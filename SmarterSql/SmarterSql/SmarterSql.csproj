@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B8246040-C019-405D-81BA-D7E26299BDE0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <StartupObject>
+    </StartupObject>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>Sassner.SmarterSql</AssemblyName>
+    <RootNamespace>Sassner.SmarterSql</RootNamespace>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <IncrementalBuild>false</IncrementalBuild>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>full</DebugType>
+    <ErrorReport>none</ErrorReport>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <DocumentationFile>
+    </DocumentationFile>
+    <BaseAddress>4194304</BaseAddress>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <IncrementalBuild>false</IncrementalBuild>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\PublicAssemblies\EnvDTE.dll</HintPath>
+    </Reference>
+    <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="GlacialList">
+      <HintPath>..\Bins\GlacialList.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.ManagedInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Package.LanguageService, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Shell, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.TextManager.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.TextManager.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\CommandAttributes\CommandMenuItemAttribute.cs" />
+    <Compile Include="Commands\Debug\CommandShowLogWindow.cs" />
+    <Compile Include="Commands\Outlining\CommandCreateRegion.cs" />
+    <Compile Include="Commands\Fix\CommandFixAllMissingTableAliases.cs" />
+    <Compile Include="Commands\CommandCleanUpCode.cs" />
+    <Compile Include="Commands\Goto\CommandGotoDeclaration.cs" />
+    <Compile Include="Commands\Goto\CommandGotoNextError.cs" />
+    <Compile Include="Commands\Goto\CommandGotoPreviousError.cs" />
+    <Compile Include="Commands\Search\CommandHighlightUsage.cs" />
+    <Compile Include="Commands\Search\CommandHighlightGotoNext.cs" />
+    <Compile Include="Commands\Search\CommandHighlightGotoPrevious.cs" />
+    <Compile Include="Commands\Fix\CommandFixAllMissingSchemas.cs" />
+    <Compile Include="Commands\CommandLicense.cs" />
+    <Compile Include="Commands\CommandPurgeCache.cs" />
+    <Compile Include="Commands\CommandRenameToken.cs" />
+    <Compile Include="Commands\Outlining\CommandToggleCurrentRegion.cs" />
+    <Compile Include="Commands\Outlining\CommandToggleRegionOutlining.cs" />
+    <Compile Include="Connect.cs" />
+    <Compile Include="Instance.cs" />
+    <Compile Include="Objects\ActiveConnection.cs" />
+    <Compile Include="Parsing\Keywords\KeywordTrigger.cs" />
+    <Compile Include="Parsing\Predicates\SubPredicate.cs" />
+    <Compile Include="Threads\TaskGeneric.cs" />
+    <Compile Include="Threads\TaskScanForCodeChanges.cs" />
+    <Compile Include="UI\Controls\GameOfLife.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\GameOfLife.designer.cs">
+      <DependentUpon>GameOfLife.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\LifeGame.cs" />
+    <Compile Include="UI\frmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmAbout.designer.cs">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\CleanUpCode.cs" />
+    <Compile Include="Utils\CodeChange.cs" />
+    <Compile Include="Utils\ExceptionAsXml.cs" />
+    <Compile Include="Utils\Intellisense.cs" />
+    <Compile Include="Objects\Functions\BuiltInFunction.cs" />
+    <Compile Include="Objects\Functions\Function.cs" />
+    <Compile Include="Objects\Functions\ScalarFunction.cs" />
+    <Compile Include="Objects\ParsedDataType.cs" />
+    <Compile Include="Objects\TransactionLabel.cs" />
+    <Compile Include="ParsingObjects\FunctionToken.cs" />
+    <Compile Include="ParsingObjects\SystemFunctionToken.cs" />
+    <Compile Include="Parsing\Expressions\BinaryOperatorExpression.cs" />
+    <Compile Include="Parsing\Expressions\BooleanExpression.cs" />
+    <Compile Include="Parsing\Expressions\CaseEndExpression.cs" />
+    <Compile Include="Parsing\Expressions\ScalarFunctionExpression.cs" />
+    <Compile Include="Parsing\Expressions\ScalarSubqueryExpression.cs" />
+    <Compile Include="Parsing\Expressions\SubExpressions.cs" />
+    <Compile Include="Parsing\Expressions\TokenExpression.cs" />
+    <Compile Include="Parsing\Expressions\VariableExpression.cs" />
+    <Compile Include="Parsing\Keywords\KeywordContainsTable.cs" />
+    <Compile Include="Parsing\Keywords\KeywordFreeTextTable.cs" />
+    <Compile Include="Parsing\Keywords\KeywordOpenDataSource.cs" />
+    <Compile Include="Parsing\Keywords\KeywordOpenQuery.cs" />
+    <Compile Include="Parsing\Keywords\KeywordOpenRowset.cs" />
+    <Compile Include="Parsing\Keywords\KeywordOverClause.cs" />
+    <Compile Include="Parsing\Keywords\KeywordPivot.cs" />
+    <Compile Include="Parsing\Predicates\BetweenPredicate.cs" />
+    <Compile Include="Parsing\Predicates\BinaryPredicate.cs" />
+    <Compile Include="Parsing\Predicates\ComparisonSubqueryPredicate.cs" />
+    <Compile Include="Parsing\Predicates\ContainsPredicate.cs" />
+    <Compile Include="Parsing\Keywords\KeywordCaseEnd.cs" />
+    <Compile Include="Parsing\Keywords\KeywordCTE.cs" />
+    <Compile Include="Parsing\Keywords\KeywordDeclare.cs" />
+    <Compile Include="Parsing\Keywords\KeywordDelete.cs" />
+    <Compile Include="Parsing\Keywords\KeywordDerivedTable.cs" />
+    <Compile Include="Parsing\Keywords\KeywordExecute.cs" />
+    <Compile Include="Parsing\Keywords\KeywordFunction.cs" />
+    <Compile Include="Parsing\Keywords\KeywordGroupBy.cs" />
+    <Compile Include="Parsing\Keywords\KeywordInsert.cs" />
+    <Compile Include="Parsing\Keywords\KeywordOpenXml.cs" />
+    <Compile Include="Parsing\Keywords\KeywordOrderBy.cs" />
+    <Compile Include="Parsing\Keywords\KeywordProcedure.cs" />
+    <Compile Include="Parsing\Keywords\KeywordSelect.cs" />
+    <Compile Include="Parsing\Keywords\KeywordTable.cs" />
+    <Compile Include="Parsing\Keywords\KeywordUpdate.cs" />
+    <Compile Include="Parsing\Keywords\KeywordView.cs" />
+    <Compile Include="Parsing\Keywords\KeywordSearchCondition.cs" />
+    <Compile Include="Parsing\Predicates\ExistsPredicate.cs" />
+    <Compile Include="Parsing\Predicates\FreeTextPredicate.cs" />
+    <Compile Include="Parsing\Predicates\InExpressionsPredicate.cs" />
+    <Compile Include="Parsing\Predicates\InSubqueryPredicate.cs" />
+    <Compile Include="Parsing\Predicates\LikePredicate.cs" />
+    <Compile Include="Parsing\Predicates\NullPredicate.cs" />
+    <Compile Include="Parsing\Predicates\Predicate.cs" />
+    <Compile Include="Parsing\Predicates\SubqueryPredicate.cs" />
+    <Compile Include="Parsing\SelectItems\SelectItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parsing\SelectItems\SelectItemExpression.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parsing\SelectItems\SelectItemStar.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parsing\SelectItems\SelectItemSysObjectStar.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Scanning\ScanningData.cs" />
+    <Compile Include="Scanning\ScanningThread.cs" />
+    <Compile Include="UI\Controls\frmSmartHelper3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\frmSmartHelper3.Designer.cs">
+      <DependentUpon>frmSmartHelper3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\HintToShow.cs" />
+    <Compile Include="Utils\Menu\Menus.cs" />
+    <Compile Include="Utils\Menu\NewMenuItem.cs" />
+    <Compile Include="Utils\PopupLastShown.cs" />
+    <Compile Include="UI\frmLogWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmLogWindow.Designer.cs">
+      <DependentUpon>frmLogWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Resources\ErrorStrip.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorStrip.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\ColumnAlias.cs" />
+    <Compile Include="Objects\Cursor.cs" />
+    <Compile Include="Objects\Label.cs" />
+    <Compile Include="Objects\MethodParameter.cs" />
+    <Compile Include="Objects\ScannedItem.cs" />
+    <Compile Include="Utils\Segment\BatchSegment.cs" />
+    <Compile Include="Utils\Settings\Settings.cs" />
+    <Compile Include="Objects\SetType.cs" />
+    <Compile Include="Objects\SmartIndentCommand.cs" />
+    <Compile Include="Objects\SysObjectParameter.cs" />
+    <Compile Include="Objects\TableSource.cs" />
+    <Compile Include="Objects\TemporaryTable.cs" />
+    <Compile Include="ParsingObjects\CommentToken.cs" />
+    <Compile Include="ParsingObjects\ErrorToken.cs" />
+    <Compile Include="ParsingObjects\NameToken.cs" />
+    <Compile Include="ParsingObjects\OperatorToken.cs" />
+    <Compile Include="ParsingObjects\PythonOperator.cs" />
+    <Compile Include="ParsingObjects\SymbolToken.cs" />
+    <Compile Include="ParsingObjects\SystemVariableToken.cs" />
+    <Compile Include="ParsingObjects\TemporaryToken.cs" />
+    <Compile Include="ParsingObjects\Token.cs" />
+    <Compile Include="ParsingObjects\ValueNumberToken.cs" />
+    <Compile Include="ParsingObjects\ValueStringToken.cs" />
+    <Compile Include="ParsingObjects\ValueToken.cs" />
+    <Compile Include="ParsingObjects\VariableToken.cs" />
+    <Compile Include="ParsingUtils\Scanner.cs" />
+    <Compile Include="ParsingUtils\TokenInfo.cs" />
+    <Compile Include="ParsingUtils\TokenType.cs" />
+    <Compile Include="Parsing\LiteralParser.cs" />
+    <Compile Include="Parsing\Location.cs" />
+    <Compile Include="Parsing\Severity.cs" />
+    <Compile Include="Parsing\SymbolId.cs" />
+    <Compile Include="Parsing\SymbolTable.cs" />
+    <Compile Include="Parsing\Tokenizer.cs" />
+    <Compile Include="Parsing\TokenKind.cs" />
+    <Compile Include="Parsing\Tokens.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Threads\BackgroundTask.cs">
+    </Compile>
+    <Compile Include="UI\Subclassing\ErrorStrip.cs" />
+    <Compile Include="UI\Controls\frmRenameEntity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\frmRenameEntity.Designer.cs">
+      <DependentUpon>frmRenameEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Subclassing\ScrollBar.cs" />
+    <Compile Include="UI\frmShowLicens.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmShowLicens.Designer.cs">
+      <DependentUpon>frmShowLicens.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Subclassing\Stripe.cs" />
+    <Compile Include="UI\Subclassing\TabsWindow.cs" />
+    <Compile Include="UI\Subclassing\VsEditPane.cs" />
+    <Compile Include="UI\Subclassing\VsSplitterRoot.cs" />
+    <Compile Include="UI\Subclassing\VsTextEditPane.cs" />
+    <Compile Include="UI\Subclassing\WindowHandler.cs" />
+    <Compile Include="Utils\Args\ErrorScanningDoneEventArgs.cs" />
+    <Compile Include="Utils\Args\GotFocusEventArgs.cs" />
+    <Compile Include="Parsing\Expressions\ConstantExpression.cs" />
+    <Compile Include="Parsing\Expressions\Expression.cs" />
+    <Compile Include="Parsing\Expressions\ColumnExpression.cs" />
+    <Compile Include="ParsingObjects\Operator.cs" />
+    <Compile Include="Utils\Args\KeyEventArgs.cs" />
+    <Compile Include="Utils\Args\KeyVsCmdEventArgs.cs" />
+    <Compile Include="Utils\Args\LostFocusEventArgs.cs" />
+    <Compile Include="Utils\Args\MouseDownEventArgs.cs" />
+    <Compile Include="Utils\Args\MouseWheelEventArgs.cs" />
+    <Compile Include="Utils\Args\ScrollBarMovedEventArgs.cs" />
+    <Compile Include="Utils\Args\SplitWindowEventArgs.cs" />
+    <Compile Include="Utils\Extensions\ArgumentHelperExtension.cs" />
+    <Compile Include="Utils\HiddenRegions\HiddenRegion.cs" />
+    <Compile Include="Utils\HiddenRegions\HiddenRegionData.cs" />
+    <Compile Include="Utils\Marker\MarkerEnum.cs" />
+    <Compile Include="Utils\MatchingParen.cs" />
+    <Compile Include="Utils\DebugMatchingParen.cs" />
+    <Compile Include="Utils\Menu\Class1.cs" />
+    <Compile Include="Utils\Menu\CommandIDAttribute.cs" />
+    <Compile Include="Utils\Menu\LearnVSXNowViewCommandHandler.cs" />
+    <Compile Include="Utils\Menu\MenuCommandHandler.cs" />
+    <Compile Include="Utils\MouseOverToken.cs" />
+    <Compile Include="Utils\ScannedTable.cs" />
+    <Compile Include="Utils\Security\ClientSideEncryption.cs" />
+    <Compile Include="Utils\Security\ServerSideEncryption.cs" />
+    <Compile Include="Utils\Security\SymmCrypto.cs" />
+    <Compile Include="Utils\Segment\SegmentEndToken.cs" />
+    <Compile Include="Utils\Segment\SegmentStartToken.cs" />
+    <Compile Include="Utils\Settings\SettingsAttributes.cs" />
+    <Compile Include="Utils\Singleton.cs" />
+    <Compile Include="Utils\SmarterSqlAddin.cs" />
+    <Compile Include="Utils\SqlErrors\ListOfScannedSqlErrors.cs" />
+    <Compile Include="Utils\SqlErrors\SqlErrorAmbigousColumn.cs" />
+    <Compile Include="Utils\SqlErrors\Choice.cs" />
+    <Compile Include="Utils\SqlErrors\ScannedSqlError.cs" />
+    <Compile Include="Utils\SqlErrors\SqlError.cs" />
+    <Compile Include="Utils\SqlErrors\SqlErrorAddColumnAlias.cs" />
+    <Compile Include="Utils\SqlErrors\SqlErrorAddSysObjectAlias.cs" />
+    <Compile Include="Utils\SqlErrors\SqlErrorAddSysObjectSchema.cs" />
+    <Compile Include="Utils\TableUtils.cs" />
+    <Compile Include="Utils\Segment\SegmentUtils.cs" />
+    <Compile Include="Utils\Segment\TokenUsage.cs" />
+    <Compile Include="Utils\Tooltips\ToolTipLiveTemplateInsertFunctionParamList.cs" />
+    <Compile Include="Utils\Tooltips\ToolTipLiveTemplateInsertInsertColumnList.cs" />
+    <Compile Include="Utils\VersionInformation.cs" />
+    <Compile Include="Utils\VSSettings.cs" />
+    <Compile Include="Tree\InStatement.cs" />
+    <Compile Include="UI\Controls\frmShowInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\frmShowInformation.Designer.cs">
+      <DependentUpon>frmShowInformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\StatementSpans.cs" />
+    <Compile Include="Utils\StatusBar.cs" />
+    <Compile Include="UI\frmDebugTokens.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmDebugTokens.Designer.cs">
+      <DependentUpon>frmDebugTokens.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Threads\IThreadTask.cs" />
+    <Compile Include="Threads\TaskGetSysObjects.cs" />
+    <Compile Include="Objects\DataType.cs" />
+    <Compile Include="Utils\Method.cs" />
+    <Compile Include="Objects\Permission.cs" />
+    <Compile Include="Objects\SysObjectSchema.cs" />
+    <Compile Include="Utils\Tooltips\ToolTipLiveTemplate.cs" />
+    <Compile Include="Utils\Tooltips\ToolTipLiveTemplateExpandTableAlias.cs" />
+    <Compile Include="Utils\Tooltips\ToolTipLiveTemplateInfo.cs" />
+    <Compile Include="Utils\Tooltips\ToolTipLiveTemplateInsertSprocParams.cs" />
+    <Compile Include="Utils\Tooltips\ToolTipLiveTemplateIntelligent.cs" />
+    <Compile Include="Objects\User.cs" />
+    <Compile Include="UI\Controls\frmIntellisense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\frmIntellisense.Designer.cs">
+      <DependentUpon>frmIntellisense.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmSettings.Designer.cs">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\Database.cs" />
+    <Compile Include="Objects\Connection.cs" />
+    <Compile Include="Objects\Server.cs" />
+    <Compile Include="Objects\SqlCommand.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\CommandAbout.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\Debug\CommandDebug.cs" />
+    <Compile Include="Commands\Debug\CommandDebugLogCommandBarsCommand.cs" />
+    <Compile Include="Commands\Debug\CommandDebugLogCommands.cs" />
+    <Compile Include="Commands\CommandSettings.cs" />
+    <Compile Include="Objects\GlobalVariable.cs" />
+    <Compile Include="Objects\IntellisenseData.cs" />
+    <Compile Include="Objects\LiveTemplate.cs" />
+    <Compile Include="Objects\LocalVariable.cs" />
+    <Compile Include="Objects\SysObject.cs" />
+    <Compile Include="Objects\SysObjectColumn.cs" />
+    <Compile Include="Objects\Table.cs" />
+    <Compile Include="Objects\Variable.cs" />
+    <Compile Include="TextEditor.cs" />
+    <Compile Include="UI\Controls\ToolTipWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ToolTipWindow.designer.cs">
+      <DependentUpon>ToolTipWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\Common.cs" />
+    <Compile Include="Utils\DataAccess.cs" />
+    <Compile Include="Utils\Args\ActiveViewEventArgs.cs" />
+    <Compile Include="Utils\Args\MouseMoveEventArgs.cs" />
+    <Compile Include="Utils\Helpers\RectHelper.cs" />
+    <Compile Include="UI\Subclassing\WindowData.cs" />
+    <Compile Include="PInvoke\ExternDll.cs" />
+    <Compile Include="Utils\Marker\Markers.cs" />
+    <Compile Include="Utils\MyIOleCommandTarget.cs" />
+    <Compile Include="Utils\MyIVsTextManagerEvents.cs" />
+    <Compile Include="Utils\MyOleComponent.cs" />
+    <Compile Include="Utils\MyRunningDocumentTable.cs" />
+    <Compile Include="PInvoke\NativeMethods.cs" />
+    <Compile Include="Utils\Args\NewConnectionEventArgs.cs" />
+    <Compile Include="PInvoke\SafeNativeMethods.cs" />
+    <Compile Include="Utils\Marker\Squiggle.cs" />
+    <Compile Include="Utils\Helpers\TextSpanHelper.cs" />
+    <Compile Include="PInvoke\UnsafeNativeMethods.cs" />
+    <Compile Include="Utils\Menu\MenuManager.cs" />
+    <Compile Include="PInvoke\NativeWIN32.cs" />
+    <Compile Include="Parsing\Parser.cs" />
+    <Compile Include="Utils\PopupWindow.cs" />
+    <Compile Include="Utils\SmartIndenter.cs" />
+    <Compile Include="Utils\StaticData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\Controls\frmSmartHelper3.resx">
+      <DependentUpon>frmSmartHelper3.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\GameOfLife.resx">
+      <DependentUpon>GameOfLife.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmAbout.resx">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmLogWindow.resx">
+      <DependentUpon>frmLogWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Resources\ErrorStrip.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorStrip.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\frmRenameEntity.resx">
+      <DependentUpon>frmRenameEntity.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\frmShowInformation.resx">
+      <DependentUpon>frmShowInformation.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmDebugTokens.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmDebugTokens.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\frmIntellisense.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmIntellisense.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmShowLicens.resx">
+      <DependentUpon>frmShowLicens.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmSettings.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\ToolTipWindow.resx">
+      <DependentUpon>ToolTipWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.VisualStudio.CommandBars">
+      <Guid>{1CBA492E-7263-47BB-87FE-639000619B15}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Image1.gif" />
+    <None Include="Resources\errorstrip_green.gif" />
+    <None Include="Resources\errorstrip_grey.gif" />
+    <None Include="Resources\errorstrip_red.gif" />
+    <None Include="Resources\errorstrip_yellow.gif" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>xcopy /y "$(SolutionDir)Licensavtal.txt" "$(ProjectDir)$(OutDir)"</PostBuildEvent>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

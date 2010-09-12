@@ -1,0 +1,72 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmarterSql", "SmarterSql\SmarterSql.csproj", "{B8246040-C019-405D-81BA-D7E26299BDE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmarterSqlAddin2005", "SmarterSqlAddin2005\SmarterSqlAddin2005.csproj", "{6831E7DA-3F58-40F3-9481-0153366ACD43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmarterSqlAddin2008", "SmarterSqlAddin2008\SmarterSqlAddin2008.csproj", "{8528AF99-D24C-4BC6-84F2-783BD3DAE65B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bins", "Bins", "{4C325DEB-7536-478C-BBB6-85FEBFC6944B}"
+	ProjectSection(SolutionItems) = preProject
+		Bins\GlacialList.dll = Bins\GlacialList.dll
+		Bins\GlacialList.txt = Bins\GlacialList.txt
+		Bins\GlacialListDocs.xml = Bins\GlacialListDocs.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlServer2005", "SqlServer2005", "{37184928-1472-4605-B150-DC7F7038D3B9}"
+	ProjectSection(SolutionItems) = preProject
+		Bins\SqlServer2005\Microsoft.SqlServer.ConnectionInfo.dll = Bins\SqlServer2005\Microsoft.SqlServer.ConnectionInfo.dll
+		Bins\SqlServer2005\Microsoft.SqlServer.RegSvrEnum.dll = Bins\SqlServer2005\Microsoft.SqlServer.RegSvrEnum.dll
+		Bins\SqlServer2005\Microsoft.SqlServer.SqlTools.VSIntegration.dll = Bins\SqlServer2005\Microsoft.SqlServer.SqlTools.VSIntegration.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlServer2008", "SqlServer2008", "{C7C4EEE6-825C-4615-8BF4-F8E2D71CC082}"
+	ProjectSection(SolutionItems) = preProject
+		Bins\SqlServer2008\Microsoft.SqlServer.ConnectionInfo.dll = Bins\SqlServer2008\Microsoft.SqlServer.ConnectionInfo.dll
+		Bins\SqlServer2008\Microsoft.SqlServer.RegSvrEnum.dll = Bins\SqlServer2008\Microsoft.SqlServer.RegSvrEnum.dll
+		Bins\SqlServer2008\Microsoft.SqlServer.SqlTools.VSIntegration.dll = Bins\SqlServer2008\Microsoft.SqlServer.SqlTools.VSIntegration.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs11
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = SmarterSql\\SmarterSql.csproj
+		SccProjectName1 = SmarterSql
+		SccLocalPath1 = SmarterSql
+		SccProjectUniqueName2 = SmarterSqlAddin2005\\SmarterSqlAddin2005.csproj
+		SccProjectName2 = SmarterSqlAddin2005
+		SccLocalPath2 = SmarterSqlAddin2005
+		SccProjectUniqueName3 = SmarterSqlAddin2008\\SmarterSqlAddin2008.csproj
+		SccProjectName3 = SmarterSqlAddin2008
+		SccLocalPath3 = SmarterSqlAddin2008
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8246040-C019-405D-81BA-D7E26299BDE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8246040-C019-405D-81BA-D7E26299BDE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8246040-C019-405D-81BA-D7E26299BDE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8246040-C019-405D-81BA-D7E26299BDE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6831E7DA-3F58-40F3-9481-0153366ACD43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6831E7DA-3F58-40F3-9481-0153366ACD43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6831E7DA-3F58-40F3-9481-0153366ACD43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6831E7DA-3F58-40F3-9481-0153366ACD43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8528AF99-D24C-4BC6-84F2-783BD3DAE65B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8528AF99-D24C-4BC6-84F2-783BD3DAE65B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8528AF99-D24C-4BC6-84F2-783BD3DAE65B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8528AF99-D24C-4BC6-84F2-783BD3DAE65B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{37184928-1472-4605-B150-DC7F7038D3B9} = {4C325DEB-7536-478C-BBB6-85FEBFC6944B}
+		{C7C4EEE6-825C-4615-8BF4-F8E2D71CC082} = {4C325DEB-7536-478C-BBB6-85FEBFC6944B}
+	EndGlobalSection
+EndGlobal
