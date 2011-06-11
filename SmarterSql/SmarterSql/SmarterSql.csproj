@@ -144,6 +144,7 @@
     <Compile Include="UI\frmAbout.designer.cs">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\CamelCaseMatcher.cs" />
     <Compile Include="Utils\CleanUpCode.cs" />
     <Compile Include="Utils\CodeChange.cs" />
     <Compile Include="Utils\ExceptionAsXml.cs" />
