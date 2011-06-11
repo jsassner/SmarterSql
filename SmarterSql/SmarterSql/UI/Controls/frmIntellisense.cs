@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using EnvDTE;
 using GlacialComponents.Controls;
@@ -474,37 +475,55 @@ namespace Sassner.SmarterSql.UI.Controls {
 				//Common.LogChar(false, "SetPointers: " + strTextToMatch + ", " + strTextToMatch.Substring(0, intPreSelectPosition) + ", " + intPreSelectPosition);
 
 				strTextToMatch = strTextToMatch.Substring(0, intPreSelectPosition);
+				Regex regExp = CamelCaseMatcher.CreateCamelCaseRegExp(strTextToMatch);
 
 				// Loop all items to find those to include
 				for (int i = 0; i < lstGLItems.Count; i++) {
 					GLItem glItem = lstGLItems[i];
 					IntellisenseData idItem = (IntellisenseData)glItem.Tag;
-					if (idItem.MainText.StartsWith(strTextToMatch, StringComparison.OrdinalIgnoreCase)) {
-						// Find the shortest string. Make that the start position
-						if (idItem.MainText.Length < minLengthMinLength) {
-							minLengthMinLength = idItem.MainText.Length;
-							startPosMinLength = lstPointers.Count;
-						}
-						if (idItem.MainText.EndsWith(postSelectText, StringComparison.OrdinalIgnoreCase)) {
-							if (idItem.MainText.Length < minLengthMatchesEnd) {
-								minLengthMatchesEnd = idItem.MainText.Length;
-								startPosMatchesEnd = lstPointers.Count;
+					if (true) {
+						if (CamelCaseMatcher.matchCamelCase(regExp, idItem.MainText)) {
+							if (idItem.MainText.Length < minLengthMinLength) {
+								minLengthMinLength = idItem.MainText.Length;
+								startPosMinLength = lstPointers.Count;
 							}
-						}
+							if (idItem.MainText.EndsWith(postSelectText, StringComparison.OrdinalIgnoreCase)) {
+								if (idItem.MainText.Length < minLengthMatchesEnd) {
+									minLengthMatchesEnd = idItem.MainText.Length;
+									startPosMatchesEnd = lstPointers.Count;
+								}
+							}
 
-						// We are showing this item - add it to our pointers list
-						lstPointers.Add(i);
+							lstPointers.Add(i);
+						}
 					} else {
-						// Check camel casing
-						if (idItem.UpperCaseLetters.Length > 0) {
-							string strNewTextToMatch = strTextToMatch;
-							// Remove prefix (if match)
-							if (strNewTextToMatch.StartsWith(idItem.TypePrefix)) {
-								strNewTextToMatch = strNewTextToMatch.Substring(idItem.TypePrefix.Length);
+						if (idItem.MainText.StartsWith(strTextToMatch, StringComparison.OrdinalIgnoreCase)) {
+							// Find the shortest string. Make that the start position
+							if (idItem.MainText.Length < minLengthMinLength) {
+								minLengthMinLength = idItem.MainText.Length;
+								startPosMinLength = lstPointers.Count;
 							}
-							if (idItem.UpperCaseLetters.StartsWith(strNewTextToMatch, StringComparison.OrdinalIgnoreCase)) {
-								// We are showing this item - add it to our pointers list
-								lstPointers.Add(i);
+							if (idItem.MainText.EndsWith(postSelectText, StringComparison.OrdinalIgnoreCase)) {
+								if (idItem.MainText.Length < minLengthMatchesEnd) {
+									minLengthMatchesEnd = idItem.MainText.Length;
+									startPosMatchesEnd = lstPointers.Count;
+								}
+							}
+
+							// We are showing this item - add it to our pointers list
+							lstPointers.Add(i);
+						} else {
+							// Check camel casing
+							if (idItem.UpperCaseLetters.Length > 0) {
+								string strNewTextToMatch = strTextToMatch;
+								// Remove prefix (if match)
+								if (strNewTextToMatch.StartsWith(idItem.TypePrefix)) {
+									strNewTextToMatch = strNewTextToMatch.Substring(idItem.TypePrefix.Length);
+								}
+								if (idItem.UpperCaseLetters.StartsWith(strNewTextToMatch, StringComparison.OrdinalIgnoreCase)) {
+									// We are showing this item - add it to our pointers list
+									lstPointers.Add(i);
+								}
 							}
 						}
 					}
