@@ -6,6 +6,6 @@ using System;
 namespace Sassner.SmarterSql.Utils {
 	public static class VersionInformation {
 		public static int cintVersion = 1;
-		public static DateTime dtBuild = new DateTime(2011, 6, 6, 10, 15, 0);
+		public static DateTime dtBuild = new DateTime(2011, 7, 1, 0, 25, 0);
 	}
 }
