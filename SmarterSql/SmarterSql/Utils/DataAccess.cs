@@ -142,6 +142,10 @@ namespace Sassner.SmarterSql.Utils {
 		                                             "SELECT	strDataBaseName = d.name " +
 		                                             "FROM	master..sysdatabases d";
 
+		private const string StatementGetServers = "" +
+													 "SELECT	strServerName = d.name " +
+													 "FROM	sys.servers d";
+
 		private const string StatementGetUsers = "" +
 		                                         "SELECT uid, name FROM sysusers WHERE gid = 0 AND issqluser = 1 AND NOT sid IS NULL";
 
@@ -528,6 +532,26 @@ namespace Sassner.SmarterSql.Utils {
 				Common.LogEntry(ClassName, "GetDataBases", e, Common.enErrorLvl.Error);
 			}
 			return lstDataBases;
+		}
+
+		public List<SysServer> GetSysServers(Connection connection) {
+			List<SysServer> sysServers = new List<SysServer>(50);
+
+			try {
+				OleDbConnection conGetDataBases = GetOleDbConnection(connection);
+				using (OleDbCommand comConnection = conGetDataBases.CreateCommand()) {
+					comConnection.CommandType = CommandType.Text;
+					comConnection.CommandText = StatementGetServers;
+					comConnection.CommandTimeout = 60;
+					OleDbDataReader reader = comConnection.ExecuteReader();
+					while (reader.Read()) {
+						sysServers.Add(new SysServer(reader["strServerName"].ToString()));
+					}
+				}
+			} catch (Exception e) {
+				Common.LogEntry(ClassName, "GetSysServers", e, Common.enErrorLvl.Error);
+			}
+			return sysServers;
 		}
 
 		/// <summary>

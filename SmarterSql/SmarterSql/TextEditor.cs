@@ -193,18 +193,9 @@ namespace Sassner.SmarterSql {
 				myRunningDocumentTable = null;
 			}
 
-			if (null != matchingParen) {
-				matchingParen = null;
-			}
-
-			if (null != debugMatchingParen) {
-				debugMatchingParen = null;
-			}
-
-			if (null != tableUtils) {
-				tableUtils = null;
-			}
-
+			matchingParen = null;
+			debugMatchingParen = null;
+			tableUtils = null;
 			if (null != tokenUsage) {
 				tokenUsage.Dispose();
 				tokenUsage = null;

@@ -19,6 +19,7 @@ namespace Sassner.SmarterSql.Objects {
 		private readonly string strSqlServer;
 		private bool blnHasBeenPurged;
 		private List<Database> lstDataBases;
+		private List<SysServer> lstSysServers;
 
 		#endregion
 
@@ -60,6 +61,10 @@ namespace Sassner.SmarterSql.Objects {
 				if (null != lstDataBases) {
 					lstDataBases.Clear();
 					lstDataBases = null;
+				}
+				if (null != lstSysServers) {
+					lstSysServers.Clear();
+					lstSysServers = null;
 				}
 				foreach (Connection connection in lstConnections) {
 					connection.PurgeCache();
@@ -135,6 +140,22 @@ namespace Sassner.SmarterSql.Objects {
 					lstDataBases = new List<Database>();
 				}
 				return lstDataBases;
+			}
+		}
+
+		public List<SysServer> GetSysServers() {
+			lock (objLock) {
+				if (null == lstSysServers) {
+					if (null != strSqlServer) {
+						Connection connection = lstConnections[0];
+						lstSysServers = Instance.DataAccess.GetSysServers(connection);
+						blnHasBeenPurged = false;
+					}
+				}
+				if (null == lstSysServers) {
+					lstSysServers = new List<SysServer>();
+				}
+				return lstSysServers;
 			}
 		}
 

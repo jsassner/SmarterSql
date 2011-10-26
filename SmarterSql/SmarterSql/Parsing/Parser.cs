@@ -1178,6 +1178,19 @@ namespace Sassner.SmarterSql.Parsing {
 						}
 						break;
 					case TokenContextType.Server:
+						// Validate server name
+						bool serverNameIsOk = false;
+						List<SysServer> sysServers = activeServer.GetSysServers();
+						foreach (SysServer sysServer in sysServers) {
+							if (unqoutedImage.Equals(sysServer.ServerName, StringComparison.OrdinalIgnoreCase)) {
+								serverNameIsOk = true;
+								break;
+							}
+						}
+						if (!serverNameIsOk) {
+							ScannedSqlErrors.Add(new ScannedSqlError("Unknown server name", index, index, index));
+						}
+						break;
 					case TokenContextType.Database:
 						// Validate database name
 						bool databaseNameIsOk = false;
@@ -1487,6 +1500,7 @@ namespace Sassner.SmarterSql.Parsing {
 					}
 
 					// Get the alias
+					int aliasIndex = index;
 					index++;
 					TokenInfo nextNextToken = InStatement.GetNextNonCommentToken(lstTokens, ref index);
 					if (Common.IsIdentifier(nextToken, nextNextToken)) {
@@ -1498,6 +1512,8 @@ namespace Sassner.SmarterSql.Parsing {
 							if (endIndex + 1 < lstTokens.Count) {
 								endIndex = InStatement.GetNextNonCommentToken(lstTokens, endIndex + 1, endIndex + 1);
 							}
+						} else {
+							endIndex = aliasIndex;
 						}
 						return true;
 					}

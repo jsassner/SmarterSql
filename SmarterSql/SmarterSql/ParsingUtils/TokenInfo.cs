@@ -88,7 +88,7 @@ namespace Sassner.SmarterSql.ParsingUtils {
 
 		[DebuggerStepThrough]
 		public override string ToString() {
-			return string.Format("{0}, {1}, ({2}-{3}), ({4}-{5}), '{6}'-'{7}',  pl={8}", Token, Type, Span.iStartLine, span.iStartIndex, span.iEndLine, span.iEndIndex, (null != Token ? Token.Image : "null"), (null != Token ? Token.ScannedText : "null"), parenLevel);
+			return string.Format("{0}, {1}, {9}, ({2}-{3}), ({4}-{5}), '{6}'-'{7}',  pl={8}", Token, Type, Span.iStartLine, span.iStartIndex, span.iEndLine, span.iEndIndex, (null != Token ? Token.Image : "null"), (null != Token ? Token.ScannedText : "null"), parenLevel, TokenContextType);
 		}
 
 		#endregion
