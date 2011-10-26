@@ -61,7 +61,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugSymbols>false</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
@@ -70,6 +70,7 @@
     <IncrementalBuild>false</IncrementalBuild>
     <RegisterForComInterop>true</RegisterForComInterop>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DebugType>full</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -127,6 +128,7 @@
     <Compile Include="Connect.cs" />
     <Compile Include="Instance.cs" />
     <Compile Include="Objects\ActiveConnection.cs" />
+    <Compile Include="Objects\SysServer.cs" />
     <Compile Include="Parsing\Keywords\KeywordTrigger.cs" />
     <Compile Include="Parsing\Predicates\SubPredicate.cs" />
     <Compile Include="Threads\TaskGeneric.cs" />

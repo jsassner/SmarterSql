@@ -287,7 +287,7 @@ namespace Sassner.SmarterSql.Utils {
 			GetLogWriter().WriteLine(logMessage);
 			GetLogWriter().Flush();
 
-			if (enErrorLvl.Error == errorLvl) {
+			if (enErrorLvl.Error == errorLvl && null != Instance.LogWindow) {
 				Instance.LogWindow.AddLogItem(logMessage);
 			}
 

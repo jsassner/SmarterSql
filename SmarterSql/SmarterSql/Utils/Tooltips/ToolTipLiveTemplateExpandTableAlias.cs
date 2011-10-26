@@ -68,15 +68,18 @@ namespace Sassner.SmarterSql.Utils.Tooltips {
 								bool blnFirstRow = true;
 								StringBuilder sbColumns = new StringBuilder();
 								foreach (SysObjectColumn column in lstColumns) {
+									bool containsSpace = column.ColumnName.Contains(" ");
+									string leading = (containsSpace ? "[" : "");
+									string ending = (containsSpace ? "]" : "");
 									if (blnFirstRow) {
 										blnFirstRow = false;
 										if (blnStartsWithComma) {
-											sbColumns.AppendFormat(",{0}.{1}\r\n", strAlias, column.ColumnName);
+											sbColumns.AppendFormat(",{0}.{2}{1}{3}\r\n", strAlias, column.ColumnName, leading, ending);
 										} else {
-											sbColumns.AppendFormat(" {0}.{1}\r\n", strAlias, column.ColumnName);
+											sbColumns.AppendFormat(" {0}.{2}{1}{3}\r\n", strAlias, column.ColumnName, leading, ending);
 										}
 									} else {
-										sbColumns.AppendFormat("{0},{1}.{2}\r\n", strIndent, strAlias, column.ColumnName);
+										sbColumns.AppendFormat("{0},{1}.{3}{2}{4}\r\n", strIndent, strAlias, column.ColumnName, leading, ending);
 									}
 								}
 								if (sbColumns.Length > 2) {

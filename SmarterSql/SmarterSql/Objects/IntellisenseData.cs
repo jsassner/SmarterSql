@@ -35,6 +35,7 @@ namespace Sassner.SmarterSql.Objects {
 			LiveTemplate,
 			Other,
 			SysObjectSchema,
+			SysServer
 		}
 
 		#endregion

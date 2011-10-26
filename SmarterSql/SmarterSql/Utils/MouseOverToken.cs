@@ -266,6 +266,26 @@ namespace Sassner.SmarterSql.Utils {
 					return "";
 				}
 
+				// Server?
+				if (token.TokenContextType == TokenContextType.Server) {
+					List<SysServer> sysServers = textEditor.ActiveServer.GetSysServers();
+					foreach (SysServer sysServer in sysServers) {
+						if (sysServer.ServerName.Equals(token.Token.UnqoutedImage, StringComparison.OrdinalIgnoreCase) || sysServer.ServerName.Equals(token.Token.Image, StringComparison.OrdinalIgnoreCase)) {
+							return sysServer.GetToolTip;
+						}
+					}
+				}
+
+				// Database?
+				if (token.TokenContextType == TokenContextType.Database) {
+					List<Database> dataBases = textEditor.ActiveServer.GetDataBases();
+					foreach (Database database in dataBases) {
+						if (database.DataBaseName.Equals(token.Token.UnqoutedImage, StringComparison.OrdinalIgnoreCase) || database.DataBaseName.Equals(token.Token.Image, StringComparison.OrdinalIgnoreCase)) {
+							return database.GetToolTip;
+						}
+					}
+				}
+
 				if (token.TokenContextType == TokenContextType.SysObjectColumn || token.TokenContextType == TokenContextType.SysObjectAlias) {
 					StatementSpans ss;
 					List<TableSource> foundTableSources;

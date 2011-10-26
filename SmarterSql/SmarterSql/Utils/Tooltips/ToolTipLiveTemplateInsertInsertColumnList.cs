@@ -35,7 +35,11 @@ namespace Sassner.SmarterSql.Utils.Tooltips {
 
 			StringBuilder sbOutput = new StringBuilder();
 			foreach (SysObjectColumn column in SysObject.Columns) {
-				sbOutput.AppendFormat("{0}, ", column.ColumnName);
+				if (column.ColumnName.Contains(" ")) {
+					sbOutput.AppendFormat("[{0}], ", column.ColumnName);
+				} else {
+					sbOutput.AppendFormat("{0}, ", column.ColumnName);
+				}
 			}
 			if (sbOutput.Length > 1) {
 				sbOutput.Remove(sbOutput.Length - 2, 2);

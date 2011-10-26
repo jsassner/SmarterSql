@@ -1,40 +1,42 @@
-// ---------------------------------
+﻿// ---------------------------------
 // SmarterSql (c) Johan Sassner 2008
 // ---------------------------------
 using System.Diagnostics;
 
 namespace Sassner.SmarterSql.Objects {
-	public class Database : IntellisenseData {
+	public class SysServer : IntellisenseData {
 		#region Member variables
 
-		private readonly string strDataBaseName;
+		private readonly string strServerName;
 
 		#endregion
 
-		public Database(string strDataBaseName) : base(strDataBaseName) {
-			this.strDataBaseName = strDataBaseName;
+		public SysServer(string strServerName)
+			: base(strServerName) {
+				this.strServerName = strServerName;
 		}
 
 		#region Public properties
 
 		protected override enSortOrder SortLevel {
 			[DebuggerStepThrough]
-			get { return enSortOrder.Database; }
+			get { return enSortOrder.SysServer; }
 		}
 
 		public override string MainText {
 			[DebuggerStepThrough]
-			get { return strDataBaseName; }
+			get { return strServerName; }
 		}
 
 		public override int ImageKey {
 			[DebuggerStepThrough]
-			get { return (int)ImageKeys.DataBase; }
+			// TODO: Fix icon
+			get { return (int)ImageKeys.None; }
 		}
 
 		public override string GetToolTip {
 			[DebuggerStepThrough]
-			get { return "Database"; }
+			get { return "Server"; }
 		}
 
 		public override string GetSelectedData {
@@ -42,9 +44,9 @@ namespace Sassner.SmarterSql.Objects {
 			get { return MainText; }
 		}
 
-		public string DataBaseName {
+		public string ServerName {
 			[DebuggerStepThrough]
-			get { return strDataBaseName; }
+			get { return strServerName; }
 		}
 
 		#endregion
