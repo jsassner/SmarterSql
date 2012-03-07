@@ -21,9 +21,8 @@ namespace Sassner.SmarterSql.Parsing.Keywords {
 		/// <param name="lstTokens"></param>
 		/// <param name="functionExpression"></param>
 		/// <param name="startIndex"></param>
-		/// <param name="endIndex"></param>
 		/// <returns></returns>
-		public static bool ParseOverClause(Parser parser, List<TokenInfo> lstTokens, ScalarFunctionExpression functionExpression, ref int startIndex, int endIndex) {
+		public static bool ParseOverClause(Parser parser, List<TokenInfo> lstTokens, ScalarFunctionExpression functionExpression, ref int startIndex) {
 			int offset = startIndex + 1;
 			TokenInfo token = InStatement.GetPreviousNonCommentToken(lstTokens, ref offset);
 			if (null == token || token.Kind != TokenKind.KeywordOver) {
@@ -34,19 +33,34 @@ namespace Sassner.SmarterSql.Parsing.Keywords {
 			if (null == token || token.Kind != TokenKind.LeftParenthesis || -1 == token.MatchingParenToken) {
 				return false;
 			}
-			int overPartitionEndIndex = token.MatchingParenToken;
-			if (overPartitionEndIndex > endIndex) {
-				overPartitionEndIndex = endIndex;
+			int overClauseEndIndex = token.MatchingParenToken;
+
+			offset++;
+			token = InStatement.GetNextNonCommentToken(lstTokens, ref offset);
+			if (null == token) {
+				return false;
 			}
+			if (token.Kind == TokenKind.KeywordOrder) {
+				List<Expression> orderByExpressions;
+				if (!KeywordOrderBy.ParseOrderBy(parser, lstTokens, ref offset, overClauseEndIndex, out orderByExpressions)) {
+					return false;
+				}
+				foreach (Expression orderByExpression in orderByExpressions) {
+					functionExpression.AddExpression(orderByExpression);
+				}
+				startIndex = overClauseEndIndex;
+				return true;
+			}
+			offset--;
 			if (!InStatement.GetIfAllNextValidToken(lstTokens, ref offset, out token, TokenKind.KeywordPartition, TokenKind.KeywordBy)) {
 				return false;
 			}
 
 			// [ value_expression , ... [ n ] ]
 			offset++;
-			while (offset < overPartitionEndIndex) {
+			while (offset < overClauseEndIndex) {
 				Expression subExpression;
-				if (Expression.FindExpression(parser, lstTokens, ref offset, overPartitionEndIndex, out subExpression)) {
+				if (Expression.FindExpression(parser, lstTokens, ref offset, overClauseEndIndex, out subExpression)) {
 					functionExpression.AddExpression(subExpression);
 				} else {
 					token = InStatement.GetNextNonCommentToken(lstTokens, ref offset);
@@ -55,7 +69,7 @@ namespace Sassner.SmarterSql.Parsing.Keywords {
 					}
 					if (token.Kind == TokenKind.KeywordOrder) {
 						List<Expression> orderByExpressions;
-						if (!KeywordOrderBy.ParseOrderBy(parser, lstTokens, ref offset, overPartitionEndIndex, out orderByExpressions)) {
+						if (!KeywordOrderBy.ParseOrderBy(parser, lstTokens, ref offset, overClauseEndIndex, out orderByExpressions)) {
 							return false;
 						}
 						foreach (Expression orderByExpression in orderByExpressions) {
@@ -69,7 +83,7 @@ namespace Sassner.SmarterSql.Parsing.Keywords {
 				}
 				offset++;
 			}
-			startIndex = overPartitionEndIndex;
+			startIndex = overClauseEndIndex;
 			return true;
 		}
 
