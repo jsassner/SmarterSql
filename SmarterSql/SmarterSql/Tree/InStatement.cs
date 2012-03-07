@@ -171,7 +171,7 @@ namespace Sassner.SmarterSql.Tree {
 
 		#endregion
 
-		#region GetPreviosNonCommentToken methods
+		#region GetPreviousNonCommentToken methods
 
 		/// <summary>
 		/// Get first previous token that ain't a comment token
@@ -316,7 +316,8 @@ namespace Sassner.SmarterSql.Tree {
 		/// </summary>
 		/// <param name="lstTokens"></param>
 		/// <param name="currentIndex"></param>
-		/// <returns></returns>
+		///<param name="foundTableSource"> </param>
+		///<returns></returns>
 		public static bool IsCandidateForInsertColumns(List<TokenInfo> lstTokens, int currentIndex, out TableSource foundTableSource) {
 			foundTableSource = null;
 

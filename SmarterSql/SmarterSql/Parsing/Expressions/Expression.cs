@@ -365,7 +365,7 @@ namespace Sassner.SmarterSql.Parsing.Expressions {
 
 				// OVER PARTITION used?
 				originalStartIndex = startIndex;
-				if (!(KeywordOverClause.ParseOverClause(parser, lstTokens, functionExpression, ref startIndex, methodEndIndex) && startIndex >= originalStartIndex)) {
+				if (!(KeywordOverClause.ParseOverClause(parser, lstTokens, functionExpression, ref startIndex) && startIndex >= originalStartIndex)) {
 					return false;
 				}
 			} else {

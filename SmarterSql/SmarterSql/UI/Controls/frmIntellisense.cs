@@ -29,6 +29,7 @@ namespace Sassner.SmarterSql.UI.Controls {
 
 		private readonly List<GLItem> lstGLItems = new List<GLItem>();
 		private readonly List<int> lstPointers = new List<int>();
+		private readonly List<List<int>> lstPointersStack = new List<List<int>>();
 		private readonly ToolTipWindow toolTip;
 		public OutputWindowPane _outputWindowPane;
 		private IVsTextView activeView;
@@ -222,6 +223,7 @@ namespace Sassner.SmarterSql.UI.Controls {
 						lstGLItems.Add(glItem);
 					}
 				}
+				lstPointersStack.Clear();
 
 				// Get the current position in the code window
 				int piMinUnit;
@@ -262,6 +264,7 @@ namespace Sassner.SmarterSql.UI.Controls {
 				glacialList1.VirtualListSize = 0;
 				lstPointers.Clear();
 				lstGLItems.Clear();
+				lstPointersStack.Clear();
 				glacialList1.EndUpdate();
 			} catch (Exception e) {
 				Common.LogEntry(ClassName, "StopOperation", e, "Error when unloading intellisense window. ", Common.enErrorLvl.Error);
@@ -304,6 +307,10 @@ namespace Sassner.SmarterSql.UI.Controls {
 			}
 			preSelectText = preSelectText.Remove(intPreSelectPosition, strTextDeleted.Length);
 
+			if (lstPointersStack.Count > 0) {
+				// Remove last list of list pointers
+				lstPointersStack.RemoveAt(lstPointersStack.Count - 1);
+			}
 			return SetPointers(preSelectText);
 		}
 
@@ -406,16 +413,18 @@ namespace Sassner.SmarterSql.UI.Controls {
 
 				// Get the selected item
 				GLItem glItem = GetItem(intIndex);
-				IntellisenseData idItem = (IntellisenseData)glItem.Tag;
-				if (idItem.GetToolTip.Length > 0) {
-					// Calculate the Y-offset
-					int intPos = (intIndex - glacialList1.TopIndex) * glacialList1.ItemHeight + (glacialList1.ItemHeight / 2) + glacialList1.CellPaddingSize;
+				if (null != glItem) {
+					IntellisenseData idItem = (IntellisenseData)glItem.Tag;
+					if (idItem.GetToolTip.Length > 0) {
+						// Calculate the Y-offset
+						int intPos = (intIndex - glacialList1.TopIndex) * glacialList1.ItemHeight + (glacialList1.ItemHeight / 2) + glacialList1.CellPaddingSize;
 
-					// Show the tooltip
-					ToolTipLiveTemplate objTTLT = new ToolTipLiveTemplateInfo(toolTip);
-					toolTip.Initialize(activeView, Left + Width, Top + intPos, idItem.GetToolTip, objTTLT, false, Common.enPosition.Center);
-					toolTip.Show();
-					blnToolTipVisible = true;
+						// Show the tooltip
+						ToolTipLiveTemplate objTTLT = new ToolTipLiveTemplateInfo(toolTip);
+						toolTip.Initialize(activeView, Left + Width, Top + intPos, idItem.GetToolTip, objTTLT, false, Common.enPosition.Center);
+						toolTip.Show();
+						blnToolTipVisible = true;
+					}
 				}
 			} catch (Exception) {
 				// Log
@@ -451,6 +460,7 @@ namespace Sassner.SmarterSql.UI.Controls {
 					return null;
 				}
 				return lstGLItems[lstPointers[intItemIndex]];
+
 			} catch (Exception e) {
 				Common.LogEntry(ClassName, "GetItem", e, "Error when getting item (intItemIndex=" + intItemIndex + "): ", Common.enErrorLvl.Error);
 				return null;
@@ -473,15 +483,28 @@ namespace Sassner.SmarterSql.UI.Controls {
 				int atStartMinLengthMinLength = 10000;
 				int startPosMatchesEnd = -1;
 				int minLengthMatchesEnd = 10000;
-
+				
 				//Common.LogChar(false, "SetPointers: " + strTextToMatch + ", " + strTextToMatch.Substring(0, intPreSelectPosition) + ", " + intPreSelectPosition);
 
 				strTextToMatch = strTextToMatch.Substring(0, intPreSelectPosition);
 				Regex regExp = CamelCaseMatcher.CreateCamelCaseRegExp(strTextToMatch);
 
+				List<int> pointersToLoop = null;
+				if (lstPointersStack.Count > 0) {
+					pointersToLoop = lstPointersStack[lstPointersStack.Count - 1];
+				}
+				if (null == pointersToLoop || 0 == pointersToLoop.Count) {
+					pointersToLoop = new List<int>(lstGLItems.Count);
+					for (int i = 0; i < lstGLItems.Count; i++) {
+						pointersToLoop.Add(i);
+					}
+				}
+//				Common.LogEntry(ClassName, "SetPointer", pointersToLoop.Count + " items.", Common.enErrorLvl.Information);
+
 				// Loop all items to find those to include
-				for (int i = 0; i < lstGLItems.Count; i++) {
-					GLItem glItem = lstGLItems[i];
+//				for (int i = 0; i < lstGLItems.Count; i++) {
+				for (int i = 0; i < pointersToLoop.Count; i++) {
+					GLItem glItem = lstGLItems[pointersToLoop[i]];
 					IntellisenseData idItem = (IntellisenseData)glItem.Tag;
 
 					Match match = CamelCaseMatcher.GetMatchCamelCase(regExp, idItem.MainText);
@@ -501,7 +524,7 @@ namespace Sassner.SmarterSql.UI.Controls {
 							}
 						}
 
-						lstPointers.Add(i);
+						lstPointers.Add(pointersToLoop[i]);
 					}
 //						if (idItem.MainText.StartsWith(strTextToMatch, StringComparison.OrdinalIgnoreCase)) {
 //							// Find the shortest string. Make that the start position
@@ -533,6 +556,15 @@ namespace Sassner.SmarterSql.UI.Controls {
 //							}
 //						}
 				}
+
+				// Copy pointers to new list
+				pointersToLoop = new List<int>(lstPointers.Count);
+				foreach (int pointer in lstPointers) {
+					pointersToLoop.Add(pointer);
+				}
+				lstPointersStack.Add(pointersToLoop);
+//				Common.LogEntry(ClassName, "SetPointer", lstPointersStack.Count + " stacks, " + pointersToLoop.Count + " items.", Common.enErrorLvl.Information);
+
 				if (atStartstartPosMinLength != 0) {
 					startPosMinLength = atStartstartPosMinLength;
 				}
@@ -555,13 +587,19 @@ namespace Sassner.SmarterSql.UI.Controls {
 
 						// Then select the first item
 						glacialList1.Items.ClearSelection();
+						int indexToEnsureVisible;
 						if (-1 != startPosMatchesEnd) {
 							glacialList1.Items[startPosMatchesEnd].Selected = true;
-							glacialList1.EnsureVisible(startPosMatchesEnd);
+							indexToEnsureVisible = startPosMatchesEnd;
 						} else {
 							glacialList1.Items[startPosMinLength].Selected = true;
-							glacialList1.EnsureVisible(startPosMinLength);
+							indexToEnsureVisible = startPosMinLength;
 						}
+						int offset = glacialList1.VisibleRowsCount - 1;
+						if (indexToEnsureVisible + offset >= lstPointers.Count) {
+							offset = 0;
+						}
+						glacialList1.EnsureVisible(indexToEnsureVisible + offset);
 
 						ResizeListView();
 
@@ -691,8 +729,6 @@ namespace Sassner.SmarterSql.UI.Controls {
 			// Measure the widest number of characters in both columns, using the supplied font
 			intColMain = TextRenderer.MeasureText(new string('X', intColMain + 2), fontEditor, Size.Empty, TextFormatFlags.LeftAndRightPadding).Width + iconWidth;
 			intColSub = TextRenderer.MeasureText(new string('X', intColSub + 2), fontEditor, Size.Empty, TextFormatFlags.LeftAndRightPadding).Width;
-
-			return;
 		}
 
 		private int GetWidth() {
@@ -715,7 +751,7 @@ namespace Sassner.SmarterSql.UI.Controls {
 			mouseInWindow = false;
 		}
 
-		bool textEditor_MouseWheel(object sender, MouseWheelEventArgs e) {
+		private bool textEditor_MouseWheel(object sender, MouseWheelEventArgs e) {
 			return MouseInWindow;
 		}
 
@@ -891,7 +927,7 @@ namespace Sassner.SmarterSql.UI.Controls {
 			if (intPreSelectPosition > preSelectText.Length) {
 				return false;
 			}
-			ipSelection.CharRight(1);
+			ipSelection.CharRight();
 			return SetPointers(preSelectText);
 		}
 
@@ -900,7 +936,11 @@ namespace Sassner.SmarterSql.UI.Controls {
 			if (intPreSelectPosition <= 0) {
 				return false;
 			}
-			ipSelection.CharLeft(1);
+			ipSelection.CharLeft();
+			if (lstPointersStack.Count > 0) {
+				// Remove last list of list pointers
+				lstPointersStack.RemoveAt(lstPointersStack.Count - 1);
+			}
 			return SetPointers(preSelectText);
 		}
 
@@ -923,7 +963,6 @@ namespace Sassner.SmarterSql.UI.Controls {
 		}
 
 		private void frmIntellisense_Deactivate(object sender, EventArgs e) {
-			;
 		}
 	}
 }

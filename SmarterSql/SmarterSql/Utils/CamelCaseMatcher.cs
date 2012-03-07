@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Sassner.SmarterSql.Utils {
 	public class CamelCaseMatcher {
+		private static Dictionary<string, Regex> regexes = new Dictionary<string, Regex>();
+
 		public static bool MatchCamelCase(string query, String toMatch) {
 			Regex regExp = CreateCamelCaseRegExp(query);
 			return MatchCamelCase(regExp, toMatch);
@@ -22,23 +26,29 @@ namespace Sassner.SmarterSql.Utils {
 		}
 
 		public static Regex CreateCamelCaseRegExp(string query) {
-			string re = "";
+			Regex regex;
+			if (regexes.TryGetValue(query, out regex)) {
+				return regex;
+			}
+
+			StringBuilder sb = new StringBuilder();
+			sb.Append("(.*?");
 			foreach (char t in query) {
 				if (char.IsLetter(t)) {
-					re += string.Format(@"([{0}|{1}][^A-Z\d]*?)", char.ToLower(t), char.ToUpper(t));
+					sb.AppendFormat(@"([{0}|{1}][^A-Z\d]*?)", char.ToLower(t), char.ToUpper(t));
 				} else if (char.IsDigit(t)) {
-					re += t;
+					sb.Append(t);
 				} else if (t == '*') {
-					re += ".*";
+					sb.Append(".*");
 				} else if (t == '_') {
-					re += t;
+					sb.Append(t);
 				} else {
-					re += @"\" + t + "+.*?";
+					sb.AppendFormat(@"\{0}+.*?", t);
 				}
 			}
-//			re = "\\b(.*?" + re + ".*?)\\b";
-			re = "(.*?" + re + ".*?)";
-			Regex regex = new Regex(re);
+			sb.Append(".*?)");
+			regex = new Regex(sb.ToString(), RegexOptions.Compiled);
+			regexes.Add(query, regex);
 			return regex;
 		}
 	}
