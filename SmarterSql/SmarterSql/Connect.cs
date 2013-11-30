@@ -103,9 +103,15 @@ namespace Sassner.SmarterSql {
 					SmarterSqlAddin smarterSqlAddin;
 					string version = ((AddIn)addInInst).DTE.Version;
 					if (version.Contains("2005")) {
-						smarterSqlAddin = (SmarterSqlAddin)Assembly.Load("Sassner.SmarterSql.Addin2005").GetType("Sassner.SmarterSql.SmarterSqlAddin2005").GetConstructor(new Type[] { }).Invoke(null);
-					} else {
+						smarterSqlAddin = (SmarterSqlAddin)Assembly.Load("Sassner.SmarterSql.Addin2005").GetType("Sassner.SmarterSql.SmarterSqlAddin2005").GetConstructor(new Type[] {}).Invoke(null);
+					} else if (version.Contains("2009")) {
 						smarterSqlAddin = (SmarterSqlAddin)Assembly.Load("Sassner.SmarterSql.Addin2008").GetType("Sassner.SmarterSql.SmarterSqlAddin2008").GetConstructor(new Type[] { }).Invoke(null);
+					} else if (version.Contains("2011")) {
+						smarterSqlAddin = (SmarterSqlAddin)Assembly.Load("Sassner.SmarterSql.Addin2012").GetType("Sassner.SmarterSql.SmarterSqlAddin2012").GetConstructor(new Type[] { }).Invoke(null);
+					} else {
+						Common.LogEntry(ClassName, "OnConnection", "Unknown SSMS version " + version, Common.enErrorLvl.Error);
+						MessageBox.Show("Error loading SmarterSql addin. Unknown SSMS version " + version, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						return;
 					}
 					instance = new Instance((DTE2)((AddIn)addInInst).DTE, (AddIn)addInInst, primaryThread, smarterSqlAddin.GetConnection);
 				}

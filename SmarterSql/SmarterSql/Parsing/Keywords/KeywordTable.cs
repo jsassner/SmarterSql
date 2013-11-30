@@ -170,5 +170,188 @@ namespace Sassner.SmarterSql.Parsing.Keywords {
 		}
 
 		#endregion
+
+		/// <summary>
+		/// ALTER TABLE [ database_name . [ schema_name ] . | schema_name . ] table_name 
+		///{ 
+		///    ALTER COLUMN column_name 
+		///    { 
+		///        [ type_schema_name. ] type_name [ ( { precision [ , scale ] 
+		///            | max | xml_schema_collection } ) ] 
+		///        [ COLLATE collation_name ] 
+		///        [ NULL | NOT NULL ] [ SPARSE ]
+		///    | {ADD | DROP } 
+		///        { ROWGUIDCOL | PERSISTED | NOT FOR REPLICATION | SPARSE }
+		///    } 
+		///        | [ WITH { CHECK | NOCHECK } ]
+		///
+		///    | ADD 
+		///    { 
+		///        <column_definition>
+		///      | <computed_column_definition>
+		///      | <table_constraint> 
+		///      | <column_set_definition> 
+		///    } [ ,...n ]
+		///
+		///    | DROP 
+		///    { 
+		///        [ CONSTRAINT ] constraint_name [ WITH ( <drop_clustered_constraint_option> [ ,...n ] ) ]
+		///        | COLUMN column_name 
+		///    } [ ,...n ] 
+		///
+		///    | [ WITH { CHECK | NOCHECK } ] { CHECK | NOCHECK } CONSTRAINT 
+		///        { ALL | constraint_name [ ,...n ] } 
+		///
+		///    | { ENABLE | DISABLE } TRIGGER 
+		///        { ALL | trigger_name [ ,...n ] }
+		///
+		///    | { ENABLE | DISABLE } CHANGE_TRACKING 
+		///        [ WITH ( TRACK_COLUMNS_UPDATED = { ON | OFF } ) ]
+		///
+		///    | SWITCH [ PARTITION source_partition_number_expression ]
+		///        TO target_table 
+		///        [ PARTITION target_partition_number_expression ]
+		///
+		///    | SET ( FILESTREAM_ON = { partition_scheme_name | filegroup | 
+		///                "default" | "NULL" } )
+		///
+		///    | REBUILD 
+		///      [ [PARTITION = ALL]
+		///        [ WITH ( <rebuild_option> [ ,...n ] ) ] 
+		///      | [ PARTITION = partition_number 
+		///           [ WITH ( <single_partition_rebuild_option> [ ,...n ] )]
+		///        ]
+		///      ]
+		///
+		///    | (<table_option>)
+		///}
+		///[ ; ]
+		/// 
+		/// <column_set_definition> ::= 
+		///     column_set_name XML COLUMN_SET FOR ALL_SPARSE_COLUMNS
+		/// 
+		/// <drop_clustered_constraint_option> ::=  
+		///     { 
+		///         MAXDOP = max_degree_of_parallelism
+		/// 
+		///       | ONLINE = {ON | OFF }
+		///       | MOVE TO { partition_scheme_name ( column_name ) | filegroup | "default" }
+		///     }
+		/// <table_option> ::=
+		///     {
+		///         SET ( LOCK_ESCALATION = { AUTO | TABLE | DISABLE } )
+		///     }
+		/// 
+		/// <single_partition_rebuild__option> ::=
+		/// {
+		///       SORT_IN_TEMPDB = { ON | OFF }
+		///     | MAXDOP = max_degree_of_parallelism
+		///     | DATA_COMPRESSION = { NONE | ROW | PAGE} }
+		/// }
+		/// </summary>
+		/// <param name="lstTokens"></param>
+		/// <param name="i"></param>
+		/// <param name="sysObjectId"></param>
+		/// <param name="lstSysObjects"></param>
+		public static void HandleAlterTable(Parser parser, List<TokenInfo> lstTokens, ref int i, ref int sysObjectId, List<SysObject> lstSysObjects) {
+			i++;
+			// ALTER TABLE [ database_name . [ schema_name ] . | schema_name . ] table_name {
+
+			TokenInfo server_name;
+			TokenInfo database_name;
+			TokenInfo schema_name;
+			TokenInfo object_name;
+			int endTableIndex;
+			if (parser.ParseTableOrViewName(i, out endTableIndex, out server_name, out database_name, out schema_name, out object_name)) {
+				if (null == object_name) {
+					return;
+				}
+
+				i++;
+				TokenInfo token = InStatement.GetNextNonCommentToken(lstTokens, ref i);
+				if (null == token) {
+					return;
+				}
+				if (token.Kind == TokenKind.KeywordDrop) {
+					ParseAlterTableDrop(lstTokens, ref i);
+				}
+
+			}
+		}
+
+		/// <summary>
+		///    | DROP 
+		///    { 
+		///        [ CONSTRAINT ] constraint_name [ WITH ( <drop_clustered_constraint_option> [ ,...n ] ) ]
+		///        | COLUMN column_name 
+		///    } [ ,...n ] 
+		/// 
+		/// <drop_clustered_constraint_option> ::=  
+		///     { 
+		///         MAXDOP = max_degree_of_parallelism
+		///       | ONLINE = {ON | OFF }
+		///       | MOVE TO { partition_scheme_name ( column_name ) | filegroup | "default" }
+		///     }
+		/// </summary>
+		/// <param name="lstTokens"></param>
+		/// <param name="i"></param>
+		private static void ParseAlterTableDrop(List<TokenInfo> lstTokens, ref int i) {
+			TokenInfo token;
+			do {
+				i++;
+				token = InStatement.GetNextNonCommentToken(lstTokens, ref i);
+				if (null == token) {
+					return;
+				}
+
+				// COLUMN column_name 
+				if (token.Kind == TokenKind.KeywordColumn) {
+					token = InStatement.GetNextNonCommentToken(lstTokens, ref i);
+					if (null == token) {
+						return;
+					}
+					token.TokenContextType = TokenContextType.TableColumn;
+				} else {
+					// [ CONSTRAINT ]
+					if (token.Kind == TokenKind.KeywordConstraint) {
+						i++;
+					}
+					token = InStatement.GetNextNonCommentToken(lstTokens, ref i);
+					if (null == token) {
+						return;
+					}
+					// constraint_name
+					token.TokenContextType = TokenContextType.Constraint;
+
+					// TODO: handle <drop_clustered_constraint_option>
+					if (InStatement.GetIfAnyNextValidToken(lstTokens, ref i, out token, TokenKind.KeywordWith, TokenKind.LeftParenthesis)) {
+						if (-1 == token.MatchingParenToken || i > token.MatchingParenToken) {
+							return;
+						}
+						int startIndex = i;
+						int endIndex = token.MatchingParenToken;
+						while (i < endIndex) {
+							i++;
+							token = InStatement.GetNextNonCommentToken(lstTokens, ref i);
+							if (null == token) {
+								return;
+							}
+							if (token.Kind == TokenKind.KeywordMaxDop) {
+							} else if (token.Kind == TokenKind.KeywordOnline) {
+							} else if (token.Kind == TokenKind.KeywordMove) {
+							}
+//								TokenKind.KeywordOnline
+//								TokenKind.KeywordOn
+//								TokenKind.KeywordOff
+//								TokenKind.KeywordMove
+//								TokenKind.KeywordTo
+						}
+					}
+				}
+
+				i++;
+				token = InStatement.GetNextNonCommentToken(lstTokens, ref i);
+			} while (null != token && token.Kind == TokenKind.Comma);
+		}
 	}
 }

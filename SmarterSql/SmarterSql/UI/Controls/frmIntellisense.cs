@@ -307,6 +307,11 @@ namespace Sassner.SmarterSql.UI.Controls {
 			}
 			preSelectText = preSelectText.Remove(intPreSelectPosition, strTextDeleted.Length);
 
+			// Remove last list of list pointers, do this twice since we are replacing the list at position-1 with new data when calling SetPointers
+			if (lstPointersStack.Count > 0) {
+				// Remove last list of list pointers
+				lstPointersStack.RemoveAt(lstPointersStack.Count - 1);
+			}
 			if (lstPointersStack.Count > 0) {
 				// Remove last list of list pointers
 				lstPointersStack.RemoveAt(lstPointersStack.Count - 1);
@@ -484,7 +489,7 @@ namespace Sassner.SmarterSql.UI.Controls {
 				int startPosMatchesEnd = -1;
 				int minLengthMatchesEnd = 10000;
 				
-				//Common.LogChar(false, "SetPointers: " + strTextToMatch + ", " + strTextToMatch.Substring(0, intPreSelectPosition) + ", " + intPreSelectPosition);
+				//Common.LogEntry(ClassName, "SetPointers", strTextToMatch + ", " + strTextToMatch.Substring(0, intPreSelectPosition) + ", " + intPreSelectPosition, Common.enErrorLvl.Information);
 
 				strTextToMatch = strTextToMatch.Substring(0, intPreSelectPosition);
 				Regex regExp = CamelCaseMatcher.CreateCamelCaseRegExp(strTextToMatch);
@@ -499,7 +504,7 @@ namespace Sassner.SmarterSql.UI.Controls {
 						pointersToLoop.Add(i);
 					}
 				}
-//				Common.LogEntry(ClassName, "SetPointer", pointersToLoop.Count + " items.", Common.enErrorLvl.Information);
+				//Common.LogEntry(ClassName, "SetPointer", pointersToLoop.Count + " items.", Common.enErrorLvl.Information);
 
 				// Loop all items to find those to include
 //				for (int i = 0; i < lstGLItems.Count; i++) {

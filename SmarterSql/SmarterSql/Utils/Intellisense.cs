@@ -552,6 +552,22 @@ namespace Sassner.SmarterSql.Utils {
 						lstAllIntellisenseItems.Add(scannedItem);
 					}
 
+					if (null != textEditor.ActiveConnection) {
+						// Add SysObjects
+						List<SysObject> lstSysObjects = textEditor.ActiveConnection.GetSysObjects();
+						foreach (SysObject sysObject in lstSysObjects) {
+							if (Common.enSqlTypes.DerivedTable != sysObject.SqlType) {
+								lstAllIntellisenseItems.Add(sysObject);
+							}
+						}
+
+						// Add schemas
+						List<SysObjectSchema> lstSysObjectsSchemas = textEditor.ActiveConnection.GetSysObjectSchemas();
+						foreach (SysObjectSchema schema in lstSysObjectsSchemas) {
+							lstAllIntellisenseItems.Add(schema);
+						}
+					}
+
 					if (null != textEditor.ActiveServer) {
 						// Databases
 						List<Database> lstDataBases = textEditor.ActiveServer.GetDataBases();
@@ -577,21 +593,6 @@ namespace Sassner.SmarterSql.Utils {
 						lstAllIntellisenseItems.Add(template);
 					}
 
-					if (null != textEditor.ActiveConnection) {
-						// Add SysObjects
-						List<SysObject> lstSysObjects = textEditor.ActiveConnection.GetSysObjects();
-						foreach (SysObject sysObject in lstSysObjects) {
-							if (Common.enSqlTypes.DerivedTable != sysObject.SqlType) {
-								lstAllIntellisenseItems.Add(sysObject);
-							}
-						}
-
-						// Add schemas
-						List<SysObjectSchema> lstSysObjectsSchemas = textEditor.ActiveConnection.GetSysObjectSchemas();
-						foreach (SysObjectSchema schema in lstSysObjectsSchemas) {
-							lstAllIntellisenseItems.Add(schema);
-						}
-					}
 				} catch (Exception e) {
 					Common.LogEntry(ClassName, "GetAllIntellisenseItems", e, Common.enErrorLvl.Error);
 				}

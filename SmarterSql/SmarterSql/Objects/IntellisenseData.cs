@@ -154,10 +154,10 @@ namespace Sassner.SmarterSql.Objects {
 				return MainText.CompareTo(other.MainText);
 			}
 			if (StartsWithAttAtt) {
-				return 1;
+				return -1;
 			}
 			if (other.StartsWithAttAtt) {
-				return -1;
+				return 1;
 			}
 
 			int compareTo = MainText.CompareTo(other.MainText);

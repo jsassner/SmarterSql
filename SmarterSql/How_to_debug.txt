@@ -1,0 +1,8 @@
+Create "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\Ssms.exe.config"
+
+<?xml version="1.0"?>
+<configuration>
+   <startup>
+      <supportedRuntime version="v2.0.50727"/>
+   </startup>
+</configuration>

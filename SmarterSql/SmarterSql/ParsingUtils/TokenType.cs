@@ -65,5 +65,7 @@ namespace Sassner.SmarterSql.ParsingUtils {
 		TransactionName,
 		PivotColumn,
 		PivotValue,
+
+		Constraint,
 	}
 }
