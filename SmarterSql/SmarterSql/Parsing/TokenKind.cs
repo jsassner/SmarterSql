@@ -749,6 +749,11 @@ namespace Sassner.SmarterSql.Parsing {
 		KeywordDeny_Server,
 		KeywordRevoke_Server,
 
+		KeywordColumn,
+		KeywordMaxDop,
+		KeywordOnline,
+		KeywordMove,
+
 		//
 	}
 }

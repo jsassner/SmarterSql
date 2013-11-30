@@ -512,7 +512,7 @@ namespace Sassner.SmarterSql.Parsing {
 
 					#endregion
 				} else if (token.Kind == TokenKind.KeywordAlter) {
-					#region ALTER PROCEDURE/FUNCTION/VIEW/ALTER
+					#region ALTER PROCEDURE/FUNCTION/VIEW/TABLE
 
 					i++;
 					TokenInfo nextToken = InStatement.GetNextNonCommentToken(lstTokens, ref i);
@@ -524,8 +524,9 @@ namespace Sassner.SmarterSql.Parsing {
 						KeywordView.HandleCreateAlterView(lstTokens, ref i);
 					} else if (null != nextToken && nextToken.Kind == TokenKind.KeywordTrigger) {
 						KeywordTrigger.HandleCreateAlterTrigger(currentStartSpan, lstTokens, ref i, ref sysObjectId, lstSysObjects);
+					} else if (null != nextToken && nextToken.Kind == TokenKind.KeywordTable) {
+						KeywordTable.HandleAlterTable(this, lstTokens, ref i, ref sysObjectId, lstSysObjects);
 					}
-					// TODO: Handle ALTER TABLE
 
 					#endregion
 				} else if (token.Kind == TokenKind.KeywordDrop) {

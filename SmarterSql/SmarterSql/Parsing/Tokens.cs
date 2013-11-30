@@ -912,6 +912,88 @@ namespace Sassner.SmarterSql.Parsing {
 		public static readonly Token kwXLockToken = new SymbolToken(TokenKind.KeywordXLock, "xlock");
 		public static readonly Token kwXmlToken = new SymbolToken(TokenKind.KeywordXml, "xml");
 
+		// ALTER TABLE [ database_name . [ schema_name ] . | schema_name . ] table_name 
+		//{ 
+		//    ALTER COLUMN column_name 
+		//    { 
+		//        [ type_schema_name. ] type_name [ ( { precision [ , scale ] 
+		//            | max | xml_schema_collection } ) ] 
+		//        [ COLLATE collation_name ] 
+		//        [ NULL | NOT NULL ] [ SPARSE ]
+		//    | {ADD | DROP } 
+		//        { ROWGUIDCOL | PERSISTED | NOT FOR REPLICATION | SPARSE }
+		//    } 
+		//        | [ WITH { CHECK | NOCHECK } ]
+		//
+		//    | ADD 
+		//    { 
+		//        <column_definition>
+		//      | <computed_column_definition>
+		//      | <table_constraint> 
+		//      | <column_set_definition> 
+		//    } [ ,...n ]
+		//
+		//    | DROP 
+		//    { 
+		//        [ CONSTRAINT ] constraint_name [ WITH ( <drop_clustered_constraint_option> [ ,...n ] ) ]
+		//        | COLUMN column_name 
+		//    } [ ,...n ] 
+		//
+		//    | [ WITH { CHECK | NOCHECK } ] { CHECK | NOCHECK } CONSTRAINT 
+		//        { ALL | constraint_name [ ,...n ] } 
+		//
+		//    | { ENABLE | DISABLE } TRIGGER 
+		//        { ALL | trigger_name [ ,...n ] }
+		//
+		//    | { ENABLE | DISABLE } CHANGE_TRACKING 
+		//        [ WITH ( TRACK_COLUMNS_UPDATED = { ON | OFF } ) ]
+		//
+		//    | SWITCH [ PARTITION source_partition_number_expression ]
+		//        TO target_table 
+		//        [ PARTITION target_partition_number_expression ]
+		//
+		//    | SET ( FILESTREAM_ON = { partition_scheme_name | filegroup | 
+		//                "default" | "NULL" } )
+		//
+		//    | REBUILD 
+		//      [ [PARTITION = ALL]
+		//        [ WITH ( <rebuild_option> [ ,...n ] ) ] 
+		//      | [ PARTITION = partition_number 
+		//           [ WITH ( <single_partition_rebuild_option> [ ,...n ] )]
+		//        ]
+		//      ]
+		//
+		//    | (<table_option>)
+		//}
+		//[ ; ]
+		// 
+		// <column_set_definition> ::= 
+		//     column_set_name XML COLUMN_SET FOR ALL_SPARSE_COLUMNS
+		// 
+		// <drop_clustered_constraint_option> ::=  
+		//     { 
+		//         MAXDOP = max_degree_of_parallelism
+		// 
+		//       | ONLINE = {ON | OFF }
+		//       | MOVE TO { partition_scheme_name ( column_name ) | filegroup
+		//           | "default" }
+		//     }
+		// <table_option> ::=
+		//     {
+		//         SET ( LOCK_ESCALATION = { AUTO | TABLE | DISABLE } )
+		//     }
+		// 
+		// <single_partition_rebuild__option> ::=
+		// {
+		//       SORT_IN_TEMPDB = { ON | OFF }
+		//     | MAXDOP = max_degree_of_parallelism
+		//     | DATA_COMPRESSION = { NONE | ROW | PAGE} }
+		// }
+		public static readonly Token kwColumnToken = new SymbolToken(TokenKind.KeywordColumn, "column");
+		public static readonly Token kwMaxDopToken = new SymbolToken(TokenKind.KeywordMaxDop, "maxdop");
+		public static readonly Token kwOnlineToken = new SymbolToken(TokenKind.KeywordOnline, "online");
+		public static readonly Token kwMoveToken = new SymbolToken(TokenKind.KeywordMove, "move");
+
 		#region Create function
 
 		//Scalar Functions
@@ -1984,6 +2066,11 @@ namespace Sassner.SmarterSql.Parsing {
 			Keywords[SymbolTable.StringToId("grant_server")] = kwGrant_ServerToken;
 			Keywords[SymbolTable.StringToId("deny_server")] = kwDeny_ServerToken;
 			Keywords[SymbolTable.StringToId("revoke_server")] = kwRevoke_ServerToken;
+
+			Keywords[SymbolTable.StringToId("column")] = kwColumnToken;
+			Keywords[SymbolTable.StringToId("maxdop")] = kwMaxDopToken;
+			Keywords[SymbolTable.StringToId("online")] = kwOnlineToken;
+			Keywords[SymbolTable.StringToId("move")] = kwMoveToken;
 
 			#endregion
 

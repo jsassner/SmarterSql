@@ -947,6 +947,11 @@ namespace Sassner.SmarterSql.ParsingUtils {
 				case TokenKind.KeywordDeny_Server:
 				case TokenKind.KeywordRevoke_Server:
 
+				case TokenKind.KeywordColumn:
+				case TokenKind.KeywordMaxDop:
+				case TokenKind.KeywordOnline:
+				case TokenKind.KeywordMove:
+
 					tokenInfo.Type = TokenType.Keyword;
 					break;
 
