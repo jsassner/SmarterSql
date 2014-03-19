@@ -152,6 +152,7 @@ namespace Sassner.SmarterSql.Utils {
 			Sql2000,
 			Sql2005,
 			Sql2008,
+			Sql2012
 		}
 
 		#endregion
