@@ -223,6 +223,8 @@ namespace Sassner.SmarterSql.Objects {
 
 			if (Instance.DataAccess.GetSqlServerVersion(this, out major, out minor, out build)) {
 				switch (major) {
+					case 11:
+						return Common.enSqlVersion.Sql2012;
 					case 10:
 						return Common.enSqlVersion.Sql2008;
 					case 9:
