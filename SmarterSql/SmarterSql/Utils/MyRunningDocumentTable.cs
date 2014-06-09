@@ -255,6 +255,7 @@ namespace Sassner.SmarterSql.Utils {
 						splitterRoot.MouseDown += splitterRoot_MouseDown;
 						splitterRoot.ScrollBarMoved += splitterRoot_ScrollBarMoved;
 						splitterRoot.SplitWindow += splitterRoot_SplitWindow;
+
 						WindowData windowData = new WindowData(docCookie, codeWindow, activeView, splitterRoot);
 						windowDatas.Add(windowData);
 

@@ -147,8 +147,8 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 		protected abstract bool OnMouseLeave(int x, int y);
 		protected abstract bool OnMouseHover(int x, int y);
 		protected abstract bool OnMouseMove(int x, int y);
-		protected abstract bool OnGotFocus();
-		protected abstract bool OnLostFocus();
+		protected abstract bool OnGotFocus(IntPtr hwnd);
+		protected abstract bool OnLostFocus(IntPtr hwnd);
 		protected abstract bool OnWindowPosChanging(IntPtr windowPos);
 		protected abstract bool OnWindowSize(IntPtr windowPos);
 		protected abstract bool OnMouseWheel(int linesToScroll, int pixelsToScroll, int newYPos);
@@ -173,7 +173,6 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 				NativeWIN32.VirtualKeys wParam = (NativeWIN32.VirtualKeys)m.WParam;
 
 				switch (msg) {
-
 
 					case NativeWIN32.WindowsMessages.WM_MOUSEWHEEL:
 					case NativeWIN32.WindowsMessages.WM_MOUSEHWHEEL:
@@ -201,11 +200,13 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 						break;
 
 					case NativeWIN32.WindowsMessages.WM_SETFOCUS:
-						OnGotFocus();
+						//Common.LogEntry(ClassName, "WndProc", "WM_SETFOCUS: " + m.HWnd + ", that lost focus: " + m.WParam, Common.enErrorLvl.Information);
+						OnGotFocus(m.HWnd);
 						break;
 
 					case NativeWIN32.WindowsMessages.WM_KILLFOCUS:
-						OnLostFocus();
+						//Common.LogEntry(ClassName, "WndProc", "WM_KILLFOCUS: " + m.HWnd + ", to recieve focus: " + m.WParam, Common.enErrorLvl.Information);
+						OnLostFocus(m.HWnd);
 						break;
 
 					case NativeWIN32.WindowsMessages.WM_MOUSEMOVE:

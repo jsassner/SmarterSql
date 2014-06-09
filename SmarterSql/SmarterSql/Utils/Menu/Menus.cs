@@ -209,7 +209,7 @@ namespace Sassner.SmarterSql.Utils.Menu {
 		/// <param name="cmd">The CMD.</param>
 		/// <exception cref="ArgumentNullException"><c>cmd</c> is null.</exception>
 		private void AddCommandToList(CommandBase cmd) {
-			if (cmd == null) {
+			if (null == cmd) {
 				throw new ArgumentNullException("cmd");
 			}
 

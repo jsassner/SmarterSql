@@ -85,13 +85,13 @@ namespace Sassner.SmarterSql.Utils.SqlErrors {
 		/// <returns></returns>
 		/// <exception cref="ArgumentNullException"><c>parser</c> is null.</exception>
 		internal bool CreateSysobjectAlias(Parser parser, List<SysObject> lstSysObjects, TableSource tableSource) {
-			if (parser == null) {
+			if (null == parser) {
 				throw new ArgumentNullException("parser");
 			}
-			if (lstSysObjects == null) {
+			if (null == lstSysObjects) {
 				throw new ArgumentNullException("lstSysObjects");
 			}
-			if (tableSource == null) {
+			if (null == tableSource) {
 				throw new ArgumentNullException("tableSource");
 			}
 			try {

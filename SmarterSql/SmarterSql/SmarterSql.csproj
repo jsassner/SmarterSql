@@ -79,9 +79,6 @@
     </Reference>
     <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="GlacialList">
-      <HintPath>..\Bins\GlacialList.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualStudio.ManagedInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.Package.LanguageService, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -90,6 +87,9 @@
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.TextManager.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.TextManager.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Sassner.Sql.GlacialList">
+      <HintPath>..\Bins\Sassner.Sql.GlacialList.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Install" />
@@ -146,10 +146,13 @@
     <Compile Include="UI\frmAbout.designer.cs">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Subclassing\ConnectionColoring.cs" />
+    <Compile Include="UI\Subclassing\VsGenericPaneChild.cs" />
     <Compile Include="Utils\CamelCaseMatcher.cs" />
     <Compile Include="Utils\CleanUpCode.cs" />
     <Compile Include="Utils\CodeChange.cs" />
     <Compile Include="Utils\ExceptionAsXml.cs" />
+    <Compile Include="Utils\Extensions\ColorExtensions.cs" />
     <Compile Include="Utils\Intellisense.cs" />
     <Compile Include="Objects\Functions\BuiltInFunction.cs" />
     <Compile Include="Objects\Functions\Function.cs" />

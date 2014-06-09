@@ -161,7 +161,7 @@ namespace Sassner.SmarterSql.Parsing.Expressions {
 		/// <returns></returns>
 		/// <exception cref="ArgumentNullException"><c>connection</c> is null.</exception>
 		private static bool IsTokenSysObject(Connection connection, TokenInfo tokenSysObjectName, TokenInfo tokenColumn, out ParsedDataType parsedDataType) {
-			if (connection == null) {
+			if (null == connection) {
 				throw new ArgumentNullException("connection");
 			}
 			SysObject sysObject;

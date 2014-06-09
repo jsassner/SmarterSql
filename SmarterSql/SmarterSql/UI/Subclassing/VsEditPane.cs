@@ -188,10 +188,7 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 		}
 
 		private int GetSplitterHeight() {
-			if (null == verticalScrollBar) {
-				return 0;
-			}
-			return verticalScrollBar.SplitterHeight;
+			return (null == verticalScrollBar ? 0 : verticalScrollBar.SplitterHeight);
 		}
 
 		/// <summary>

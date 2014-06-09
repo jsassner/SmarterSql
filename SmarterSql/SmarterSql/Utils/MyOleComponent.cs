@@ -156,7 +156,7 @@ namespace Sassner.SmarterSql.Utils {
 		/// </summary>
 		private void InitializeOleComponentManager() {
 			mgr = sp.GetService(typeof(SOleComponentManager)) as IOleComponentManager;
-			if (mgr == null) {
+			if (null == mgr) {
 				return;
 			}
 			OLECRINFO[] crinfo = new OLECRINFO[1];

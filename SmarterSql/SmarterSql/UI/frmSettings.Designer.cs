@@ -25,6 +25,10 @@ namespace Sassner.SmarterSql.UI {
 		private void InitializeComponent() {
 			GlacialComponents.Controls.GLColumn glColumn1 = new GlacialComponents.Controls.GLColumn();
 			GlacialComponents.Controls.GLColumn glColumn2 = new GlacialComponents.Controls.GLColumn();
+			GlacialComponents.Controls.GLColumn glColumn3 = new GlacialComponents.Controls.GLColumn();
+			GlacialComponents.Controls.GLColumn glColumn4 = new GlacialComponents.Controls.GLColumn();
+			GlacialComponents.Controls.GLColumn glColumn5 = new GlacialComponents.Controls.GLColumn();
+			GlacialComponents.Controls.GLColumn glColumn6 = new GlacialComponents.Controls.GLColumn();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
 			this.tabIntellisense = new System.Windows.Forms.TabPage();
@@ -52,7 +56,6 @@ namespace Sassner.SmarterSql.UI {
 			this.chkAutoInsertTokenAS = new System.Windows.Forms.CheckBox();
 			this.chkAutoInsertPairParanthesesAndQuotes = new System.Windows.Forms.CheckBox();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
-			this.chkShowErrorStrip = new System.Windows.Forms.CheckBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.txtAlphaHighlightCurrentLine = new System.Windows.Forms.TextBox();
@@ -61,6 +64,13 @@ namespace Sassner.SmarterSql.UI {
 			this.picHightlightCurrentLine = new System.Windows.Forms.PictureBox();
 			this.chkHighlightCurrentLine = new System.Windows.Forms.CheckBox();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.cmdSetDefaultCommittedBy = new System.Windows.Forms.Button();
+			this.chkCommittedBySpaceBar = new System.Windows.Forms.CheckBox();
+			this.chkCommittedByTab = new System.Windows.Forms.CheckBox();
+			this.label7 = new System.Windows.Forms.Label();
+			this.chkCommittedByEnter = new System.Windows.Forms.CheckBox();
+			this.txtCommittedByCharacters = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.numSmartHelperInitialDelay = new System.Windows.Forms.NumericUpDown();
@@ -71,14 +81,23 @@ namespace Sassner.SmarterSql.UI {
 			this.label3 = new System.Windows.Forms.Label();
 			this.numFullParseInitialDelay = new System.Windows.Forms.NumericUpDown();
 			this.chkAutomaticallyShowCompletionWindow = new System.Windows.Forms.CheckBox();
+			this.tabWindows = new System.Windows.Forms.TabPage();
+			this.lstConnectionColors = new GlacialComponents.Controls.GlacialList();
+			this.cmdAddConnectionColorSetting = new System.Windows.Forms.Button();
+			this.chkShowConnectionColorStrip = new System.Windows.Forms.CheckBox();
+			this.chkShowErrorStrip = new System.Windows.Forms.CheckBox();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-			this.groupBox4 = new System.Windows.Forms.GroupBox();
-			this.label7 = new System.Windows.Forms.Label();
-			this.txtCommittedByCharacters = new System.Windows.Forms.TextBox();
-			this.chkCommittedBySpaceBar = new System.Windows.Forms.CheckBox();
-			this.chkCommittedByEnter = new System.Windows.Forms.CheckBox();
-			this.chkCommittedByTab = new System.Windows.Forms.CheckBox();
-			this.cmdSetDefaultCommittedBy = new System.Windows.Forms.Button();
+			this.colorDialog2 = new System.Windows.Forms.ColorDialog();
+			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.rbConColPosBottom = new System.Windows.Forms.RadioButton();
+			this.rbConColPosTop = new System.Windows.Forms.RadioButton();
+			this.rbConColPosLeft = new System.Windows.Forms.RadioButton();
+			this.rbConColPosRight = new System.Windows.Forms.RadioButton();
+			this.groupBox6 = new System.Windows.Forms.GroupBox();
+			this.rbErrorStripPosRight = new System.Windows.Forms.RadioButton();
+			this.rbErrorStripPosLeft = new System.Windows.Forms.RadioButton();
+			this.rbErrorStripPosBottom = new System.Windows.Forms.RadioButton();
+			this.rbErrorStripPosTop = new System.Windows.Forms.RadioButton();
 			this.tabIntellisense.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
@@ -90,16 +109,19 @@ namespace Sassner.SmarterSql.UI {
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.picHightlightCurrentLine)).BeginInit();
 			this.tabPage1.SuspendLayout();
+			this.groupBox4.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numSmartHelperInitialDelay)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numFullParseInitialDelay)).BeginInit();
-			this.groupBox4.SuspendLayout();
+			this.tabWindows.SuspendLayout();
+			this.groupBox5.SuspendLayout();
+			this.groupBox6.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// btnCancel
 			// 
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.Location = new System.Drawing.Point(407, 51);
+			this.btnCancel.Location = new System.Drawing.Point(405, 51);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
 			this.btnCancel.TabIndex = 1;
@@ -110,7 +132,8 @@ namespace Sassner.SmarterSql.UI {
 			// btnOk
 			// 
 			this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOk.Location = new System.Drawing.Point(407, 22);
+			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnOk.Location = new System.Drawing.Point(405, 22);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
 			this.btnOk.TabIndex = 0;
@@ -124,7 +147,7 @@ namespace Sassner.SmarterSql.UI {
 			this.tabIntellisense.Location = new System.Drawing.Point(4, 22);
 			this.tabIntellisense.Name = "tabIntellisense";
 			this.tabIntellisense.Padding = new System.Windows.Forms.Padding(3);
-			this.tabIntellisense.Size = new System.Drawing.Size(396, 324);
+			this.tabIntellisense.Size = new System.Drawing.Size(394, 365);
 			this.tabIntellisense.TabIndex = 0;
 			this.tabIntellisense.Text = "Scan for";
 			this.tabIntellisense.UseVisualStyleBackColor = true;
@@ -218,18 +241,19 @@ namespace Sassner.SmarterSql.UI {
 			// 
 			// tabControl1
 			// 
-			this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
+			this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.tabControl1.Controls.Add(this.tabMisc);
 			this.tabControl1.Controls.Add(this.tabIntellisense);
 			this.tabControl1.Controls.Add(this.tabInsertText);
 			this.tabControl1.Controls.Add(this.tabPage2);
 			this.tabControl1.Controls.Add(this.tabPage1);
-			this.tabControl1.Location = new System.Drawing.Point(1, 1);
+			this.tabControl1.Controls.Add(this.tabWindows);
+			this.tabControl1.Location = new System.Drawing.Point(-3, 1);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(404, 350);
+			this.tabControl1.Size = new System.Drawing.Size(402, 391);
 			this.tabControl1.TabIndex = 3;
 			// 
 			// tabMisc
@@ -244,7 +268,7 @@ namespace Sassner.SmarterSql.UI {
 			this.tabMisc.Location = new System.Drawing.Point(4, 22);
 			this.tabMisc.Name = "tabMisc";
 			this.tabMisc.Padding = new System.Windows.Forms.Padding(3);
-			this.tabMisc.Size = new System.Drawing.Size(396, 324);
+			this.tabMisc.Size = new System.Drawing.Size(394, 365);
 			this.tabMisc.TabIndex = 1;
 			this.tabMisc.Text = "Misc";
 			this.tabMisc.UseVisualStyleBackColor = true;
@@ -343,7 +367,7 @@ namespace Sassner.SmarterSql.UI {
 			this.tabInsertText.Location = new System.Drawing.Point(4, 22);
 			this.tabInsertText.Name = "tabInsertText";
 			this.tabInsertText.Padding = new System.Windows.Forms.Padding(3);
-			this.tabInsertText.Size = new System.Drawing.Size(396, 324);
+			this.tabInsertText.Size = new System.Drawing.Size(394, 365);
 			this.tabInsertText.TabIndex = 2;
 			this.tabInsertText.Text = "Insert text";
 			this.tabInsertText.UseVisualStyleBackColor = true;
@@ -469,25 +493,14 @@ namespace Sassner.SmarterSql.UI {
 			// 
 			// tabPage2
 			// 
-			this.tabPage2.Controls.Add(this.chkShowErrorStrip);
 			this.tabPage2.Controls.Add(this.groupBox2);
 			this.tabPage2.Location = new System.Drawing.Point(4, 22);
 			this.tabPage2.Name = "tabPage2";
 			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage2.Size = new System.Drawing.Size(396, 324);
+			this.tabPage2.Size = new System.Drawing.Size(394, 365);
 			this.tabPage2.TabIndex = 3;
 			this.tabPage2.Text = "Editor";
 			this.tabPage2.UseVisualStyleBackColor = true;
-			// 
-			// chkShowErrorStrip
-			// 
-			this.chkShowErrorStrip.AutoSize = true;
-			this.chkShowErrorStrip.Location = new System.Drawing.Point(18, 17);
-			this.chkShowErrorStrip.Name = "chkShowErrorStrip";
-			this.chkShowErrorStrip.Size = new System.Drawing.Size(99, 17);
-			this.chkShowErrorStrip.TabIndex = 0;
-			this.chkShowErrorStrip.Text = "Show ErrorStrip";
-			this.chkShowErrorStrip.UseVisualStyleBackColor = true;
 			// 
 			// groupBox2
 			// 
@@ -497,7 +510,7 @@ namespace Sassner.SmarterSql.UI {
 			this.groupBox2.Controls.Add(this.trackBar1);
 			this.groupBox2.Controls.Add(this.picHightlightCurrentLine);
 			this.groupBox2.Controls.Add(this.chkHighlightCurrentLine);
-			this.groupBox2.Location = new System.Drawing.Point(7, 49);
+			this.groupBox2.Location = new System.Drawing.Point(7, 6);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(260, 131);
 			this.groupBox2.TabIndex = 5;
@@ -578,10 +591,81 @@ namespace Sassner.SmarterSql.UI {
 			this.tabPage1.Location = new System.Drawing.Point(4, 22);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(396, 324);
+			this.tabPage1.Size = new System.Drawing.Size(394, 365);
 			this.tabPage1.TabIndex = 4;
 			this.tabPage1.Text = "Intellisense";
 			this.tabPage1.UseVisualStyleBackColor = true;
+			// 
+			// groupBox4
+			// 
+			this.groupBox4.Controls.Add(this.cmdSetDefaultCommittedBy);
+			this.groupBox4.Controls.Add(this.chkCommittedBySpaceBar);
+			this.groupBox4.Controls.Add(this.chkCommittedByTab);
+			this.groupBox4.Controls.Add(this.label7);
+			this.groupBox4.Controls.Add(this.chkCommittedByEnter);
+			this.groupBox4.Controls.Add(this.txtCommittedByCharacters);
+			this.groupBox4.Location = new System.Drawing.Point(7, 67);
+			this.groupBox4.Name = "groupBox4";
+			this.groupBox4.Size = new System.Drawing.Size(373, 130);
+			this.groupBox4.TabIndex = 23;
+			this.groupBox4.TabStop = false;
+			this.groupBox4.Text = "Committing";
+			// 
+			// cmdSetDefaultCommittedBy
+			// 
+			this.cmdSetDefaultCommittedBy.Location = new System.Drawing.Point(256, 31);
+			this.cmdSetDefaultCommittedBy.Name = "cmdSetDefaultCommittedBy";
+			this.cmdSetDefaultCommittedBy.Size = new System.Drawing.Size(109, 23);
+			this.cmdSetDefaultCommittedBy.TabIndex = 23;
+			this.cmdSetDefaultCommittedBy.Text = "Set default values";
+			this.cmdSetDefaultCommittedBy.UseVisualStyleBackColor = true;
+			this.cmdSetDefaultCommittedBy.Click += new System.EventHandler(this.cmdSetDefaultCommittedBy_Click);
+			// 
+			// chkCommittedBySpaceBar
+			// 
+			this.chkCommittedBySpaceBar.AutoSize = true;
+			this.chkCommittedBySpaceBar.Location = new System.Drawing.Point(6, 57);
+			this.chkCommittedBySpaceBar.Name = "chkCommittedBySpaceBar";
+			this.chkCommittedBySpaceBar.Size = new System.Drawing.Size(199, 17);
+			this.chkCommittedBySpaceBar.TabIndex = 20;
+			this.chkCommittedBySpaceBar.Text = "Committed by pressing the space bar";
+			this.chkCommittedBySpaceBar.UseVisualStyleBackColor = true;
+			// 
+			// chkCommittedByTab
+			// 
+			this.chkCommittedByTab.AutoSize = true;
+			this.chkCommittedByTab.Location = new System.Drawing.Point(6, 103);
+			this.chkCommittedByTab.Name = "chkCommittedByTab";
+			this.chkCommittedByTab.Size = new System.Drawing.Size(187, 17);
+			this.chkCommittedByTab.TabIndex = 22;
+			this.chkCommittedByTab.Text = "Committed by pressing the tab key";
+			this.chkCommittedByTab.UseVisualStyleBackColor = true;
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(3, 15);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(219, 13);
+			this.label7.TabIndex = 18;
+			this.label7.Text = "Committed by typing the following characters:";
+			// 
+			// chkCommittedByEnter
+			// 
+			this.chkCommittedByEnter.AutoSize = true;
+			this.chkCommittedByEnter.Location = new System.Drawing.Point(6, 80);
+			this.chkCommittedByEnter.Name = "chkCommittedByEnter";
+			this.chkCommittedByEnter.Size = new System.Drawing.Size(196, 17);
+			this.chkCommittedByEnter.TabIndex = 21;
+			this.chkCommittedByEnter.Text = "Committed by pressing the enter key";
+			this.chkCommittedByEnter.UseVisualStyleBackColor = true;
+			// 
+			// txtCommittedByCharacters
+			// 
+			this.txtCommittedByCharacters.Location = new System.Drawing.Point(35, 31);
+			this.txtCommittedByCharacters.Name = "txtCommittedByCharacters";
+			this.txtCommittedByCharacters.Size = new System.Drawing.Size(215, 20);
+			this.txtCommittedByCharacters.TabIndex = 19;
 			// 
 			// label5
 			// 
@@ -707,84 +791,249 @@ namespace Sassner.SmarterSql.UI {
 			this.chkAutomaticallyShowCompletionWindow.UseVisualStyleBackColor = true;
 			this.chkAutomaticallyShowCompletionWindow.CheckedChanged += new System.EventHandler(this.chkAutomaticallyShowCompletionWindow_CheckedChanged);
 			// 
-			// groupBox4
+			// tabWindows
 			// 
-			this.groupBox4.Controls.Add(this.cmdSetDefaultCommittedBy);
-			this.groupBox4.Controls.Add(this.chkCommittedBySpaceBar);
-			this.groupBox4.Controls.Add(this.chkCommittedByTab);
-			this.groupBox4.Controls.Add(this.label7);
-			this.groupBox4.Controls.Add(this.chkCommittedByEnter);
-			this.groupBox4.Controls.Add(this.txtCommittedByCharacters);
-			this.groupBox4.Location = new System.Drawing.Point(7, 67);
-			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(373, 130);
-			this.groupBox4.TabIndex = 23;
-			this.groupBox4.TabStop = false;
-			this.groupBox4.Text = "Committing";
+			this.tabWindows.Controls.Add(this.groupBox6);
+			this.tabWindows.Controls.Add(this.groupBox5);
+			this.tabWindows.Controls.Add(this.lstConnectionColors);
+			this.tabWindows.Controls.Add(this.cmdAddConnectionColorSetting);
+			this.tabWindows.Controls.Add(this.chkShowConnectionColorStrip);
+			this.tabWindows.Controls.Add(this.chkShowErrorStrip);
+			this.tabWindows.Location = new System.Drawing.Point(4, 22);
+			this.tabWindows.Name = "tabWindows";
+			this.tabWindows.Padding = new System.Windows.Forms.Padding(3);
+			this.tabWindows.Size = new System.Drawing.Size(394, 365);
+			this.tabWindows.TabIndex = 5;
+			this.tabWindows.Text = "Windows";
+			this.tabWindows.UseVisualStyleBackColor = true;
 			// 
-			// label7
+			// lstConnectionColors
 			// 
-			this.label7.AutoSize = true;
-			this.label7.Location = new System.Drawing.Point(3, 15);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(219, 13);
-			this.label7.TabIndex = 18;
-			this.label7.Text = "Committed by typing the following characters:";
+			this.lstConnectionColors.AllowColumnResize = true;
+			this.lstConnectionColors.AllowMultiselect = false;
+			this.lstConnectionColors.AlternateBackground = System.Drawing.Color.DarkGreen;
+			this.lstConnectionColors.AlternatingColors = false;
+			this.lstConnectionColors.AutoHeight = false;
+			this.lstConnectionColors.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.lstConnectionColors.BackgroundStretchToFit = true;
+			glColumn3.ActivatedEmbeddedType = GlacialComponents.Controls.GLActivatedEmbeddedTypes.TextBox;
+			glColumn3.CheckBoxes = false;
+			glColumn3.ImageIndex = -1;
+			glColumn3.Name = "Column1";
+			glColumn3.NumericSort = false;
+			glColumn3.Text = "Server";
+			glColumn3.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			glColumn3.Width = 100;
+			glColumn4.ActivatedEmbeddedType = GlacialComponents.Controls.GLActivatedEmbeddedTypes.TextBox;
+			glColumn4.CheckBoxes = false;
+			glColumn4.ImageIndex = -1;
+			glColumn4.Name = "Column2";
+			glColumn4.NumericSort = false;
+			glColumn4.Text = "Database";
+			glColumn4.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			glColumn4.Width = 100;
+			glColumn5.ActivatedEmbeddedType = GlacialComponents.Controls.GLActivatedEmbeddedTypes.UserType;
+			glColumn5.CheckBoxes = false;
+			glColumn5.ImageIndex = -1;
+			glColumn5.Name = "Column3";
+			glColumn5.NumericSort = false;
+			glColumn5.Text = "Color";
+			glColumn5.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			glColumn5.Width = 100;
+			glColumn6.ActivatedEmbeddedType = GlacialComponents.Controls.GLActivatedEmbeddedTypes.UserType;
+			glColumn6.CheckBoxes = false;
+			glColumn6.ImageIndex = -1;
+			glColumn6.Name = "Column4";
+			glColumn6.NumericSort = false;
+			glColumn6.Text = "Delete";
+			glColumn6.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			glColumn6.Width = 100;
+			this.lstConnectionColors.Columns.AddRange(new GlacialComponents.Controls.GLColumn[] {
+            glColumn3,
+            glColumn4,
+            glColumn5,
+            glColumn6});
+			this.lstConnectionColors.ControlStyle = GlacialComponents.Controls.GLControlStyles.Normal;
+			this.lstConnectionColors.FullRowSelect = true;
+			this.lstConnectionColors.GridColor = System.Drawing.Color.LightGray;
+			this.lstConnectionColors.GridLines = GlacialComponents.Controls.GLGridLines.gridBoth;
+			this.lstConnectionColors.GridLineStyle = GlacialComponents.Controls.GLGridLineStyles.gridSolid;
+			this.lstConnectionColors.GridTypes = GlacialComponents.Controls.GLGridTypes.gridOnExists;
+			this.lstConnectionColors.HeaderHeight = 23;
+			this.lstConnectionColors.HeaderVisible = true;
+			this.lstConnectionColors.HeaderWordWrap = false;
+			this.lstConnectionColors.HotColumnTracking = false;
+			this.lstConnectionColors.HotItemTracking = false;
+			this.lstConnectionColors.HotTrackingColor = System.Drawing.Color.LightGray;
+			this.lstConnectionColors.HoverEvents = false;
+			this.lstConnectionColors.HoverTime = 1;
+			this.lstConnectionColors.ImageList = null;
+			this.lstConnectionColors.ItemHeight = 30;
+			this.lstConnectionColors.ItemWordWrap = false;
+			this.lstConnectionColors.Location = new System.Drawing.Point(8, 125);
+			this.lstConnectionColors.Name = "lstConnectionColors";
+			this.lstConnectionColors.Selectable = true;
+			this.lstConnectionColors.SelectedTextColor = System.Drawing.Color.White;
+			this.lstConnectionColors.SelectionColor = System.Drawing.SystemColors.Highlight;
+			this.lstConnectionColors.ShowBorder = true;
+			this.lstConnectionColors.ShowFocusRect = false;
+			this.lstConnectionColors.Size = new System.Drawing.Size(382, 142);
+			this.lstConnectionColors.SortType = GlacialComponents.Controls.SortTypes.None;
+			this.lstConnectionColors.SuperFlatHeaderColor = System.Drawing.Color.White;
+			this.lstConnectionColors.TabIndex = 19;
+			this.lstConnectionColors.Text = "glacialList2";
+			this.lstConnectionColors.VirtualMode = false;
 			// 
-			// txtCommittedByCharacters
+			// cmdAddConnectionColorSetting
 			// 
-			this.txtCommittedByCharacters.Location = new System.Drawing.Point(35, 31);
-			this.txtCommittedByCharacters.Name = "txtCommittedByCharacters";
-			this.txtCommittedByCharacters.Size = new System.Drawing.Size(215, 20);
-			this.txtCommittedByCharacters.TabIndex = 19;
+			this.cmdAddConnectionColorSetting.Location = new System.Drawing.Point(7, 273);
+			this.cmdAddConnectionColorSetting.Name = "cmdAddConnectionColorSetting";
+			this.cmdAddConnectionColorSetting.Size = new System.Drawing.Size(75, 23);
+			this.cmdAddConnectionColorSetting.TabIndex = 4;
+			this.cmdAddConnectionColorSetting.Text = "Add";
+			this.cmdAddConnectionColorSetting.UseVisualStyleBackColor = true;
+			this.cmdAddConnectionColorSetting.Click += new System.EventHandler(this.cmdAddConnectionColorSetting_Click);
 			// 
-			// chkCommittedBySpaceBar
+			// chkShowConnectionColorStrip
 			// 
-			this.chkCommittedBySpaceBar.AutoSize = true;
-			this.chkCommittedBySpaceBar.Location = new System.Drawing.Point(6, 57);
-			this.chkCommittedBySpaceBar.Name = "chkCommittedBySpaceBar";
-			this.chkCommittedBySpaceBar.Size = new System.Drawing.Size(199, 17);
-			this.chkCommittedBySpaceBar.TabIndex = 20;
-			this.chkCommittedBySpaceBar.Text = "Committed by pressing the space bar";
-			this.chkCommittedBySpaceBar.UseVisualStyleBackColor = true;
+			this.chkShowConnectionColorStrip.AutoSize = true;
+			this.chkShowConnectionColorStrip.Location = new System.Drawing.Point(8, 102);
+			this.chkShowConnectionColorStrip.Name = "chkShowConnectionColorStrip";
+			this.chkShowConnectionColorStrip.Size = new System.Drawing.Size(150, 17);
+			this.chkShowConnectionColorStrip.TabIndex = 2;
+			this.chkShowConnectionColorStrip.Text = "Show Connection coloring";
+			this.chkShowConnectionColorStrip.UseVisualStyleBackColor = true;
 			// 
-			// chkCommittedByEnter
+			// chkShowErrorStrip
 			// 
-			this.chkCommittedByEnter.AutoSize = true;
-			this.chkCommittedByEnter.Location = new System.Drawing.Point(6, 80);
-			this.chkCommittedByEnter.Name = "chkCommittedByEnter";
-			this.chkCommittedByEnter.Size = new System.Drawing.Size(196, 17);
-			this.chkCommittedByEnter.TabIndex = 21;
-			this.chkCommittedByEnter.Text = "Committed by pressing the enter key";
-			this.chkCommittedByEnter.UseVisualStyleBackColor = true;
+			this.chkShowErrorStrip.AutoSize = true;
+			this.chkShowErrorStrip.Location = new System.Drawing.Point(7, 6);
+			this.chkShowErrorStrip.Name = "chkShowErrorStrip";
+			this.chkShowErrorStrip.Size = new System.Drawing.Size(99, 17);
+			this.chkShowErrorStrip.TabIndex = 1;
+			this.chkShowErrorStrip.Text = "Show ErrorStrip";
+			this.chkShowErrorStrip.UseVisualStyleBackColor = true;
 			// 
-			// chkCommittedByTab
+			// groupBox5
 			// 
-			this.chkCommittedByTab.AutoSize = true;
-			this.chkCommittedByTab.Location = new System.Drawing.Point(6, 103);
-			this.chkCommittedByTab.Name = "chkCommittedByTab";
-			this.chkCommittedByTab.Size = new System.Drawing.Size(187, 17);
-			this.chkCommittedByTab.TabIndex = 22;
-			this.chkCommittedByTab.Text = "Committed by pressing the tab key";
-			this.chkCommittedByTab.UseVisualStyleBackColor = true;
+			this.groupBox5.Controls.Add(this.rbConColPosRight);
+			this.groupBox5.Controls.Add(this.rbConColPosLeft);
+			this.groupBox5.Controls.Add(this.rbConColPosBottom);
+			this.groupBox5.Controls.Add(this.rbConColPosTop);
+			this.groupBox5.Location = new System.Drawing.Point(122, 273);
+			this.groupBox5.Name = "groupBox5";
+			this.groupBox5.Size = new System.Drawing.Size(118, 87);
+			this.groupBox5.TabIndex = 22;
+			this.groupBox5.TabStop = false;
+			this.groupBox5.Text = "Bar position";
 			// 
-			// cmdSetDefaultCommittedBy
+			// rbConColPosBottom
 			// 
-			this.cmdSetDefaultCommittedBy.Location = new System.Drawing.Point(256, 31);
-			this.cmdSetDefaultCommittedBy.Name = "cmdSetDefaultCommittedBy";
-			this.cmdSetDefaultCommittedBy.Size = new System.Drawing.Size(109, 23);
-			this.cmdSetDefaultCommittedBy.TabIndex = 23;
-			this.cmdSetDefaultCommittedBy.Text = "Set default values";
-			this.cmdSetDefaultCommittedBy.UseVisualStyleBackColor = true;
-			this.cmdSetDefaultCommittedBy.Click += new System.EventHandler(this.cmdSetDefaultCommittedBy_Click);
+			this.rbConColPosBottom.AutoSize = true;
+			this.rbConColPosBottom.Location = new System.Drawing.Point(27, 65);
+			this.rbConColPosBottom.Name = "rbConColPosBottom";
+			this.rbConColPosBottom.Size = new System.Drawing.Size(58, 17);
+			this.rbConColPosBottom.TabIndex = 23;
+			this.rbConColPosBottom.TabStop = true;
+			this.rbConColPosBottom.Text = "Bottom";
+			this.rbConColPosBottom.UseVisualStyleBackColor = true;
+			// 
+			// rbConColPosTop
+			// 
+			this.rbConColPosTop.AutoSize = true;
+			this.rbConColPosTop.Location = new System.Drawing.Point(27, 19);
+			this.rbConColPosTop.Name = "rbConColPosTop";
+			this.rbConColPosTop.Size = new System.Drawing.Size(44, 17);
+			this.rbConColPosTop.TabIndex = 22;
+			this.rbConColPosTop.TabStop = true;
+			this.rbConColPosTop.Text = "Top";
+			this.rbConColPosTop.UseVisualStyleBackColor = true;
+			// 
+			// rbConColPosLeft
+			// 
+			this.rbConColPosLeft.AutoSize = true;
+			this.rbConColPosLeft.Location = new System.Drawing.Point(7, 42);
+			this.rbConColPosLeft.Name = "rbConColPosLeft";
+			this.rbConColPosLeft.Size = new System.Drawing.Size(43, 17);
+			this.rbConColPosLeft.TabIndex = 24;
+			this.rbConColPosLeft.TabStop = true;
+			this.rbConColPosLeft.Text = "Left";
+			this.rbConColPosLeft.UseVisualStyleBackColor = true;
+			// 
+			// rbConColPosRight
+			// 
+			this.rbConColPosRight.AutoSize = true;
+			this.rbConColPosRight.Location = new System.Drawing.Point(56, 42);
+			this.rbConColPosRight.Name = "rbConColPosRight";
+			this.rbConColPosRight.Size = new System.Drawing.Size(50, 17);
+			this.rbConColPosRight.TabIndex = 25;
+			this.rbConColPosRight.TabStop = true;
+			this.rbConColPosRight.Text = "Right";
+			this.rbConColPosRight.UseVisualStyleBackColor = true;
+			// 
+			// groupBox6
+			// 
+			this.groupBox6.Controls.Add(this.rbErrorStripPosRight);
+			this.groupBox6.Controls.Add(this.rbErrorStripPosLeft);
+			this.groupBox6.Controls.Add(this.rbErrorStripPosBottom);
+			this.groupBox6.Controls.Add(this.rbErrorStripPosTop);
+			this.groupBox6.Enabled = false;
+			this.groupBox6.Location = new System.Drawing.Point(122, 6);
+			this.groupBox6.Name = "groupBox6";
+			this.groupBox6.Size = new System.Drawing.Size(118, 90);
+			this.groupBox6.TabIndex = 23;
+			this.groupBox6.TabStop = false;
+			this.groupBox6.Text = "Bar position";
+			// 
+			// rbErrorStripPosRight
+			// 
+			this.rbErrorStripPosRight.AutoSize = true;
+			this.rbErrorStripPosRight.Location = new System.Drawing.Point(56, 42);
+			this.rbErrorStripPosRight.Name = "rbErrorStripPosRight";
+			this.rbErrorStripPosRight.Size = new System.Drawing.Size(50, 17);
+			this.rbErrorStripPosRight.TabIndex = 25;
+			this.rbErrorStripPosRight.TabStop = true;
+			this.rbErrorStripPosRight.Text = "Right";
+			this.rbErrorStripPosRight.UseVisualStyleBackColor = true;
+			// 
+			// rbErrorStripPosLeft
+			// 
+			this.rbErrorStripPosLeft.AutoSize = true;
+			this.rbErrorStripPosLeft.Location = new System.Drawing.Point(7, 42);
+			this.rbErrorStripPosLeft.Name = "rbErrorStripPosLeft";
+			this.rbErrorStripPosLeft.Size = new System.Drawing.Size(43, 17);
+			this.rbErrorStripPosLeft.TabIndex = 24;
+			this.rbErrorStripPosLeft.TabStop = true;
+			this.rbErrorStripPosLeft.Text = "Left";
+			this.rbErrorStripPosLeft.UseVisualStyleBackColor = true;
+			// 
+			// rbErrorStripPosBottom
+			// 
+			this.rbErrorStripPosBottom.AutoSize = true;
+			this.rbErrorStripPosBottom.Location = new System.Drawing.Point(27, 65);
+			this.rbErrorStripPosBottom.Name = "rbErrorStripPosBottom";
+			this.rbErrorStripPosBottom.Size = new System.Drawing.Size(58, 17);
+			this.rbErrorStripPosBottom.TabIndex = 23;
+			this.rbErrorStripPosBottom.TabStop = true;
+			this.rbErrorStripPosBottom.Text = "Bottom";
+			this.rbErrorStripPosBottom.UseVisualStyleBackColor = true;
+			// 
+			// rbErrorStripPosTop
+			// 
+			this.rbErrorStripPosTop.AutoSize = true;
+			this.rbErrorStripPosTop.Location = new System.Drawing.Point(27, 19);
+			this.rbErrorStripPosTop.Name = "rbErrorStripPosTop";
+			this.rbErrorStripPosTop.Size = new System.Drawing.Size(44, 17);
+			this.rbErrorStripPosTop.TabIndex = 22;
+			this.rbErrorStripPosTop.TabStop = true;
+			this.rbErrorStripPosTop.Text = "Top";
+			this.rbErrorStripPosTop.UseVisualStyleBackColor = true;
 			// 
 			// frmSettings
 			// 
-			this.AcceptButton = this.btnOk;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.CancelButton = this.btnCancel;
-			this.ClientSize = new System.Drawing.Size(485, 354);
+			this.ClientSize = new System.Drawing.Size(483, 395);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOk);
 			this.Controls.Add(this.tabControl1);
@@ -794,6 +1043,7 @@ namespace Sassner.SmarterSql.UI {
 			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Settings";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSettings_FormClosing);
 			this.tabIntellisense.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
@@ -804,17 +1054,22 @@ namespace Sassner.SmarterSql.UI {
 			this.tabInsertText.PerformLayout();
 			this.groupBox3.ResumeLayout(false);
 			this.tabPage2.ResumeLayout(false);
-			this.tabPage2.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.picHightlightCurrentLine)).EndInit();
 			this.tabPage1.ResumeLayout(false);
 			this.tabPage1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numSmartHelperInitialDelay)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numFullParseInitialDelay)).EndInit();
 			this.groupBox4.ResumeLayout(false);
 			this.groupBox4.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numSmartHelperInitialDelay)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numFullParseInitialDelay)).EndInit();
+			this.tabWindows.ResumeLayout(false);
+			this.tabWindows.PerformLayout();
+			this.groupBox5.ResumeLayout(false);
+			this.groupBox5.PerformLayout();
+			this.groupBox6.ResumeLayout(false);
+			this.groupBox6.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -849,7 +1104,6 @@ namespace Sassner.SmarterSql.UI {
 		private System.Windows.Forms.TrackBar trackBar1;
 		private System.Windows.Forms.PictureBox picHightlightCurrentLine;
 		private System.Windows.Forms.CheckBox chkHighlightCurrentLine;
-        private System.Windows.Forms.CheckBox chkShowErrorStrip;
 		private System.Windows.Forms.TabPage tabPage1;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label3;
@@ -875,5 +1129,21 @@ namespace Sassner.SmarterSql.UI {
 		private System.Windows.Forms.CheckBox chkCommittedByEnter;
 		private System.Windows.Forms.TextBox txtCommittedByCharacters;
 		private System.Windows.Forms.Button cmdSetDefaultCommittedBy;
+		private System.Windows.Forms.TabPage tabWindows;
+		private System.Windows.Forms.CheckBox chkShowConnectionColorStrip;
+		private System.Windows.Forms.CheckBox chkShowErrorStrip;
+		private System.Windows.Forms.Button cmdAddConnectionColorSetting;
+		private System.Windows.Forms.ColorDialog colorDialog2;
+		private GlacialComponents.Controls.GlacialList lstConnectionColors;
+		private System.Windows.Forms.GroupBox groupBox5;
+		private System.Windows.Forms.RadioButton rbConColPosRight;
+		private System.Windows.Forms.RadioButton rbConColPosLeft;
+		private System.Windows.Forms.RadioButton rbConColPosBottom;
+		private System.Windows.Forms.RadioButton rbConColPosTop;
+		private System.Windows.Forms.GroupBox groupBox6;
+		private System.Windows.Forms.RadioButton rbErrorStripPosRight;
+		private System.Windows.Forms.RadioButton rbErrorStripPosLeft;
+		private System.Windows.Forms.RadioButton rbErrorStripPosBottom;
+		private System.Windows.Forms.RadioButton rbErrorStripPosTop;
 	}
 }

@@ -324,7 +324,7 @@ namespace Sassner.SmarterSql {
 		private static Object InternalSyncObject {
 			[DebuggerStepThrough]
 			get {
-				if (s_InternalSyncObject == null) {
+				if (null == s_InternalSyncObject) {
 					Object obj = new Object();
 					Interlocked.CompareExchange(ref s_InternalSyncObject, obj, null);
 				}
@@ -1542,10 +1542,10 @@ namespace Sassner.SmarterSql {
 		/// <param name="newSettings"></param>
 		public void SettingsUpdated(Settings oldSettings, Settings newSettings) {
 			try {
-				if (oldSettings.EnableAddin != newSettings.EnableAddin || oldSettings.ShowErrorStrip != newSettings.ShowErrorStrip || oldSettings.HighlightCurrentLine != newSettings.HighlightCurrentLine) {
+				if (oldSettings.EnableAddin != newSettings.EnableAddin || oldSettings.ShowErrorStrip != newSettings.ShowErrorStrip || newSettings.HasConnectionColoringSettingsChanged(oldSettings) || oldSettings.HighlightCurrentLine != newSettings.HighlightCurrentLine) {
 					// Enable / disable error strip window
 					foreach (WindowData windowData in lstWindowData) {
-						windowData.SplitterRoot.EnableErrorStrip(newSettings);
+						windowData.SplitterRoot.EnableWindowStrips(newSettings);
 					}
 				}
 				

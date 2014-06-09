@@ -10,7 +10,6 @@ using Microsoft.VisualStudio.TextManager.Interop;
 using Sassner.SmarterSql.PInvoke;
 using Sassner.SmarterSql.UI.Controls;
 using Sassner.SmarterSql.Utils;
-using Sassner.SmarterSql.Utils.Helpers;
 
 namespace Sassner.SmarterSql.UI.Subclassing {
 	public class ErrorStrip : WindowHandler, IDisposable {
@@ -139,11 +138,11 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 			return false;
 		}
 
-		protected override bool OnGotFocus() {
+		protected override bool OnGotFocus(IntPtr hwnd) {
 			return false;
 		}
 
-		protected override bool OnLostFocus() {
+		protected override bool OnLostFocus(IntPtr hwnd) {
 			return false;
 		}
 

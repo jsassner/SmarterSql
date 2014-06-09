@@ -142,7 +142,7 @@ namespace Sassner.SmarterSql.Utils.Helpers {
 		/// <devdoc>Pins the text span to valid line bounds returned from IVsTextLines.</devdoc>
 		public static void Normalize(ref TextSpan span, IVsTextLines textLines) {
 			MakePositive(ref span);
-			if (textLines == null) {
+			if (null == textLines) {
 				return;
 			}
 			//adjust max. lines
