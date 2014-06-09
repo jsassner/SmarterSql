@@ -2,16 +2,23 @@
 // SmarterSql (c) Johan Sassner 2008
 // ---------------------------------
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Drawing;
+using System.Text;
+using System.Xml;
 using System.Xml.Serialization;
-using Sassner.SmarterSql.Utils;
+using Sassner.SmarterSql.Objects;
 
 namespace Sassner.SmarterSql.Utils.Settings {
 	[Serializable]
 	[XmlRoot(ElementName = "SmarterSqlSetting")]
 	public class Settings {
 		#region Member variables
+
+		private const string ClassName = "Settings";
 
 		internal const string DefaultCommittedByCharacters = @"{}[]().,:;+%&|^!~=<>?#\";
 
@@ -44,8 +51,9 @@ namespace Sassner.SmarterSql.Utils.Settings {
 		private bool scanForUnknownTokens = true;
 		private bool showDebugWindow = true;
 		private bool showErrorStrip = true;
+		private bool showConnectionColorStrip = true;
 		private bool showMatchingBraces = true;
-		private bool smartIndenting = false;
+		private bool smartIndenting;
 		private int initalSysObjectSize = 5000;
 		private int initalSysObjectSchemaSize = 100;
 		private ProperCase keywordsShouldBeUpperCase = ProperCase.Upper;
@@ -54,8 +62,20 @@ namespace Sassner.SmarterSql.Utils.Settings {
 		private bool committedByEnter = true;
 		private bool committedByTab = true;
 		private string committedByCharacters = DefaultCommittedByCharacters;
+		private List<ConnectionColorSetting> connectionColorSetting;
+		private StripPosition connectionColoringStripPosition = StripPosition.Top;
+		private StripPosition errorStripPosition = StripPosition.Right;
 
 		#endregion
+
+		#region Enums
+
+		public enum StripPosition {
+			Top = 0,
+			Left,
+			Bottom,
+			Right
+		}
 
 		public enum ProperCase {
 			Upper = 0,
@@ -63,10 +83,14 @@ namespace Sassner.SmarterSql.Utils.Settings {
 			Disabled
 		}
 
+		#endregion
+
 		// ReSharper disable EmptyConstructor
 		public Settings() {
 		}
 		// ReSharper restore EmptyConstructor
+
+		#region Helper methods
 
 		public static Settings CreateDefaultSettings() {
 			Settings newSettings = new Settings {
@@ -103,12 +127,147 @@ namespace Sassner.SmarterSql.Utils.Settings {
 				committedByEnter = true,
 				committedByTab = true,
 				committedByCharacters = DefaultCommittedByCharacters,
+				connectionColorSetting = new List<ConnectionColorSetting>(),
+				connectionColoringStripPosition = StripPosition.Top,
+				errorStripPosition = StripPosition.Right
 			};
 
 			return newSettings;
 		}
 
+		public bool HasConnectionColoringSettingsChanged(Settings oldSettings) {
+			if (ShowConnectionColorStrip != oldSettings.ShowConnectionColorStrip || ConnectionColorSettings.Count != oldSettings.ConnectionColorSettings.Count) {
+				return true;
+			}
+			for (int i = 0; i < ConnectionColorSettings.Count; i++) {
+				if (!ConnectionColorSettings[i].Same(oldSettings.ConnectionColorSettings[i])) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public Brush GetConnectionColor(ActiveConnection connection) {
+			ConnectionColorSetting colorSetting = GetConnectionColorSetting(connection);
+			return (null == colorSetting ? null : new SolidBrush(Color.FromArgb(colorSetting.ColorA, colorSetting.ColorR, colorSetting.ColorG, colorSetting.ColorB)));
+		}
+
+		public ConnectionColorSetting GetConnectionColorSetting(ActiveConnection connection) {
+			if (null == connection) {
+				return null;
+			}
+
+			ConnectionColorSetting setting = ConnectionColorSettings.FirstOrDefault(x => connection.ServerName.Equals(x.ServerName, StringComparison.CurrentCultureIgnoreCase) && connection.DatabaseName.Equals(x.DatabaseName, StringComparison.CurrentCultureIgnoreCase));
+			if (null != setting) {
+				return setting;
+			}
+
+			setting = ConnectionColorSettings.FirstOrDefault(x => connection.ServerName.StartsWith(x.ServerName, StringComparison.CurrentCultureIgnoreCase) && connection.DatabaseName.StartsWith(x.DatabaseName, StringComparison.CurrentCultureIgnoreCase));
+			if (null != setting) {
+				return setting;
+			}
+
+			setting = ConnectionColorSettings.FirstOrDefault(x => connection.ServerName.Equals(x.ServerName, StringComparison.CurrentCultureIgnoreCase));
+			if (null != setting) {
+				return setting;
+			}
+
+			setting = ConnectionColorSettings.FirstOrDefault(x => connection.ServerName.StartsWith(x.ServerName, StringComparison.CurrentCultureIgnoreCase));
+			if (null != setting) {
+				return setting;
+			}
+
+			return null;
+		}
+
+		#endregion
+
+		#region Helper classes
+
+		public class ConnectionColorSetting {
+			public ConnectionColorSetting() {
+			}
+
+			public ConnectionColorSetting(string serverName, string databaseName, int colorA, int colorR, int colorG, int colorB) {
+				ServerName = serverName;
+				DatabaseName = databaseName;
+				ColorA = colorA;
+				ColorR = colorR;
+				ColorG = colorG;
+				ColorB = colorB;
+			}
+
+			public ConnectionColorSetting(string serverName, string databaseName, Color color) {
+				ServerName = serverName;
+				DatabaseName = databaseName;
+				ColorA = color.A;
+				ColorR = color.R;
+				ColorG = color.G;
+				ColorB = color.B;
+			}
+
+			// ReSharper disable UnusedAutoPropertyAccessor.Global
+			public string ServerName { get; set; }
+			public string DatabaseName { get; set; }
+			public int ColorA { get; set; }
+			public int ColorR { get; set; }
+			public int ColorG { get; set; }
+			public int ColorB { get; set; }
+			// ReSharper restore UnusedAutoPropertyAccessor.Global
+
+			[XmlIgnore]
+			public Color Color {
+				get {
+					return Color.FromArgb(ColorA, ColorR, ColorG, ColorB);
+				}
+				set {
+					ColorA = value.A;
+					ColorR = value.R;
+					ColorG = value.G;
+					ColorB = value.B;
+				}
+			}
+
+			public bool Same(ConnectionColorSetting setting) {
+				if (!ServerName.Equals(setting.ServerName, StringComparison.CurrentCultureIgnoreCase)) {
+					return false;
+				}
+				if (!DatabaseName.Equals(setting.DatabaseName, StringComparison.CurrentCultureIgnoreCase)) {
+					return false;
+				}
+
+				return ColorA == setting.ColorA && ColorR == setting.ColorR && ColorG == setting.ColorG && ColorB == setting.ColorB;
+			}
+		}
+
+		#endregion
+
 		#region Public properties
+
+		[XmlElement]
+		public StripPosition ErrorStripPosition {
+			[DebuggerStepThrough]
+			get { return errorStripPosition; }
+			[DebuggerStepThrough]
+			set { errorStripPosition = value; }
+		}
+
+		[XmlElement]
+		public StripPosition ConnectionColoringStripPosition {
+			[DebuggerStepThrough]
+			get { return connectionColoringStripPosition; }
+			[DebuggerStepThrough]
+			set { connectionColoringStripPosition = value; }
+		}
+
+		[XmlElement]
+		public List<ConnectionColorSetting> ConnectionColorSettings {
+			[DebuggerStepThrough]
+			get { return connectionColorSetting; }
+			[DebuggerStepThrough]
+			set { connectionColorSetting = value; }
+		}
 
 		[XmlElement]
 		public int InitalSysObjectSize {
@@ -152,6 +311,13 @@ namespace Sassner.SmarterSql.Utils.Settings {
 			[DebuggerStepThrough]
 			get { return showErrorStrip; }
 			set { showErrorStrip = value; }
+		}
+
+		[XmlElement]
+		public bool ShowConnectionColorStrip {
+			[DebuggerStepThrough]
+			get { return showConnectionColorStrip; }
+			set { showConnectionColorStrip = value; }
 		}
 
 		[XmlElement]
@@ -376,5 +542,31 @@ namespace Sassner.SmarterSql.Utils.Settings {
 		}
 
 		#endregion
+
+		public bool StoreSettings() {
+			try {
+				string settingsFilename = GetSettingsFilename();
+
+				XmlSerializer serializer = new XmlSerializer(typeof(Settings));
+				XmlTextWriter tw = new XmlTextWriter(settingsFilename, Encoding.UTF8);
+				serializer.Serialize(tw, this);
+				tw.Close();
+
+				return true;
+
+			} catch (Exception e) {
+				Common.LogEntry(ClassName, "StoreSettings", e, Common.enErrorLvl.Error);
+				Common.ErrorMsg("Unable to store settings.");
+			}
+			return false;
+		}
+
+		public static string GetSettingsFilename() {
+			string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SmarterSql");
+			if (!Directory.Exists(dir)) {
+				Directory.CreateDirectory(dir);
+			}
+			return Path.Combine(dir, "SmarterSql_settings.xml");
+		}
 	}
 }

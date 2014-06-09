@@ -1,654 +1,152 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>GlacialList</name>
+        <name>Sassner.Sql.GlacialList</name>
     </assembly>
     <members>
-        <member name="T:GlacialComponents.Controls.GLItemCollection">
+        <member name="T:GlacialComponents.Controls.BorderStrip">
             <summary>
-            Collection of GLItems
+            Summary description for BorderStrip.
             </summary>
         </member>
-        <member name="M:GlacialComponents.Controls.GLItemCollection.#ctor(GlacialComponents.Controls.GlacialList)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="newParent"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemCollection.Item_Changed(System.Object,GlacialComponents.Controls.ChangedEventArgs)">
-            <summary>
-            item has changed
-            </summary>
-            <param name="source"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemCollection.OnClear">
-            <summary>
-            Items have been cleared event
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemCollection.AddRange(GlacialComponents.Controls.GLItem[])">
-            <summary>
-            Compatability with collection editor
-            </summary>
-            <param name="items"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemCollection.Add(System.String)">
-            <summary>
-            add an item to the end of the list
-            </summary>
-            <param name="strItemText"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemCollection.Add(GlacialComponents.Controls.GLItem)">
-            <summary>
-            add an itemto the items collection
-            </summary>
-            <param name="item"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemCollection.Insert(System.Int32,System.String)">
-            <summary>
-            insert an item into the list at specified index
-            </summary>
-            <param name="nIndex"></param>
-            <param name="strItemText"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemCollection.Insert(System.Int32,GlacialComponents.Controls.GLItem)">
-            <summary>
-            lowest level of add/insert.  All add and insert routines eventually call this
-            
-            in the future always have routines call this one as well to keep one point of entry
-            </summary>
-            <param name="nIndex"></param>
-            <param name="item"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemCollection.Remove(System.Int32)">
-            <summary>
-            remove an item from the list
-            </summary>
-            <param name="nItemIndex"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemCollection.Remove(GlacialComponents.Controls.GLItem)">
-            <summary>
-            remove an item from the list
-            </summary>
-            <param name="item"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemCollection.ClearSelection">
-            <summary>
-            Clears all selection bits in the item structure
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemCollection.ClearSelection(GlacialComponents.Controls.GLItem)">
-            <summary>
-            Clears all selection bits in the item structure
-            
-            this overload is an optimization to stop a redraw on a re-selection
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemCollection.FindNextItemIndex(System.Int32,System.Int32,System.String)">
-            <summary>
-            Find the next item index
-            
-            set startindex to -1 to start at the beginning
-            </summary>
-            <param name="nStartIndex"></param>
-            <param name="nColumn"></param>
-            <param name="strItemText"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemCollection.GetNextSelectedItemIndex(System.Int32)">
-            <summary>
-            Get the next selected item index.
-            
-            set startindex to -1 to start at the beginning
-            </summary>
-            <param name="nStartIndex"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemCollection.FindItemIndex(GlacialComponents.Controls.GLItem)">
-            <summary>
-            Find the index of a specified item
-            </summary>
-            <param name="item"></param>
-            <returns></returns>
-        </member>
-        <member name="E:GlacialComponents.Controls.GLItemCollection.ChangedEvent">
-            <summary>
-            Fires when a change occurs to the data
-            </summary>
-        </member>
-        <member name="E:GlacialComponents.Controls.GLItemCollection.RetrieveVirtualItem">
-            <summary>
-            Event handler used in VirtualMode
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItemCollection.Item(System.Int32)">
-            <summary>
-            Indexer that allows the use of Items by []
-            </summary>
-            
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItemCollection.VirtualListSize">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItemCollection.Count">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItemCollection.VirtualMode">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItemCollection.SuspendEvents">
-            <summary>
-            this is used for operations where you are changing multiple items consecutively and don't want to send 
-            a larger number of change events than necessary.
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItemCollection.Parent">
-            <summary>
-            Sets the parent variable so we know what to refresh when there is a change
-            </summary>
-            
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItemCollection.SelectedItems">
-            <summary>
-            returns a list of only the selected items
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItemCollection.SelectedIndicies">
-            <summary>
-            returns a list of only the selected items indexes
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.GLTextBox">
-            <summary>
-            Summary description for GLTextBox.
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.GLEmbeddedControl">
-            <summary>
-            Interface you must include for a control to be activated embedded useable
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLEmbeddedControl.GLReturnText">
-            <summary>
-            This returns the current text output as entered into the control right now
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLEmbeddedControl.GLLoad(GlacialComponents.Controls.GLItem,GlacialComponents.Controls.GLSubItem,GlacialComponents.Controls.GlacialList)">
-            <summary>
-            Called when the control is loaded
-            </summary>
-            <param name="item"></param>
-            <param name="subItem"></param>
-            <param name="listctrl"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLEmbeddedControl.GLUnload">
-            <summary>
-            Called when control is being destructed
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLEmbeddedControl.Item">
-            <summary>
-            item this control is embedded in
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLEmbeddedControl.SubItem">
-            <summary>
-            Sub item this control is embedded in
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLEmbeddedControl.ListControl">
-            <summary>
-            Parent control
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.GLTextBox.components">
+        <member name="F:GlacialComponents.Controls.BorderStrip.components">
             <summary>
             Required designer variable.
             </summary>
         </member>
-        <member name="M:GlacialComponents.Controls.GLTextBox.Dispose(System.Boolean)">
+        <member name="M:GlacialComponents.Controls.BorderStrip.Dispose(System.Boolean)">
             <summary>
             Clean up any resources being used.
             </summary>
         </member>
-        <member name="M:GlacialComponents.Controls.GLTextBox.InitializeComponent">
+        <member name="M:GlacialComponents.Controls.BorderStrip.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify 
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="T:GlacialComponents.Controls.GLDateTimePicker">
+        <member name="P:GlacialComponents.Controls.BorderStrip.BorderType">
             <summary>
-            Summary description for GLDateTimePicker.
+            how the control looks on the outside
             </summary>
         </member>
-        <member name="F:GlacialComponents.Controls.GLDateTimePicker.components">
-            <summary> 
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLDateTimePicker.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLDateTimePicker.InitializeComponent">
-            <summary> 
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.GLColumnConverter">
+        <member name="T:GlacialComponents.Controls.ColumnStates">
             <summary>
-            GLColumnConverter
-            </summary>
-            
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
-            <summary>
-            Required for correct collection editor use
-            </summary>
-            <param name="context"></param>
-            <param name="destinationType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
-            <summary>
-            Required for correct collection editor use
-            </summary>
-            <param name="context"></param>
-            <param name="culture"></param>
-            <param name="value"></param>
-            <param name="destinationType"></param>
-            <returns></returns>
-        </member>
-        <member name="T:GlacialComponents.Controls.RECT">
-            <summary>
-            Internal struct for use with the header style flat only
+            Column State enumerations
             </summary>
         </member>
-        <member name="T:GlacialComponents.Controls.ChangedEventHandler">
+        <member name="F:GlacialComponents.Controls.ColumnStates.csNone">
             <summary>
-            Delegate for changed events within Columns, Items, and SubItems
+            Column is in normal state
             </summary>
         </member>
-        <member name="T:GlacialComponents.Controls.RetrieveVirtualItem2EventHandler">
+        <member name="F:GlacialComponents.Controls.ColumnStates.csPressed">
             <summary>
-            Delegate for changed events within Columns, Items, and SubItems
+            Column is showing pressed state
             </summary>
         </member>
-        <member name="T:GlacialComponents.Controls.RetrieveVirtualItem2EventArgs">
+        <member name="F:GlacialComponents.Controls.ColumnStates.csHot">
             <summary>
+            Mouse cursor is over column header, but not pressed
             </summary>
         </member>
-        <member name="M:GlacialComponents.Controls.RetrieveVirtualItem2EventArgs.#ctor(System.Int32)">
+        <member name="T:GlacialComponents.Controls.GLColumn">
             <summary>
-            </summary>
-            <param name="itemIndex"></param>
-        </member>
-        <member name="P:GlacialComponents.Controls.RetrieveVirtualItem2EventArgs.ItemIndex">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.RetrieveVirtualItem2EventArgs.Item">
-            <summary>
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.ChangedTypes">
-            <summary>
-            Change events that are filtered up out of the control
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.ChangedTypes.GeneralInvalidate">
-            <summary>
-            Invalidation Fired
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.ChangedTypes.SubItemChanged">
-            <summary>
-            Sub Item Changed
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.ChangedTypes.SubItemCollectionChanged">
-            <summary>
-            Sub Item Collection Changed
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.ChangedTypes.ItemChanged">
-            <summary>
-            Item Changed
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.ChangedTypes.ItemCollectionChanged">
-            <summary>
-            Item Collection Changed
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.ChangedTypes.ColumnChanged">
-            <summary>
-            Column changed
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.ChangedTypes.ColumnCollectionChanged">
-            <summary>
-            Column Collection Changed
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.ChangedTypes.FocusedChanged">
-            <summary>
-            Focus Changed
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.ChangedTypes.SelectionChanged">
-            <summary>
-            A different item is now selected
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.ChangedTypes.ColumnStateChanged">
-            <summary>
-            Column state has changed
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.ChangedEventArgs">
-            <summary>
-            Changed Event Args
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.ChangedEventArgs.#ctor(GlacialComponents.Controls.ChangedTypes,GlacialComponents.Controls.GLColumn,GlacialComponents.Controls.GLItem,GlacialComponents.Controls.GLSubItem)">
-            <summary>
-            Changes in the columns, items or subitems
-            </summary>
-            <param name="ctType"></param>
-            <param name="column"></param>
-            <param name="item"></param>
-            <param name="subItem"></param>
-        </member>
-        <member name="P:GlacialComponents.Controls.ChangedEventArgs.Column">
-            <summary>
-            Column Name
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.ChangedEventArgs.Item">
-            <summary>
-            Item Name
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.ChangedEventArgs.SubItem">
-            <summary>
-            SubItem Name
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.ChangedEventArgs.ChangedType">
-            <summary>
-            Type of change
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.GLStringHelpers">
-            <summary>
-            String Manipulation Help
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLStringHelpers.TruncateString(System.String,System.Int32,System.Drawing.Graphics,System.Drawing.Font)">
-            <summary>
-            Truncate a string.
-            
-            This function also handles truncation of multiline strings
-            </summary>
-            <param name="strText"></param>
-            <param name="nWidth"></param>
-            <param name="subDC"></param>
-            <param name="font"></param>
-            <returns>
-            Truncated string
-            </returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLStringHelpers.MeasureMultiLineString(System.String,System.Drawing.Graphics,System.Drawing.Font)">
-            <summary>
-            Measure a multi lined string
-            </summary>
-            <param name="strText"></param>
-            <param name="mDC"></param>
-            <param name="font"></param>
-            <returns></returns>
-        </member>
-        <member name="T:GlacialComponents.Controls.ClickEventArgs">
-            <summary>
-            Clicked Event Args
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.ClickEventArgs.#ctor(System.Int32,System.Int32)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="itemindex"></param>
-            <param name="columnindex"></param>
-        </member>
-        <member name="P:GlacialComponents.Controls.ClickEventArgs.ItemIndex">
-            <summary>
-            Index of item clicked
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.ClickEventArgs.ColumnIndex">
-            <summary>
-            Index of column clicked
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.HoverTypes">
-            <summary>
-            Types of hover
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.HoverTypes.HoverStart">
-            <summary>
-            Hover has begun
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.HoverTypes.HoverEnd">
-            <summary>
-            Hover ending
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.HoverEventArgs">
-            <summary>
-            Hover event args
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.HoverEventArgs.#ctor(GlacialComponents.Controls.HoverTypes,System.Int32,System.Int32,GlacialComponents.Controls.GLListRegion)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="hovertype"></param>
-            <param name="itemindex"></param>
-            <param name="columnindex"></param>
-            <param name="region"></param>
-        </member>
-        <member name="P:GlacialComponents.Controls.HoverEventArgs.HoverType">
-            <summary>
-            Type of hover
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.HoverEventArgs.Region">
-            <summary>
-            Region being hovered
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.HoverEventArgs.ItemIndex">
-            <summary>
-            Index of item hovered
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.HoverEventArgs.ColumnIndex">
-            <summary>
-            Index of column hovered
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.GLSubItem">
-            <summary>
-            SubItems which make up a GLItem
-            </summary>
-        </member>
-        <member name="E:GlacialComponents.Controls.GLSubItem.ChangedEvent">
-            <summary>
-            Sub Item has changed.
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLSubItem.LastCellRect">
-            <summary>
-            last rectangle that text was drawn into
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLSubItem.Checked">
-            <summary>
-            is the checkbox checked or not
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLSubItem.Parent">
-            <summary>
-            pointer to the primary Parent on top
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLSubItem.EmbeddedControProperties">
-            <summary>
-            Properties of the embedded controls in the listview
-            
-            this is brilliant because it also allows people to set properties of controls that I don't know about
-            
-            the reason I'm even doing this is so many standard control types don't have to be shown
+            Summary description for Column.
             </summary>
             
         </member>
-        <member name="P:GlacialComponents.Controls.GLSubItem.ForceText">
+        <member name="M:GlacialComponents.Controls.GLColumn.#ctor">
             <summary>
-            Force the sub item display to default to text only
-            
-            This will override everything.
+            Default constructor for use with the collection editor (only)
             </summary>
         </member>
-        <member name="P:GlacialComponents.Controls.GLSubItem.Control">
+        <member name="M:GlacialComponents.Controls.GLColumn.#ctor(System.String)">
             <summary>
-            Embedded Control
+            Constructor for GLColumn
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="E:GlacialComponents.Controls.GLColumn.ChangedEvent">
+            <summary>
+            Column has changed event
             </summary>
         </member>
-        <member name="P:GlacialComponents.Controls.GLSubItem.ImageIndex">
+        <member name="P:GlacialComponents.Controls.GLColumn.ActivatedEmbeddedControlTemplate">
             <summary>
-            Index of image
+            Not sure if I'm going to end up using this
             </summary>
         </member>
-        <member name="P:GlacialComponents.Controls.GLSubItem.ImageAlignment">
+        <member name="P:GlacialComponents.Controls.GLColumn.ActivatedEmbeddedType">
             <summary>
-            Alignment of the image within the subitem
+            Type of activated embedded control to use
+            </summary>
+            <remarks>
+            This comes with some built in basic types but is also useable with the User type if you want to put your
+            own type in.
+            </remarks>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLColumn.NumericSort">
+            <summary>
+            Whether or not NumericSort are visible in this column
             </summary>
         </member>
-        <member name="P:GlacialComponents.Controls.GLSubItem.Tag">
-            <summary>
-            Extra user information
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLSubItem.Text">
-            <summary>
-            Text
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLSubItem.ForeColor">
-            <summary>
-            Color of text in item
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLSubItem.BackColor">
-            <summary>
-            Background color
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLSubItem.Selected">
-            <summary>
-            Indicates when the item is selected
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.GLItem">
-            <summary>
-            GLItem which corresponds to rows in the list view
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItem.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItem.#ctor(GlacialComponents.Controls.GlacialList)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="parent"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItem.SubItemCollection_Changed(System.Object,GlacialComponents.Controls.ChangedEventArgs)">
-            <summary>
-            Sub Item collection changed handler
-            </summary>
-            <param name="source"></param>
-            <param name="e"></param>
-        </member>
-        <member name="E:GlacialComponents.Controls.GLItem.ChangedEvent">
-            <summary>
-            GLItem changed event
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItem.RowBorderSize">
-            <summary>
-            row border size
-            </summary>
-            
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItem.SubItems">
-            <summary>
-            Text color for item
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItem.BackColor">
-            <summary>
-            Row border color
-            </summary>
-            
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItem.RowBorderColor">
-            <summary>
-            Row border color
-            </summary>
-            
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItem.Text">
-            <summary>
-            Text for cell 0 (added by popular request)
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItem.Tag">
-            <summary>
-            User defineable object
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItem.ForeColor">
-            <summary>
-            Text color for item
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLItem.Parent">
+        <member name="P:GlacialComponents.Controls.GLColumn.Parent">
             <summary>
             pointer to parent
             </summary>
         </member>
-        <member name="P:GlacialComponents.Controls.GLItem.Selected">
+        <member name="P:GlacialComponents.Controls.GLColumn.CheckBoxes">
             <summary>
-            Selected
+            Whether or not checkboxes are visible in this column
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLColumn.ImageIndex">
+            <summary>
+            Image Index
+            </summary>
+            <remarks>
+            Index of image based on image list included in main list
+            </remarks>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLColumn.TextAlignment">
+            <summary>
+            Alignment of text in the header and in the cells
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLColumn.ActiveControlItems">
+            <summary>
+            ActiveControlItems
+            </summary>
+            <remarks>
+            this holds references to items that currently contain live controls.  
+            This is an optimization so I don't have to iterate the entire Items list
+            each draw cycle to remove controls no longer visible
+            </remarks>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLColumn.LastSortState">
+            <summary>
+            Last sort state
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLColumn.Width">
+            <summary>
+            Width of column
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLColumn.Text">
+            <summary>
+            Text 
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLColumn.Name">
+            <summary>
+            Name of the column internally
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLColumn.State">
+            <summary>
+            State of the column
             </summary>
         </member>
         <member name="T:GlacialComponents.Controls.CustomCollectionEditor">
@@ -677,460 +175,6 @@
             </summary>
             <param name="itemType"></param>
             <returns></returns>
-        </member>
-        <member name="T:GlacialComponents.Controls.GLMergeSort">
-            <summary>
-            Summary description for GLMergeSort.
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.GLMergeSort.m_bNumericCompare">
-            <summary>
-            compare only numeric values in items.  Warning, this can end up slowing down routine quite a bit
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.GLMergeSort.m_bStopRequested">
-            <summary>
-            Stop this sort before it finishes
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.GLMergeSort.m_nSortColumn">
-            <summary>
-            Column within the items structure to sort
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.GLMergeSort.m_SortDirection">
-            <summary>
-            Direction this sorting routine will move items
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.ManagedVScrollBar">
-            <summary>
-            Summary description for ManagedVScrollBar.
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.ManagedVScrollBar.OnMouseEnter(System.EventArgs)">
-            <summary>
-                                Raises the <see cref="E:System.Windows.Forms.Control.MouseEnter" /> event.
-            </summary>
-            <param name="e">
-                                An <see cref="T:System.EventArgs" /> that contains the event data. 
-                            </param>
-        </member>
-        <member name="M:GlacialComponents.Controls.ManagedVScrollBar.OnMouseLeave(System.EventArgs)">
-            <summary>
-                                Raises the <see cref="E:System.Windows.Forms.Control.MouseLeave" /> event.
-            </summary>
-            <param name="e">
-                                An <see cref="T:System.EventArgs" /> that contains the event data. 
-                            </param>
-        </member>
-        <member name="T:GlacialComponents.Controls.BorderStrip">
-            <summary>
-            Summary description for BorderStrip.
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.BorderStrip.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.BorderStrip.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.BorderStrip.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.BorderStrip.BorderType">
-            <summary>
-            how the control looks on the outside
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.GLColumnCollection">
-            <summary>
-            gl column collection
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnCollection.#ctor(GlacialComponents.Controls.GlacialList)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="parent"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnCollection.GLColumn_Changed(System.Object,GlacialComponents.Controls.ChangedEventArgs)">
-            <summary>
-            Column has changed.  Pass Event up the chain.
-            </summary>
-            <param name="source"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnCollection.GetColumnIndex(System.String)">
-            <summary>
-            Get the column index that corresponds to the column name
-            </summary>
-            <param name="strColumnName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnCollection.GetSpanSize(System.String,System.Int32)">
-            <summary>
-            Get Span Size for column spanning
-            </summary>
-            <param name="strStartColumnName"></param>
-            <param name="nColumnsSpanned"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnCollection.Add(GlacialComponents.Controls.GLColumn)">
-            <summary>
-            Add a column to collection
-            </summary>
-            <param name="newColumn"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnCollection.Add(System.String,System.Int32)">
-            <summary>
-            Add Column to collection
-            </summary>
-            <param name="strColumnName"></param>
-            <param name="nColumnWidth"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnCollection.Add(System.String,System.Int32,System.Windows.Forms.HorizontalAlignment)">
-            <summary>
-            Add Column to collection
-            </summary>
-            <param name="strColumnName"></param>
-            <param name="nColumnWidth"></param>
-            <param name="align"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnCollection.AddRange(GlacialComponents.Controls.GLColumn[])">
-            <summary>
-            Add Range of columns to collection
-            </summary>
-            <param name="columns"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnCollection.Remove(System.Int32)">
-            <summary>
-            Remove Column from collection
-            </summary>
-            <param name="nColumnIndex"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnCollection.Clear">
-            <summary>
-            Remove all columns from collection
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnCollection.IndexOf(GlacialComponents.Controls.GLColumn)">
-            <summary>
-            Return index of column in collection
-            </summary>
-            <param name="column"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnCollection.ClearStates">
-            <summary>
-            Clear column states
-            </summary>
-            <remarks>
-            Primarily used to clear pressed / hot states
-            </remarks>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnCollection.ClearHotStates">
-            <summary>
-            Clear only hot states from column collection
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumnCollection.AnyPressed">
-            <summary>
-            if any of the columns are in a pressed state then disable all hotting
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="E:GlacialComponents.Controls.GLColumnCollection.ChangedEvent">
-            <summary>
-            Column or Column Collection has changed 
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLColumnCollection.Parent">
-            <summary>
-            pointer to parent
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLColumnCollection.Item(System.Int32)">
-            <summary>
-            Indexer
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLColumnCollection.Item(System.String)">
-            <summary>
-            Index by column name
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLColumnCollection.Width">
-            <summary>
-            the combined width of all of the columns
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.ThemeRoutines">
-            <summary>
-            Summary description for ThemeRoutines.
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.ThemeRoutines.IsThemeActive">
-            <summary>
-            Tests if a visual style for the current application is active.
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.ThemeRoutines.OpenThemeData(System.IntPtr,System.String)">
-            <summary>
-            Opens the theme data for a window and its associated class.
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.ThemeRoutines.CloseThemeData(System.IntPtr)">
-            <summary>Closes the theme data handle.</summary>
-            <remarks>The CloseThemeData function should be called when a window that has a visual style applied is destroyed.</remarks> 
-        </member>
-        <member name="M:GlacialComponents.Controls.ThemeRoutines.DrawThemeBackground(System.IntPtr,System.IntPtr,System.Int32,System.Int32,GlacialComponents.Controls.RECT@,GlacialComponents.Controls.RECT@)">
-            <summary>
-            Draws the background image defined by the visual style for the specified control part.
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.ThemeRoutines.DrawThemeEdge(System.IntPtr,System.IntPtr,System.Int32,System.Int32,GlacialComponents.Controls.RECT@,System.UInt32,System.UInt32,GlacialComponents.Controls.RECT@)">
-            <summary>
-            Draws one or more edges defined by the visual style of a rectangle.
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.ThemeRoutines.DrawThemeIcon(System.IntPtr,System.IntPtr,System.Int32,System.Int32,GlacialComponents.Controls.RECT@,System.IntPtr,System.Int32)">
-            <summary>
-            Draws an image from an image list with the icon effect defined by the visual style.
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.ThemeRoutines.DrawThemeText(System.IntPtr,System.IntPtr,System.Int32,System.Int32,System.String,System.Int32,System.UInt32,System.UInt32,GlacialComponents.Controls.RECT@)">
-            <summary>
-            Draws text using the color and font defined by the visual style.
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.ThemeRoutines.DrawThemeParentBackground(System.IntPtr,System.IntPtr,GlacialComponents.Controls.RECT@)">
-            <summary>
-            Draws the part of a parent control that is covered by a partially-transparent or alpha-blended child control.
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.ThemeRoutines.SetWindowTheme(System.IntPtr,System.String,System.String)">
-            <summary>
-            Causes a window to use a different set of visual style information than its class normally uses.
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.GLSubItemCollection">
-            <summary>
-            Sub Item collection
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLSubItemCollection.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLSubItemCollection.#ctor(GlacialComponents.Controls.GlacialList)">
-            <summary>
-            Constructor that accepts parent pointer
-            </summary>
-            <param name="parent"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLSubItemCollection.SubItem_Changed(System.Object,GlacialComponents.Controls.ChangedEventArgs)">
-            <summary>
-            Sub Item changed handler.
-            </summary>
-            <param name="source"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLSubItemCollection.OnClear">
-            <summary>
-            Clear called against subitems in sub item collection
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLSubItemCollection.AddRange(GlacialComponents.Controls.GLSubItem[])">
-            <summary>
-            Add range of sub items
-            </summary>
-            <param name="subItems"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLSubItemCollection.Add(System.String)">
-            <summary>
-            add an item to the end of the list
-            </summary>
-            <param name="strItemText"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLSubItemCollection.Add(GlacialComponents.Controls.GLSubItem)">
-            <summary>
-            add an itemto the items collection
-            </summary>
-            <param name="subItem"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLSubItemCollection.Insert(System.Int32,System.String)">
-            <summary>
-            insert an item into the list at specified index
-            </summary>
-            <param name="nIndex"></param>
-            <param name="strItemText"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLSubItemCollection.Insert(System.Int32,GlacialComponents.Controls.GLSubItem)">
-            <summary>
-            lowest level of add/insert.  All add and insert routines eventually call this
-            
-            in the future always have routines call this one as well to keep one point of entry
-            </summary>
-            <param name="nIndex"></param>
-            <param name="subItem"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLSubItemCollection.Remove(System.Int32)">
-            <summary>
-            remove an item from the list
-            </summary>
-            <param name="nSubItemIndex"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLSubItemCollection.Remove(GlacialComponents.Controls.GLSubItem)">
-            <summary>
-            remove an item from the list
-            </summary>
-            <param name="subItem"></param>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLSubItemCollection.ClearSelection">
-            <summary>
-            Clears all selection bits in the item structure
-            </summary>
-        </member>
-        <member name="E:GlacialComponents.Controls.GLSubItemCollection.ChangedEvent">
-            <summary>
-            Sub Item Collection has changed
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLSubItemCollection.Parent">
-            <summary>
-            Internal pointer to parent class
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLSubItemCollection.Item(System.Int32)">
-            <summary>
-            Indexer
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.SortDirections">
-            <summary>
-            Direction of column sorting
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.SortDirections.SortAscending">
-            <summary>
-            Ascending Items
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.SortDirections.SortDescending">
-            <summary>
-            Descending Items
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.GLQuickSort">
-            <summary>
-            Summary description for GLQuickSort.
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.GLQuickSort.m_bNumericCompare">
-            <summary>
-            compare only numeric values in items.  Warning, this can end up slowing down routine quite a bit
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.GLQuickSort.m_bStopRequested">
-            <summary>
-            Stop this sort before it finishes
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.GLQuickSort.m_nSortColumn">
-            <summary>
-            Column within the items structure to sort
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.GLQuickSort.m_SortDirection">
-            <summary>
-            Direction this sorting routine will move items
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.Win32">
-            <summary>
-            Summary description for Win32.
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.GLSubItemConverter">
-            <summary>
-            GLSubItemConverter
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLSubItemConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
-            <summary>
-            Conversion from Item to string
-            </summary>
-            <param name="context"></param>
-            <param name="destinationType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLSubItemConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
-            <summary>
-            Conversion to string
-            </summary>
-            <param name="context"></param>
-            <param name="culture"></param>
-            <param name="value"></param>
-            <param name="destinationType"></param>
-            <returns></returns>
-        </member>
-        <member name="T:GlacialComponents.Controls.GLItemConverter">
-            <summary>
-            GLItemConverter
-            </summary>
-            
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
-            <summary>
-            Conversion from Item to string
-            </summary>
-            <param name="context"></param>
-            <param name="destinationType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLItemConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
-            <summary>
-            Conversion to string
-            </summary>
-            <param name="context"></param>
-            <param name="culture"></param>
-            <param name="value"></param>
-            <param name="destinationType"></param>
-            <returns></returns>
-        </member>
-        <member name="T:GlacialComponents.Controls.GLComboBox">
-            <summary>
-            Summary description for GLComboBox.
-            </summary>
-        </member>
-        <member name="F:GlacialComponents.Controls.GLComboBox.components">
-            <summary> 
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLComboBox.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLComboBox.InitializeComponent">
-            <summary> 
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
         </member>
         <member name="T:GlacialComponents.Controls.SortTypes">
             <summary>
@@ -1931,123 +975,1079 @@
             Hover Event delegate definition
             </summary>
         </member>
-        <member name="T:GlacialComponents.Controls.ColumnStates">
+        <member name="T:GlacialComponents.Controls.GLColumnCollection">
             <summary>
-            Column State enumerations
+            gl column collection
             </summary>
         </member>
-        <member name="F:GlacialComponents.Controls.ColumnStates.csNone">
+        <member name="M:GlacialComponents.Controls.GLColumnCollection.#ctor(GlacialComponents.Controls.GlacialList)">
             <summary>
-            Column is in normal state
+            Constructor
+            </summary>
+            <param name="parent"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLColumnCollection.GLColumn_Changed(System.Object,GlacialComponents.Controls.ChangedEventArgs)">
+            <summary>
+            Column has changed.  Pass Event up the chain.
+            </summary>
+            <param name="source"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLColumnCollection.GetColumnIndex(System.String)">
+            <summary>
+            Get the column index that corresponds to the column name
+            </summary>
+            <param name="strColumnName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLColumnCollection.GetSpanSize(System.String,System.Int32)">
+            <summary>
+            Get Span Size for column spanning
+            </summary>
+            <param name="strStartColumnName"></param>
+            <param name="nColumnsSpanned"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLColumnCollection.Add(GlacialComponents.Controls.GLColumn)">
+            <summary>
+            Add a column to collection
+            </summary>
+            <param name="newColumn"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLColumnCollection.Add(System.String,System.Int32)">
+            <summary>
+            Add Column to collection
+            </summary>
+            <param name="strColumnName"></param>
+            <param name="nColumnWidth"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLColumnCollection.Add(System.String,System.Int32,System.Windows.Forms.HorizontalAlignment)">
+            <summary>
+            Add Column to collection
+            </summary>
+            <param name="strColumnName"></param>
+            <param name="nColumnWidth"></param>
+            <param name="align"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLColumnCollection.AddRange(GlacialComponents.Controls.GLColumn[])">
+            <summary>
+            Add Range of columns to collection
+            </summary>
+            <param name="columns"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLColumnCollection.Remove(System.Int32)">
+            <summary>
+            Remove Column from collection
+            </summary>
+            <param name="nColumnIndex"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLColumnCollection.Clear">
+            <summary>
+            Remove all columns from collection
             </summary>
         </member>
-        <member name="F:GlacialComponents.Controls.ColumnStates.csPressed">
+        <member name="M:GlacialComponents.Controls.GLColumnCollection.IndexOf(GlacialComponents.Controls.GLColumn)">
             <summary>
-            Column is showing pressed state
+            Return index of column in collection
             </summary>
+            <param name="column"></param>
+            <returns></returns>
         </member>
-        <member name="F:GlacialComponents.Controls.ColumnStates.csHot">
+        <member name="M:GlacialComponents.Controls.GLColumnCollection.ClearStates">
             <summary>
-            Mouse cursor is over column header, but not pressed
-            </summary>
-        </member>
-        <member name="T:GlacialComponents.Controls.GLColumn">
-            <summary>
-            Summary description for Column.
-            </summary>
-            
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumn.#ctor">
-            <summary>
-            Default constructor for use with the collection editor (only)
-            </summary>
-        </member>
-        <member name="M:GlacialComponents.Controls.GLColumn.#ctor(System.String)">
-            <summary>
-            Constructor for GLColumn
-            </summary>
-            <param name="name"></param>
-        </member>
-        <member name="E:GlacialComponents.Controls.GLColumn.ChangedEvent">
-            <summary>
-            Column has changed event
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLColumn.ActivatedEmbeddedControlTemplate">
-            <summary>
-            Not sure if I'm going to end up using this
-            </summary>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLColumn.ActivatedEmbeddedType">
-            <summary>
-            Type of activated embedded control to use
+            Clear column states
             </summary>
             <remarks>
-            This comes with some built in basic types but is also useable with the User type if you want to put your
-            own type in.
+            Primarily used to clear pressed / hot states
             </remarks>
         </member>
-        <member name="P:GlacialComponents.Controls.GLColumn.NumericSort">
+        <member name="M:GlacialComponents.Controls.GLColumnCollection.ClearHotStates">
             <summary>
-            Whether or not NumericSort are visible in this column
+            Clear only hot states from column collection
             </summary>
         </member>
-        <member name="P:GlacialComponents.Controls.GLColumn.Parent">
+        <member name="M:GlacialComponents.Controls.GLColumnCollection.AnyPressed">
+            <summary>
+            if any of the columns are in a pressed state then disable all hotting
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="E:GlacialComponents.Controls.GLColumnCollection.ChangedEvent">
+            <summary>
+            Column or Column Collection has changed 
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLColumnCollection.Parent">
             <summary>
             pointer to parent
             </summary>
         </member>
-        <member name="P:GlacialComponents.Controls.GLColumn.CheckBoxes">
+        <member name="P:GlacialComponents.Controls.GLColumnCollection.Item(System.Int32)">
             <summary>
-            Whether or not checkboxes are visible in this column
+            Indexer
             </summary>
         </member>
-        <member name="P:GlacialComponents.Controls.GLColumn.ImageIndex">
+        <member name="P:GlacialComponents.Controls.GLColumnCollection.Item(System.String)">
             <summary>
-            Image Index
-            </summary>
-            <remarks>
-            Index of image based on image list included in main list
-            </remarks>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLColumn.TextAlignment">
-            <summary>
-            Alignment of text in the header and in the cells
+            Index by column name
             </summary>
         </member>
-        <member name="P:GlacialComponents.Controls.GLColumn.ActiveControlItems">
+        <member name="P:GlacialComponents.Controls.GLColumnCollection.Width">
             <summary>
-            ActiveControlItems
-            </summary>
-            <remarks>
-            this holds references to items that currently contain live controls.  
-            This is an optimization so I don't have to iterate the entire Items list
-            each draw cycle to remove controls no longer visible
-            </remarks>
-        </member>
-        <member name="P:GlacialComponents.Controls.GLColumn.LastSortState">
-            <summary>
-            Last sort state
+            the combined width of all of the columns
             </summary>
         </member>
-        <member name="P:GlacialComponents.Controls.GLColumn.Width">
+        <member name="T:GlacialComponents.Controls.GLColumnConverter">
             <summary>
-            Width of column
+            GLColumnConverter
+            </summary>
+            
+        </member>
+        <member name="M:GlacialComponents.Controls.GLColumnConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Required for correct collection editor use
+            </summary>
+            <param name="context"></param>
+            <param name="destinationType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLColumnConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+            <summary>
+            Required for correct collection editor use
+            </summary>
+            <param name="context"></param>
+            <param name="culture"></param>
+            <param name="value"></param>
+            <param name="destinationType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GlacialComponents.Controls.GLComboBox">
+            <summary>
+            Summary description for GLComboBox.
             </summary>
         </member>
-        <member name="P:GlacialComponents.Controls.GLColumn.Text">
+        <member name="T:GlacialComponents.Controls.GLEmbeddedControl">
             <summary>
-            Text 
+            Interface you must include for a control to be activated embedded useable
             </summary>
         </member>
-        <member name="P:GlacialComponents.Controls.GLColumn.Name">
+        <member name="M:GlacialComponents.Controls.GLEmbeddedControl.GLReturnText">
             <summary>
-            Name of the column internally
+            This returns the current text output as entered into the control right now
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLEmbeddedControl.GLLoad(GlacialComponents.Controls.GLItem,GlacialComponents.Controls.GLSubItem,GlacialComponents.Controls.GlacialList)">
+            <summary>
+            Called when the control is loaded
+            </summary>
+            <param name="item"></param>
+            <param name="subItem"></param>
+            <param name="listctrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLEmbeddedControl.GLUnload">
+            <summary>
+            Called when control is being destructed
             </summary>
         </member>
-        <member name="P:GlacialComponents.Controls.GLColumn.State">
+        <member name="P:GlacialComponents.Controls.GLEmbeddedControl.Item">
             <summary>
-            State of the column
+            item this control is embedded in
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLEmbeddedControl.SubItem">
+            <summary>
+            Sub item this control is embedded in
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLEmbeddedControl.ListControl">
+            <summary>
+            Parent control
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.GLComboBox.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLComboBox.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLComboBox.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.GLDateTimePicker">
+            <summary>
+            Summary description for GLDateTimePicker.
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.GLDateTimePicker.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLDateTimePicker.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLDateTimePicker.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.GLItem">
+            <summary>
+            GLItem which corresponds to rows in the list view
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItem.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItem.#ctor(GlacialComponents.Controls.GlacialList)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="parent"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItem.SubItemCollection_Changed(System.Object,GlacialComponents.Controls.ChangedEventArgs)">
+            <summary>
+            Sub Item collection changed handler
+            </summary>
+            <param name="source"></param>
+            <param name="e"></param>
+        </member>
+        <member name="E:GlacialComponents.Controls.GLItem.ChangedEvent">
+            <summary>
+            GLItem changed event
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItem.RowBorderSize">
+            <summary>
+            row border size
+            </summary>
+            
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItem.SubItems">
+            <summary>
+            Text color for item
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItem.BackColor">
+            <summary>
+            Row border color
+            </summary>
+            
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItem.RowBorderColor">
+            <summary>
+            Row border color
+            </summary>
+            
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItem.Text">
+            <summary>
+            Text for cell 0 (added by popular request)
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItem.Tag">
+            <summary>
+            User defineable object
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItem.ForeColor">
+            <summary>
+            Text color for item
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItem.Parent">
+            <summary>
+            pointer to parent
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItem.Selected">
+            <summary>
+            Selected
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.GLItemCollection">
+            <summary>
+            Collection of GLItems
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemCollection.#ctor(GlacialComponents.Controls.GlacialList)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="newParent"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemCollection.Item_Changed(System.Object,GlacialComponents.Controls.ChangedEventArgs)">
+            <summary>
+            item has changed
+            </summary>
+            <param name="source"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemCollection.OnClear">
+            <summary>
+            Items have been cleared event
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemCollection.AddRange(GlacialComponents.Controls.GLItem[])">
+            <summary>
+            Compatability with collection editor
+            </summary>
+            <param name="items"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemCollection.Add(System.String)">
+            <summary>
+            add an item to the end of the list
+            </summary>
+            <param name="strItemText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemCollection.Add(GlacialComponents.Controls.GLItem)">
+            <summary>
+            add an itemto the items collection
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemCollection.Insert(System.Int32,System.String)">
+            <summary>
+            insert an item into the list at specified index
+            </summary>
+            <param name="nIndex"></param>
+            <param name="strItemText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemCollection.Insert(System.Int32,GlacialComponents.Controls.GLItem)">
+            <summary>
+            lowest level of add/insert.  All add and insert routines eventually call this
+            
+            in the future always have routines call this one as well to keep one point of entry
+            </summary>
+            <param name="nIndex"></param>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemCollection.Remove(System.Int32)">
+            <summary>
+            remove an item from the list
+            </summary>
+            <param name="nItemIndex"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemCollection.Remove(GlacialComponents.Controls.GLItem)">
+            <summary>
+            remove an item from the list
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemCollection.ClearSelection">
+            <summary>
+            Clears all selection bits in the item structure
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemCollection.ClearSelection(GlacialComponents.Controls.GLItem)">
+            <summary>
+            Clears all selection bits in the item structure
+            
+            this overload is an optimization to stop a redraw on a re-selection
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemCollection.FindNextItemIndex(System.Int32,System.Int32,System.String)">
+            <summary>
+            Find the next item index
+            
+            set startindex to -1 to start at the beginning
+            </summary>
+            <param name="nStartIndex"></param>
+            <param name="nColumn"></param>
+            <param name="strItemText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemCollection.GetNextSelectedItemIndex(System.Int32)">
+            <summary>
+            Get the next selected item index.
+            
+            set startindex to -1 to start at the beginning
+            </summary>
+            <param name="nStartIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemCollection.FindItemIndex(GlacialComponents.Controls.GLItem)">
+            <summary>
+            Find the index of a specified item
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="E:GlacialComponents.Controls.GLItemCollection.ChangedEvent">
+            <summary>
+            Fires when a change occurs to the data
+            </summary>
+        </member>
+        <member name="E:GlacialComponents.Controls.GLItemCollection.RetrieveVirtualItem">
+            <summary>
+            Event handler used in VirtualMode
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItemCollection.Item(System.Int32)">
+            <summary>
+            Indexer that allows the use of Items by []
+            </summary>
+            
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItemCollection.VirtualListSize">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItemCollection.Count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItemCollection.VirtualMode">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItemCollection.SuspendEvents">
+            <summary>
+            this is used for operations where you are changing multiple items consecutively and don't want to send 
+            a larger number of change events than necessary.
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItemCollection.Parent">
+            <summary>
+            Sets the parent variable so we know what to refresh when there is a change
+            </summary>
+            
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItemCollection.SelectedItems">
+            <summary>
+            returns a list of only the selected items
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLItemCollection.SelectedIndicies">
+            <summary>
+            returns a list of only the selected items indexes
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.GLItemConverter">
+            <summary>
+            GLItemConverter
+            </summary>
+            
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Conversion from Item to string
+            </summary>
+            <param name="context"></param>
+            <param name="destinationType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLItemConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+            <summary>
+            Conversion to string
+            </summary>
+            <param name="context"></param>
+            <param name="culture"></param>
+            <param name="value"></param>
+            <param name="destinationType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GlacialComponents.Controls.GLMergeSort">
+            <summary>
+            Summary description for GLMergeSort.
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.GLMergeSort.m_bNumericCompare">
+            <summary>
+            compare only numeric values in items.  Warning, this can end up slowing down routine quite a bit
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.GLMergeSort.m_bStopRequested">
+            <summary>
+            Stop this sort before it finishes
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.GLMergeSort.m_nSortColumn">
+            <summary>
+            Column within the items structure to sort
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.GLMergeSort.m_SortDirection">
+            <summary>
+            Direction this sorting routine will move items
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.SortDirections">
+            <summary>
+            Direction of column sorting
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.SortDirections.SortAscending">
+            <summary>
+            Ascending Items
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.SortDirections.SortDescending">
+            <summary>
+            Descending Items
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.GLQuickSort">
+            <summary>
+            Summary description for GLQuickSort.
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.GLQuickSort.m_bNumericCompare">
+            <summary>
+            compare only numeric values in items.  Warning, this can end up slowing down routine quite a bit
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.GLQuickSort.m_bStopRequested">
+            <summary>
+            Stop this sort before it finishes
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.GLQuickSort.m_nSortColumn">
+            <summary>
+            Column within the items structure to sort
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.GLQuickSort.m_SortDirection">
+            <summary>
+            Direction this sorting routine will move items
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.GLSubItem">
+            <summary>
+            SubItems which make up a GLItem
+            </summary>
+        </member>
+        <member name="E:GlacialComponents.Controls.GLSubItem.ChangedEvent">
+            <summary>
+            Sub Item has changed.
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLSubItem.LastCellRect">
+            <summary>
+            last rectangle that text was drawn into
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLSubItem.Checked">
+            <summary>
+            is the checkbox checked or not
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLSubItem.Parent">
+            <summary>
+            pointer to the primary Parent on top
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLSubItem.EmbeddedControProperties">
+            <summary>
+            Properties of the embedded controls in the listview
+            
+            this is brilliant because it also allows people to set properties of controls that I don't know about
+            
+            the reason I'm even doing this is so many standard control types don't have to be shown
+            </summary>
+            
+        </member>
+        <member name="P:GlacialComponents.Controls.GLSubItem.ForceText">
+            <summary>
+            Force the sub item display to default to text only
+            
+            This will override everything.
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLSubItem.Control">
+            <summary>
+            Embedded Control
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLSubItem.ImageIndex">
+            <summary>
+            Index of image
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLSubItem.ImageAlignment">
+            <summary>
+            Alignment of the image within the subitem
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLSubItem.Tag">
+            <summary>
+            Extra user information
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLSubItem.Text">
+            <summary>
+            Text
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLSubItem.ForeColor">
+            <summary>
+            Color of text in item
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLSubItem.BackColor">
+            <summary>
+            Background color
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLSubItem.Selected">
+            <summary>
+            Indicates when the item is selected
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.GLSubItemCollection">
+            <summary>
+            Sub Item collection
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLSubItemCollection.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLSubItemCollection.#ctor(GlacialComponents.Controls.GlacialList)">
+            <summary>
+            Constructor that accepts parent pointer
+            </summary>
+            <param name="parent"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLSubItemCollection.SubItem_Changed(System.Object,GlacialComponents.Controls.ChangedEventArgs)">
+            <summary>
+            Sub Item changed handler.
+            </summary>
+            <param name="source"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLSubItemCollection.OnClear">
+            <summary>
+            Clear called against subitems in sub item collection
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLSubItemCollection.AddRange(GlacialComponents.Controls.GLSubItem[])">
+            <summary>
+            Add range of sub items
+            </summary>
+            <param name="subItems"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLSubItemCollection.Add(System.String)">
+            <summary>
+            add an item to the end of the list
+            </summary>
+            <param name="strItemText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLSubItemCollection.Add(GlacialComponents.Controls.GLSubItem)">
+            <summary>
+            add an itemto the items collection
+            </summary>
+            <param name="subItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLSubItemCollection.Insert(System.Int32,System.String)">
+            <summary>
+            insert an item into the list at specified index
+            </summary>
+            <param name="nIndex"></param>
+            <param name="strItemText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLSubItemCollection.Insert(System.Int32,GlacialComponents.Controls.GLSubItem)">
+            <summary>
+            lowest level of add/insert.  All add and insert routines eventually call this
+            
+            in the future always have routines call this one as well to keep one point of entry
+            </summary>
+            <param name="nIndex"></param>
+            <param name="subItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLSubItemCollection.Remove(System.Int32)">
+            <summary>
+            remove an item from the list
+            </summary>
+            <param name="nSubItemIndex"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLSubItemCollection.Remove(GlacialComponents.Controls.GLSubItem)">
+            <summary>
+            remove an item from the list
+            </summary>
+            <param name="subItem"></param>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLSubItemCollection.ClearSelection">
+            <summary>
+            Clears all selection bits in the item structure
+            </summary>
+        </member>
+        <member name="E:GlacialComponents.Controls.GLSubItemCollection.ChangedEvent">
+            <summary>
+            Sub Item Collection has changed
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLSubItemCollection.Parent">
+            <summary>
+            Internal pointer to parent class
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.GLSubItemCollection.Item(System.Int32)">
+            <summary>
+            Indexer
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.GLSubItemConverter">
+            <summary>
+            GLSubItemConverter
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLSubItemConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Conversion from Item to string
+            </summary>
+            <param name="context"></param>
+            <param name="destinationType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLSubItemConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+            <summary>
+            Conversion to string
+            </summary>
+            <param name="context"></param>
+            <param name="culture"></param>
+            <param name="value"></param>
+            <param name="destinationType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GlacialComponents.Controls.GLTextBox">
+            <summary>
+            Summary description for GLTextBox.
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.GLTextBox.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLTextBox.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLTextBox.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.RECT">
+            <summary>
+            Internal struct for use with the header style flat only
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.ChangedEventHandler">
+            <summary>
+            Delegate for changed events within Columns, Items, and SubItems
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.RetrieveVirtualItem2EventHandler">
+            <summary>
+            Delegate for changed events within Columns, Items, and SubItems
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.RetrieveVirtualItem2EventArgs">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.RetrieveVirtualItem2EventArgs.#ctor(System.Int32)">
+            <summary>
+            </summary>
+            <param name="itemIndex"></param>
+        </member>
+        <member name="P:GlacialComponents.Controls.RetrieveVirtualItem2EventArgs.ItemIndex">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.RetrieveVirtualItem2EventArgs.Item">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.ChangedTypes">
+            <summary>
+            Change events that are filtered up out of the control
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.ChangedTypes.GeneralInvalidate">
+            <summary>
+            Invalidation Fired
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.ChangedTypes.SubItemChanged">
+            <summary>
+            Sub Item Changed
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.ChangedTypes.SubItemCollectionChanged">
+            <summary>
+            Sub Item Collection Changed
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.ChangedTypes.ItemChanged">
+            <summary>
+            Item Changed
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.ChangedTypes.ItemCollectionChanged">
+            <summary>
+            Item Collection Changed
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.ChangedTypes.ColumnChanged">
+            <summary>
+            Column changed
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.ChangedTypes.ColumnCollectionChanged">
+            <summary>
+            Column Collection Changed
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.ChangedTypes.FocusedChanged">
+            <summary>
+            Focus Changed
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.ChangedTypes.SelectionChanged">
+            <summary>
+            A different item is now selected
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.ChangedTypes.ColumnStateChanged">
+            <summary>
+            Column state has changed
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.ChangedEventArgs">
+            <summary>
+            Changed Event Args
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.ChangedEventArgs.#ctor(GlacialComponents.Controls.ChangedTypes,GlacialComponents.Controls.GLColumn,GlacialComponents.Controls.GLItem,GlacialComponents.Controls.GLSubItem)">
+            <summary>
+            Changes in the columns, items or subitems
+            </summary>
+            <param name="ctType"></param>
+            <param name="column"></param>
+            <param name="item"></param>
+            <param name="subItem"></param>
+        </member>
+        <member name="P:GlacialComponents.Controls.ChangedEventArgs.Column">
+            <summary>
+            Column Name
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.ChangedEventArgs.Item">
+            <summary>
+            Item Name
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.ChangedEventArgs.SubItem">
+            <summary>
+            SubItem Name
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.ChangedEventArgs.ChangedType">
+            <summary>
+            Type of change
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.GLStringHelpers">
+            <summary>
+            String Manipulation Help
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLStringHelpers.TruncateString(System.String,System.Int32,System.Drawing.Graphics,System.Drawing.Font)">
+            <summary>
+            Truncate a string.
+            
+            This function also handles truncation of multiline strings
+            </summary>
+            <param name="strText"></param>
+            <param name="nWidth"></param>
+            <param name="subDC"></param>
+            <param name="font"></param>
+            <returns>
+            Truncated string
+            </returns>
+        </member>
+        <member name="M:GlacialComponents.Controls.GLStringHelpers.MeasureMultiLineString(System.String,System.Drawing.Graphics,System.Drawing.Font)">
+            <summary>
+            Measure a multi lined string
+            </summary>
+            <param name="strText"></param>
+            <param name="mDC"></param>
+            <param name="font"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GlacialComponents.Controls.ClickEventArgs">
+            <summary>
+            Clicked Event Args
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.ClickEventArgs.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="itemindex"></param>
+            <param name="columnindex"></param>
+        </member>
+        <member name="P:GlacialComponents.Controls.ClickEventArgs.ItemIndex">
+            <summary>
+            Index of item clicked
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.ClickEventArgs.ColumnIndex">
+            <summary>
+            Index of column clicked
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.HoverTypes">
+            <summary>
+            Types of hover
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.HoverTypes.HoverStart">
+            <summary>
+            Hover has begun
+            </summary>
+        </member>
+        <member name="F:GlacialComponents.Controls.HoverTypes.HoverEnd">
+            <summary>
+            Hover ending
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.HoverEventArgs">
+            <summary>
+            Hover event args
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.HoverEventArgs.#ctor(GlacialComponents.Controls.HoverTypes,System.Int32,System.Int32,GlacialComponents.Controls.GLListRegion)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="hovertype"></param>
+            <param name="itemindex"></param>
+            <param name="columnindex"></param>
+            <param name="region"></param>
+        </member>
+        <member name="P:GlacialComponents.Controls.HoverEventArgs.HoverType">
+            <summary>
+            Type of hover
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.HoverEventArgs.Region">
+            <summary>
+            Region being hovered
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.HoverEventArgs.ItemIndex">
+            <summary>
+            Index of item hovered
+            </summary>
+        </member>
+        <member name="P:GlacialComponents.Controls.HoverEventArgs.ColumnIndex">
+            <summary>
+            Index of column hovered
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.ManagedVScrollBar">
+            <summary>
+            Summary description for ManagedVScrollBar.
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.ManagedVScrollBar.OnMouseEnter(System.EventArgs)">
+            <summary>
+                                Raises the <see cref="E:System.Windows.Forms.Control.MouseEnter" /> event.
+            </summary>
+            <param name="e">
+                                An <see cref="T:System.EventArgs" /> that contains the event data. 
+                            </param>
+        </member>
+        <member name="M:GlacialComponents.Controls.ManagedVScrollBar.OnMouseLeave(System.EventArgs)">
+            <summary>
+                                Raises the <see cref="E:System.Windows.Forms.Control.MouseLeave" /> event.
+            </summary>
+            <param name="e">
+                                An <see cref="T:System.EventArgs" /> that contains the event data. 
+                            </param>
+        </member>
+        <member name="T:GlacialComponents.Controls.ThemeRoutines">
+            <summary>
+            Summary description for ThemeRoutines.
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.ThemeRoutines.IsThemeActive">
+            <summary>
+            Tests if a visual style for the current application is active.
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.ThemeRoutines.OpenThemeData(System.IntPtr,System.String)">
+            <summary>
+            Opens the theme data for a window and its associated class.
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.ThemeRoutines.CloseThemeData(System.IntPtr)">
+            <summary>Closes the theme data handle.</summary>
+            <remarks>The CloseThemeData function should be called when a window that has a visual style applied is destroyed.</remarks> 
+        </member>
+        <member name="M:GlacialComponents.Controls.ThemeRoutines.DrawThemeBackground(System.IntPtr,System.IntPtr,System.Int32,System.Int32,GlacialComponents.Controls.RECT@,GlacialComponents.Controls.RECT@)">
+            <summary>
+            Draws the background image defined by the visual style for the specified control part.
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.ThemeRoutines.DrawThemeEdge(System.IntPtr,System.IntPtr,System.Int32,System.Int32,GlacialComponents.Controls.RECT@,System.UInt32,System.UInt32,GlacialComponents.Controls.RECT@)">
+            <summary>
+            Draws one or more edges defined by the visual style of a rectangle.
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.ThemeRoutines.DrawThemeIcon(System.IntPtr,System.IntPtr,System.Int32,System.Int32,GlacialComponents.Controls.RECT@,System.IntPtr,System.Int32)">
+            <summary>
+            Draws an image from an image list with the icon effect defined by the visual style.
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.ThemeRoutines.DrawThemeText(System.IntPtr,System.IntPtr,System.Int32,System.Int32,System.String,System.Int32,System.UInt32,System.UInt32,GlacialComponents.Controls.RECT@)">
+            <summary>
+            Draws text using the color and font defined by the visual style.
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.ThemeRoutines.DrawThemeParentBackground(System.IntPtr,System.IntPtr,GlacialComponents.Controls.RECT@)">
+            <summary>
+            Draws the part of a parent control that is covered by a partially-transparent or alpha-blended child control.
+            </summary>
+        </member>
+        <member name="M:GlacialComponents.Controls.ThemeRoutines.SetWindowTheme(System.IntPtr,System.String,System.String)">
+            <summary>
+            Causes a window to use a different set of visual style information than its class normally uses.
+            </summary>
+        </member>
+        <member name="T:GlacialComponents.Controls.Win32">
+            <summary>
+            Summary description for Win32.
             </summary>
         </member>
     </members>

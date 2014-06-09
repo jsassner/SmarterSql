@@ -161,12 +161,12 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 			return false;
 		}
 
-		protected override bool OnGotFocus() {
+		protected override bool OnGotFocus(IntPtr hwnd) {
 			FireGotFocus(new GotFocusEventArgs(HwndVsTextEditPane, (null != vsEditPane ? vsEditPane.ActiveWindow : Common.enActiveWindow.Main)));
 			return false;
 		}
 
-		protected override bool OnLostFocus() {
+		protected override bool OnLostFocus(IntPtr hwnd) {
 			FireLostFocus(new LostFocusEventArgs());
 			return false;
 		}

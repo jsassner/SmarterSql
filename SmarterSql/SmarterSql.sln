@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmarterSql", "SmarterSql\SmarterSql.csproj", "{B8246040-C019-405D-81BA-D7E26299BDE0}"
 EndProject
@@ -11,9 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmarterSqlAddin2008", "Smar
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bins", "Bins", "{4C325DEB-7536-478C-BBB6-85FEBFC6944B}"
 	ProjectSection(SolutionItems) = preProject
-		Bins\GlacialList.dll = Bins\GlacialList.dll
 		Bins\GlacialList.txt = Bins\GlacialList.txt
 		Bins\GlacialListDocs.xml = Bins\GlacialListDocs.xml
+		Bins\Sassner.Sql.GlacialList.dll = Bins\Sassner.Sql.GlacialList.dll
+		Bins\Sassner.Sql.GlacialList.pdb = Bins\Sassner.Sql.GlacialList.pdb
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlServer2005", "SqlServer2005", "{37184928-1472-4605-B150-DC7F7038D3B9}"

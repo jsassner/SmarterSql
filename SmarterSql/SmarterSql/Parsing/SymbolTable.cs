@@ -29,7 +29,7 @@ namespace Sassner.SmarterSql.Parsing {
 
 		public static SymbolId StringToId(string field) {
 			int count;
-			if (field == null) {
+			if (null == field) {
 				Debug.WriteLine("TypeError. attribute name must be string");
 				//throw Ops.TypeError("attribute name must be string", new object[0]);
 				return None;

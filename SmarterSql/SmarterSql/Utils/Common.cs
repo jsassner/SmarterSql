@@ -252,6 +252,12 @@ namespace Sassner.SmarterSql.Utils {
 			dte.Quit();
 		}
 
+		public static int ConnectionColorStripHeight {
+			get {
+				return 10;
+			}
+		}
+
 		public static int ErrorStripWidth() {
 			return NativeWIN32.GetSystemMetrics(NativeWIN32.SystemMetric.SM_CYVSCROLL);
 		}
@@ -356,8 +362,7 @@ namespace Sassner.SmarterSql.Utils {
 		}
 
 		/// <summary>
-		/// Retrieve the parent window to the textview that has a classname of GenericPane. We are
-		/// interrested in their events
+		/// Retrieve the parent window to the textview that has a classname of GenericPane. We are interrested in their events
 		/// </summary>
 		/// <param name="hwnd"></param>
 		/// <returns></returns>
@@ -371,6 +376,29 @@ namespace Sassner.SmarterSql.Utils {
 					}
 					hwndParent = NativeWIN32.GetParent(hwndParent);
 				}
+			} catch (Exception) {
+				// Do nothing
+			}
+			return IntPtr.Zero;
+		}
+
+		/// <summary>
+		/// Retrieve the first child window to the window that has a classname of GenericPane.
+		/// </summary>
+		/// <param name="hwnd"></param>
+		/// <returns></returns>
+		public static IntPtr FindChildToGenericPaneWindow(IntPtr hwnd) {
+			try {
+				do {
+					IntPtr hwndParent = NativeWIN32.GetParent(hwnd);
+					string className = NativeWIN32.GetClassName(hwndParent);
+					if (className.Equals("GenericPane")) {
+						return hwnd;
+					}
+					hwnd = hwndParent;
+
+				} while (IntPtr.Zero != hwnd);
+
 			} catch (Exception) {
 				// Do nothing
 			}

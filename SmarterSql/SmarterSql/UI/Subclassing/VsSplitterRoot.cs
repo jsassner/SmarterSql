@@ -36,6 +36,7 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 		private VsEditPane secondaryVsEditPane;
 		private Settings settings;
 		private TabsWindow tabsWindow;
+		private VsGenericPaneChild genericPaneChild;
 
 		#endregion
 
@@ -134,7 +135,7 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 		/// Enable/disable subclassing
 		/// </summary>
 		/// <param name="newSettings"></param>
-		public void EnableErrorStrip(Settings newSettings) {
+		public void EnableWindowStrips(Settings newSettings) {
 			settings = newSettings;
 
 			DeInitialize();
@@ -147,6 +148,9 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 			}
 			if (null != secondaryVsEditPane) {
 				secondaryVsEditPane.SetBounds();
+			}
+			if (null != genericPaneChild) {
+				genericPaneChild.SetBounds();
 			}
 		}
 
@@ -326,6 +330,9 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 			if (null != GotFocus) {
 				GotFocus(sender, e);
 			}
+			if (null != genericPaneChild) {
+				genericPaneChild.Initialize();
+			}
 		}
 
 		private void vsTextEditPane_LostFocus(object sender, LostFocusEventArgs e) {
@@ -337,6 +344,9 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 		private void tabsWindow_NewConnection(object sender, NewConnectionEventArgs e) {
 			if (null != NewConnection) {
 				NewConnection(sender, e);
+			}
+			if (null != genericPaneChild) {
+				genericPaneChild.Initialize();
 			}
 		}
 
@@ -518,6 +528,12 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 					SplitWindow(this, new SplitWindowEventArgs(primaryActiveView, secondaryActiveView));
 				}
 
+				if (null != genericPaneChild) {
+					genericPaneChild.Dispose();
+				}
+				genericPaneChild = new VsGenericPaneChild(hwndVsSplitterRoot);
+				//genericPaneChild.Initialize();
+
 				if (null == tabsWindow) {
 					// Subclass the tab window
 					IntPtr hwndTab = Common.GetGenericPaneWindow(hwndVsSplitterRoot);
@@ -534,6 +550,10 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 
 		private void DeInitialize() {
 			try {
+				if (null != genericPaneChild) {
+					genericPaneChild.Dispose();
+					genericPaneChild = null;
+				}
 				if (null != tabsWindow) {
 					tabsWindow.NewConnection -= tabsWindow_NewConnection;
 					tabsWindow.Dispose();

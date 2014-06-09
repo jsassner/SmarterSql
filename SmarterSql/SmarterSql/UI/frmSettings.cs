@@ -4,15 +4,15 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
-using System.Xml;
 using System.Xml.Serialization;
 using GlacialComponents.Controls;
 using Sassner.SmarterSql.Objects;
 using Sassner.SmarterSql.Utils;
+using Sassner.SmarterSql.Utils.Extensions;
 using Sassner.SmarterSql.Utils.Settings;
 
 namespace Sassner.SmarterSql.UI {
@@ -46,8 +46,6 @@ namespace Sassner.SmarterSql.UI {
 			Bitmap bitmap = new Bitmap(200, 100);
 			picHightlightCurrentLine.Image = bitmap;
 
-			InitializeProperCaseGrid();
-
 			SetSettingsInGUI();
 		}
 
@@ -66,32 +64,15 @@ namespace Sassner.SmarterSql.UI {
 
 		#region Store and retrieve settings
 
-		private static bool StoreSettings() {
-			try {
-				string settingsFilename = GetSettingsFilename();
-
-				XmlSerializer serializer = new XmlSerializer(typeof(Settings));
-				XmlTextWriter tw = new XmlTextWriter(settingsFilename, Encoding.UTF8);
-				serializer.Serialize(tw, settings);
-				tw.Close();
-
-				return true;
-			} catch (Exception e) {
-				Common.LogEntry(ClassName, "StoreSettings", e, Common.enErrorLvl.Error);
-				Common.ErrorMsg("Unable to store settings.");
-				return false;
-			}
-		}
-
 		public static Settings RetrieveSettings() {
 			Settings newSettings = null;
 			try {
-				string settingsFilename = GetSettingsFilename();
+				string settingsFilename = Settings.GetSettingsFilename();
 
 				if (!File.Exists(settingsFilename)) {
 					newSettings = Settings.CreateDefaultSettings();
 					settings = newSettings;
-					StoreSettings();
+					settings.StoreSettings();
 					return newSettings;
 				}
 
@@ -103,7 +84,7 @@ namespace Sassner.SmarterSql.UI {
 				if (!newSettings.BuildDate.Equals(VersionInformation.dtBuild)) {
 					newSettings = Settings.CreateDefaultSettings();
 					settings = newSettings;
-					StoreSettings();
+					settings.StoreSettings();
 				}
 			} catch (Exception e) {
 				Common.LogEntry(ClassName, "RetrieveSettings", e, Common.enErrorLvl.Error);
@@ -113,22 +94,16 @@ namespace Sassner.SmarterSql.UI {
 			return newSettings;
 		}
 
-		private static string GetSettingsFilename() {
-			string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SmarterSql");
-			if (!Directory.Exists(dir)) {
-				Directory.CreateDirectory(dir);
-			}
-			return Path.Combine(dir, "SmarterSql_settings.xml");
-		}
-
 		#endregion
 
 		#region UI methods
 
 		private void InitializeProperCaseGrid() {
 			try {
+				glacialList1.Items.Clear();
+
 				foreach (Type type in Assembly.GetExecutingAssembly().GetTypes()) {
-					if (typeof(Settings) == type) {
+					if (type == typeof(Settings)) {
 						foreach (PropertyInfo propertyInfo in type.GetProperties()) {
 							object[] attributes = propertyInfo.GetCustomAttributes(typeof(SettingsProperCaseAttribute), true);
 							foreach (SettingsProperCaseAttribute attribute in attributes) {
@@ -167,10 +142,78 @@ namespace Sassner.SmarterSql.UI {
 			}
 		}
 
+		private void InitializeConnectionColorGrid() {
+			try {
+				lstConnectionColors.Items.Clear();
+				foreach (var connectionColorSetting in settings.ConnectionColorSettings) {
+					AddConnectionColorSettingToList(connectionColorSetting);
+				}
+
+				if (0 == lstConnectionColors.Items.Count) {
+					return;
+				}
+				// Set heights
+				lstConnectionColors.ResizeToFullColumnWidth();
+
+			} catch (Exception e) {
+				Common.LogEntry(ClassName, "InitializeConnectionColorGrid", e, Common.enErrorLvl.Error);
+			}
+		}
+
+		private void AddConnectionColorSettingToList(Settings.ConnectionColorSetting connectionColorSetting) {
+			GLItem item = lstConnectionColors.Items.Add(connectionColorSetting.ServerName);
+			item.Tag = connectionColorSetting;
+			GLSubItem subItem = new GLSubItem {
+				Text = connectionColorSetting.DatabaseName
+			};
+			item.SubItems.Add(subItem);
+
+			Button button = new Button {
+				Text = connectionColorSetting.Color.ToHexString(),
+				BackColor = connectionColorSetting.Color,
+				Tag = connectionColorSetting
+			};
+			button.Click += (sender, args) => {
+				if (DialogResult.OK == colorDialog2.ShowDialog()) {
+					Button clickedButton = ((Button)sender);
+					Settings.ConnectionColorSetting _connectionColorSetting = (Settings.ConnectionColorSetting)clickedButton.Tag;
+					clickedButton.Text = colorDialog2.Color.ToHexString();
+					clickedButton.BackColor = colorDialog2.Color;
+					_connectionColorSetting.Color = colorDialog2.Color;
+				}
+			};
+
+			subItem = new GLSubItem {
+				Control = button
+			};
+			item.SubItems.Add(subItem);
+
+			button = new Button {
+				Text = "Remove",
+				Tag = connectionColorSetting
+			};
+			button.Click += (sender, args) => {
+				if (MessageBox.Show("Are you sure you want to remove the connection coloring?", "Remove connection coloring?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+					Button clickedButton = ((Button)sender);
+					Settings.ConnectionColorSetting _connectionColorSetting = (Settings.ConnectionColorSetting)clickedButton.Tag;
+					int index = settings.ConnectionColorSettings.IndexOf(_connectionColorSetting);
+					if (index >= 0) {
+						settings.ConnectionColorSettings.Remove(_connectionColorSetting);
+						lstConnectionColors.Items.Remove(index);
+						lstConnectionColors.Refresh();
+					}
+				}
+			};
+			subItem = new GLSubItem {
+				Control = button
+			};
+			item.SubItems.Add(subItem);
+		}
+
 		private void btnOk_Click(object sender, EventArgs e) {
 			GetSettingsFromGUI();
 
-			if (StoreSettings()) {
+			if (settings.StoreSettings()) {
 				try {
 					if (null != SettingsUpdated) {
 						SettingsUpdated(settings);
@@ -181,6 +224,13 @@ namespace Sassner.SmarterSql.UI {
 					return;
 				}
 				Close();
+			}
+		}
+
+		private void frmSettings_FormClosing(object sender, FormClosingEventArgs e) {
+			// If an control is active in the connection coloring control, abort the cancel
+			if (null != lstConnectionColors.ActivatedEmbeddedControl) {
+				e.Cancel = true;
 			}
 		}
 
@@ -212,6 +262,7 @@ namespace Sassner.SmarterSql.UI {
 			settings.ColorHighlightCurrentLine = HighlightCurrentLineColor;
 			settings.AlphaHighlightCurrentLine = Convert.ToInt32(txtAlphaHighlightCurrentLine.Text);
 			settings.ShowErrorStrip = chkShowErrorStrip.Checked;
+			settings.ShowConnectionColorStrip = chkShowConnectionColorStrip.Checked;
 			settings.AutomaticallyShowCompletionWindow = chkAutomaticallyShowCompletionWindow.Checked;
 			settings.FullParseInitialDelay = (int)numFullParseInitialDelay.Value;
 			settings.SmartHelperInitialDelay = (int)numSmartHelperInitialDelay.Value;
@@ -225,6 +276,16 @@ namespace Sassner.SmarterSql.UI {
 				ComboBox comboBox = (ComboBox)item.SubItems[1].Control;
 				propertyInfo.SetValue(settings, comboBox.SelectedIndex, null);
 			}
+
+			for (int i = 0; i < lstConnectionColors.Items.Count; i++) {
+				GLItem item = lstConnectionColors.Items[i];
+				Settings.ConnectionColorSetting connectionColorSetting = settings.ConnectionColorSettings[i];
+				connectionColorSetting.ServerName = item.Text;
+				connectionColorSetting.DatabaseName = item.SubItems[1].Text;
+			}
+
+			settings.ConnectionColoringStripPosition = (rbConColPosTop.Checked ? Settings.StripPosition.Top : rbConColPosLeft.Checked ? Settings.StripPosition.Left : rbConColPosBottom.Checked ? Settings.StripPosition.Bottom : Settings.StripPosition.Right);
+			settings.ErrorStripPosition = (rbErrorStripPosTop.Checked ? Settings.StripPosition.Top : rbErrorStripPosLeft.Checked ? Settings.StripPosition.Left : rbErrorStripPosBottom.Checked ? Settings.StripPosition.Bottom : Settings.StripPosition.Right);
 		}
 
 		private void SetSettingsInGUI() {
@@ -247,9 +308,10 @@ namespace Sassner.SmarterSql.UI {
 			chkAutoInsertSysobjectSchema.Checked = settings.AutoInsertSysobjectSchema;
 			chkHighlightCurrentLine.Checked = settings.HighlightCurrentLine;
 			HighlightCurrentLineColor = settings.ColorHighlightCurrentLine;
-			txtAlphaHighlightCurrentLine.Text = settings.AlphaHighlightCurrentLine.ToString();
+			txtAlphaHighlightCurrentLine.Text = settings.AlphaHighlightCurrentLine.ToString(CultureInfo.InvariantCulture);
 			trackBar1.Value = settings.AlphaHighlightCurrentLine;
 			chkShowErrorStrip.Checked = settings.ShowErrorStrip;
+			chkShowConnectionColorStrip.Checked = settings.ShowConnectionColorStrip;
 			chkAutomaticallyShowCompletionWindow.Checked = settings.AutomaticallyShowCompletionWindow;
 			numFullParseInitialDelay.Value = settings.FullParseInitialDelay;
 			numFullParseInitialDelay.Enabled = chkAutomaticallyShowCompletionWindow.Checked;
@@ -260,6 +322,38 @@ namespace Sassner.SmarterSql.UI {
 			chkCommittedByTab.Checked = settings.CommittedByTab;
 			txtCommittedByCharacters.Text = settings.CommittedByCharacters;
 			// KeywordsShouldBeUpperCase & DatatypesShouldBeUpperCase are set in method InitializeProperCaseGrid
+
+			InitializeProperCaseGrid();
+			InitializeConnectionColorGrid();
+
+			switch (settings.ConnectionColoringStripPosition) {
+				case Settings.StripPosition.Top:
+					rbConColPosTop.Checked = true;
+					break;
+				case Settings.StripPosition.Left:
+					rbConColPosLeft.Checked = true;
+					break;
+				case Settings.StripPosition.Bottom:
+					rbConColPosBottom.Checked = true;
+					break;
+				case Settings.StripPosition.Right:
+					rbConColPosRight.Checked = true;
+					break;
+			}
+			switch (settings.ErrorStripPosition) {
+				case Settings.StripPosition.Top:
+					rbErrorStripPosTop.Checked = true;
+					break;
+				case Settings.StripPosition.Left:
+					rbErrorStripPosLeft.Checked = true;
+					break;
+				case Settings.StripPosition.Bottom:
+					rbErrorStripPosBottom.Checked = true;
+					break;
+				case Settings.StripPosition.Right:
+					rbErrorStripPosRight.Checked = true;
+					break;
+			}
 		}
 
 		private void picHightlightCurrentLine_Click(object sender, EventArgs e) {
@@ -292,7 +386,7 @@ namespace Sassner.SmarterSql.UI {
 		}
 
 		private void trackBar1_ValueChanged(object sender, EventArgs e) {
-			txtAlphaHighlightCurrentLine.Text = trackBar1.Value.ToString();
+			txtAlphaHighlightCurrentLine.Text = trackBar1.Value.ToString(CultureInfo.InvariantCulture);
 			PaintBackgroundColor();
 		}
 
@@ -302,6 +396,12 @@ namespace Sassner.SmarterSql.UI {
 
 		private void cmdSetDefaultCommittedBy_Click(object sender, EventArgs e) {
 			txtCommittedByCharacters.Text = Settings.DefaultCommittedByCharacters;
+		}
+
+		private void cmdAddConnectionColorSetting_Click(object sender, EventArgs e) {
+			Settings.ConnectionColorSetting connectionColorSetting = new Settings.ConnectionColorSetting("<server>", "<database>", 255, 128, 128, 128);
+			settings.ConnectionColorSettings.Add(connectionColorSetting);
+			AddConnectionColorSettingToList(connectionColorSetting);
 		}
 	}
 }

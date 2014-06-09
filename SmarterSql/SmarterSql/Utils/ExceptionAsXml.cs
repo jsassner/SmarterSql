@@ -30,7 +30,7 @@ namespace Sassner.SmarterSql.Utils {
 		public ExceptionAsXml(Exception exception, bool omitStackTrace) {
 			// Allow null to allow new ExceptionAsXml(exception.InnerException)
 			// where InnerException may be null
-			if (exception == null) {
+			if (null == exception) {
 				return;
 			}
 

@@ -88,7 +88,7 @@ namespace Sassner.SmarterSql.Threads {
 
 		private static Object InternalSyncObject {
 			get {
-				if (s_InternalSyncObject == null) {
+				if (null == s_InternalSyncObject) {
 					Object o = new Object();
 					Interlocked.CompareExchange(ref s_InternalSyncObject, o, null);
 				}

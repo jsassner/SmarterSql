@@ -16,7 +16,6 @@ using Sassner.SmarterSql.Threads;
 using Sassner.SmarterSql.UI;
 using Sassner.SmarterSql.Utils;
 using Sassner.SmarterSql.Utils.Menu;
-using Sassner.SmarterSql.Utils.Security;
 using Sassner.SmarterSql.Utils.Settings;
 using Thread=System.Threading.Thread;
 
