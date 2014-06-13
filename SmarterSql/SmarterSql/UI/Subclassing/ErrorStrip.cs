@@ -3,6 +3,7 @@
 // ---------------------------------
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
@@ -36,6 +37,7 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 		public ErrorStrip(VsTextEditPane vsTextEditPane, List<Stripe> stripes, int nbOfRowsInEditor) {
 			this.vsTextEditPane = vsTextEditPane;
 			this.stripes = stripes;
+			Stripe.Sort(this.stripes);
 			this.nbOfRowsInEditor = nbOfRowsInEditor;
 		}
 
@@ -50,6 +52,7 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 			get { return stripes; }
 			set {
 				stripes = value;
+				Stripe.Sort(stripes);
 				Invalidate();
 			}
 		}
@@ -327,9 +330,11 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 					}
 
 					// Draw stripes
-					foreach (Stripe stripe in stripes) {
-						g.DrawRectangle(Stripe.GetPen(stripe), 3, stripe.PositionY, width, 1);
+					var uniqueRowStrips = Stripe.GetUniqueRowStrips(stripes);
+					foreach (Stripe stripe in uniqueRowStrips) {
+						g.DrawRectangle(Stripe.GetPen(stripe), 3, (int)stripe.PositionY, width, 1);
 					}
+
 				}
 			} catch (Exception e) {
 				Common.LogEntry(ClassName, "OnPaint", e, Common.enErrorLvl.Error);
