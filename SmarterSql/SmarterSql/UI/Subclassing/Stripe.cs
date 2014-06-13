@@ -1,6 +1,8 @@
 // ---------------------------------
 // SmarterSql (c) Johan Sassner 2008
 // ---------------------------------
+
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using Sassner.SmarterSql.Utils;
@@ -78,6 +80,25 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 					break;
 			}
 			return pen;
+		}
+
+		public static void Sort(List<Stripe> stripes) {
+			stripes.Sort(delegate(Stripe stripe1, Stripe stripe2) {
+				if (stripe1.EditorLine == stripe2.EditorLine) {
+					return stripe1.EditorColumn - stripe2.EditorColumn;
+				}
+				return stripe1.EditorLine - stripe2.EditorLine;
+			});
+		}
+
+		public static IEnumerable<Stripe> GetUniqueRowStrips(List<Stripe> stripes) {
+			int currentRow = -1;
+			foreach (Stripe stripe in stripes) {
+				if ((int)stripe.PositionY > currentRow) {
+					currentRow = (int)stripe.PositionY;
+					yield return stripe;
+				}
+			}
 		}
 	}
 }
