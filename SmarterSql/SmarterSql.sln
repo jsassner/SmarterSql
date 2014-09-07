@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bins", "Bins", "{4C325DEB-7
 	ProjectSection(SolutionItems) = preProject
 		Bins\GlacialList.txt = Bins\GlacialList.txt
 		Bins\GlacialListDocs.xml = Bins\GlacialListDocs.xml
+		Bins\readme.txt = Bins\readme.txt
 		Bins\Sassner.Sql.GlacialList.dll = Bins\Sassner.Sql.GlacialList.dll
 		Bins\Sassner.Sql.GlacialList.pdb = Bins\Sassner.Sql.GlacialList.pdb
 	EndProjectSection
@@ -41,9 +42,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Installer_release.nsi = Installer_release.nsi
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmarterSqlAddin2014", "SmarterSqlAddin2014\SmarterSqlAddin2014.csproj", "{5EFBB9A6-06DC-4787-B4B4-E3CAFD9D31BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlServer2012", "SqlServer2012", "{C177B757-F840-4B95-BADD-D7C80EA0841D}"
+	ProjectSection(SolutionItems) = preProject
+		Bins\SqlServer2012\Microsoft.SqlServer.ConnectionInfo.dll = Bins\SqlServer2012\Microsoft.SqlServer.ConnectionInfo.dll
+		Bins\SqlServer2012\Microsoft.SqlServer.RegSvrEnum.dll = Bins\SqlServer2012\Microsoft.SqlServer.RegSvrEnum.dll
+		Bins\SqlServer2012\SqlPackageBase.dll = Bins\SqlServer2012\SqlPackageBase.dll
+		Bins\SqlServer2012\SqlWorkbench.Interfaces.dll = Bins\SqlServer2012\SqlWorkbench.Interfaces.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlServer2014", "SqlServer2014", "{E6C13C6F-C3CA-435C-8391-D76FF785AC97}"
+	ProjectSection(SolutionItems) = preProject
+		Bins\SqlServer2014\Microsoft.SqlServer.ConnectionInfo.dll = Bins\SqlServer2014\Microsoft.SqlServer.ConnectionInfo.dll
+		Bins\SqlServer2014\Microsoft.SqlServer.RegSvrEnum.dll = Bins\SqlServer2014\Microsoft.SqlServer.RegSvrEnum.dll
+		Bins\SqlServer2014\SqlPackageBase.dll = Bins\SqlServer2014\SqlPackageBase.dll
+		Bins\SqlServer2014\SqlWorkbench.Interfaces.dll = Bins\SqlServer2014\SqlWorkbench.Interfaces.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs11
 		SccLocalPath0 = .
@@ -62,6 +81,9 @@ Global
 		SccProjectUniqueName5 = SmarterSqlAddin2012\\SmarterSqlAddin2012.csproj
 		SccProjectName5 = SmarterSqlAddin2012
 		SccLocalPath5 = SmarterSqlAddin2012
+		SccProjectUniqueName6 = SmarterSqlAddin2014\\SmarterSqlAddin2014.csproj
+		SccProjectName6 = SmarterSqlAddin2014
+		SccLocalPath6 = SmarterSqlAddin2014
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -122,6 +144,16 @@ Global
 		{9CCE3C36-04B7-4A4A-ACA8-1117FEBD2CD0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9CCE3C36-04B7-4A4A-ACA8-1117FEBD2CD0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9CCE3C36-04B7-4A4A-ACA8-1117FEBD2CD0}.Release|x86.ActiveCfg = Release|Any CPU
+		{5EFBB9A6-06DC-4787-B4B4-E3CAFD9D31BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EFBB9A6-06DC-4787-B4B4-E3CAFD9D31BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EFBB9A6-06DC-4787-B4B4-E3CAFD9D31BA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5EFBB9A6-06DC-4787-B4B4-E3CAFD9D31BA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5EFBB9A6-06DC-4787-B4B4-E3CAFD9D31BA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5EFBB9A6-06DC-4787-B4B4-E3CAFD9D31BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EFBB9A6-06DC-4787-B4B4-E3CAFD9D31BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EFBB9A6-06DC-4787-B4B4-E3CAFD9D31BA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5EFBB9A6-06DC-4787-B4B4-E3CAFD9D31BA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5EFBB9A6-06DC-4787-B4B4-E3CAFD9D31BA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,5 +161,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{37184928-1472-4605-B150-DC7F7038D3B9} = {4C325DEB-7536-478C-BBB6-85FEBFC6944B}
 		{C7C4EEE6-825C-4615-8BF4-F8E2D71CC082} = {4C325DEB-7536-478C-BBB6-85FEBFC6944B}
+		{C177B757-F840-4B95-BADD-D7C80EA0841D} = {4C325DEB-7536-478C-BBB6-85FEBFC6944B}
+		{E6C13C6F-C3CA-435C-8391-D76FF785AC97} = {4C325DEB-7536-478C-BBB6-85FEBFC6944B}
 	EndGlobalSection
 EndGlobal

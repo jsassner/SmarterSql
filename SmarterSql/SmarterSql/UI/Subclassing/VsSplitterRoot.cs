@@ -93,16 +93,20 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 				throw new ApplicationException("hwndVsTextEditPane wasn't a valid window.");
 			}
 
-			// Get VsEditPane
-			IntPtr hwndVsEditPane = NativeWIN32.GetParent(hwndVsTextEditPane);
-			if (!NativeWIN32.IsValidWindowHandle(hwndVsEditPane)) {
-				throw new ApplicationException("Couldn't find parent window from VsTextEditPane.");
-			}
+			if (Instance.MgtmStdSqlVersion >= Common.enSqlVersion.Sql2012) {
+				hwndVsSplitterRoot = hwndVsTextEditPane;
+			} else {
+				// Get VsEditPane
+				IntPtr hwndVsEditPane = NativeWIN32.GetParent(hwndVsTextEditPane);
+				if (!NativeWIN32.IsValidWindowHandle(hwndVsEditPane)) {
+					throw new ApplicationException("Couldn't find parent window from VsTextEditPane.");
+				}
 
-			// Get VsSplitterRoot
-			hwndVsSplitterRoot = NativeWIN32.GetParent(hwndVsEditPane);
-			if (!NativeWIN32.IsValidWindowHandle(hwndVsSplitterRoot)) {
-				throw new ApplicationException("Couldn't find parent window from hwndVsSplitterRoot.");
+				// Get VsSplitterRoot
+				hwndVsSplitterRoot = NativeWIN32.GetParent(hwndVsEditPane);
+				if (!NativeWIN32.IsValidWindowHandle(hwndVsSplitterRoot)) {
+					throw new ApplicationException("Couldn't find parent window from hwndVsSplitterRoot.");
+				}
 			}
 
 			// Subclass this window
@@ -375,22 +379,12 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 			get { return secondaryActiveView; }
 		}
 
-		public IntPtr HwndVsSplitterRoot {
-			[DebuggerStepThrough]
-			get { return hwndVsSplitterRoot; }
-		}
-
 		public VsEditPane PrimaryVsEditPane {
 			[DebuggerStepThrough]
 			get { return primaryVsEditPane; }
 		}
 
-		public VsEditPane SecondaryVsEditPane {
-			[DebuggerStepThrough]
-			get { return secondaryVsEditPane; }
-		}
-
-		public IntPtr PrimaryHwndVsEditPane {
+/*		public IntPtr PrimaryHwndVsEditPane {
 			[DebuggerStepThrough]
 			get { return primaryHwndVsEditPane; }
 		}
@@ -409,6 +403,7 @@ namespace Sassner.SmarterSql.UI.Subclassing {
 			[DebuggerStepThrough]
 			get { return secondaryHwndVsTextEditPane; }
 		}
+ */
 
 		public IntPtr ActiveHwnd {
 			[DebuggerStepThrough]

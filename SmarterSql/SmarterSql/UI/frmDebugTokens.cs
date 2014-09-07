@@ -399,10 +399,10 @@ namespace Sassner.SmarterSql.UI {
 				AddWindowDataItem(value, windowData.SplitterRoot.PrimaryActiveView);
 				AddWindowDataItem(value, windowData.SplitterRoot.SecondaryActiveView);
 				AddWindowDataItem(value, windowData.SplitterRoot.ActiveHwnd);
-				AddWindowDataItem(value, windowData.SplitterRoot.PrimaryHwndVsEditPane);
-				AddWindowDataItem(value, windowData.SplitterRoot.PrimaryHwndVsTextEditPane);
-				AddWindowDataItem(value, windowData.SplitterRoot.SecondaryHwndVsEditPane);
-				AddWindowDataItem(value, windowData.SplitterRoot.SecondaryHwndVsTextEditPane);
+//				AddWindowDataItem(value, windowData.SplitterRoot.PrimaryHwndVsEditPane);
+//				AddWindowDataItem(value, windowData.SplitterRoot.PrimaryHwndVsTextEditPane);
+//				AddWindowDataItem(value, windowData.SplitterRoot.SecondaryHwndVsEditPane);
+//				AddWindowDataItem(value, windowData.SplitterRoot.SecondaryHwndVsTextEditPane);
 				listView1.Items.Add(value);
 			}
 			listView1.EndUpdate();

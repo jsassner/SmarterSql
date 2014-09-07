@@ -1,9 +1,7 @@
 ﻿using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo.RegSvrEnum;
-/*
 using Microsoft.SqlServer.Management.UI.VSIntegration;
 using Microsoft.SqlServer.Management.UI.VSIntegration.Editors;
-*/
 using Sassner.SmarterSql.Objects;
 using Sassner.SmarterSql.Utils;
 
@@ -13,7 +11,7 @@ namespace Sassner.SmarterSql {
 		#region Get active connection
 
 		public override ActiveConnection GetConnection() {
-/*
+
 			IScriptFactory scriptFactory = ServiceCache.ScriptFactory;
 			if (null != scriptFactory && null != scriptFactory.CurrentlyActiveWndConnectionInfo && null != scriptFactory.CurrentlyActiveWndConnectionInfo.UIConnectionInfo) {
 				CurrentlyActiveWndConnectionInfo connInfo = scriptFactory.CurrentlyActiveWndConnectionInfo;
@@ -40,7 +38,7 @@ namespace Sassner.SmarterSql {
 
 				return new ActiveConnection(serverName, databaseName, blnIsUsingIntegratedSecurity, userName, passWord, buildMajor, buildMinor, buildNumber);
 			}
-*/
+
 			return null;
 		}
 

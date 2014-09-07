@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Security.Principal;
@@ -33,9 +34,9 @@ namespace Sassner.SmarterSql.Utils {
 		public const int WM_RUNPARSE = WM_USER + 500;
 		public const int WM_UPDATEPROGRESS = WM_USER + 501;
 		private const int WM_USER = 0x0400;
-		public static readonly char chrKeyBackSpace = (char)8;
+		public const char chrKeyBackSpace = (char)8;
 
-		public static readonly char chrKeyCitation = '\'';
+		public const char chrKeyCitation = '\'';
 		public static readonly char chrKeyComma = ',';
 		public static readonly char chrKeyDelete = (char)0x7f;
 		public static readonly char chrKeyDot = '.';
@@ -66,7 +67,7 @@ namespace Sassner.SmarterSql.Utils {
 		public static readonly string symmetric_key_signature = "dN5HQiTVfRbhpR9ttyA2ZPohRuMpRtF0PDNYuf7t5PXtjc/PZXo0NNDBjc9z7T0IilLUpcVQy9PbEUWbZEpV5y93utDZ7xPGEyTvmiOjDJhspOxJNxHp+XEeoWOny1ZKZ2UYWdj+Rpcs41LHK6+On4qv691zqS3n1sEGvyHp1IijdB0uCkEieAl3jJfK0kCScH4HCjiLNZbiBVMuPP9tRQ3EAn3wCX/do8Gyr13GFYfs+jh3JGLy0t8ocENjVToy9ZVstBypcCKzxvfM0FryL+ejn1cfKlhzArnNM1Y+7YxEEAMgFD1AownZEheCTvwTfLpU1g2GYkphli+IEbAYpA==";
 		public static String guidfrmBackground = "{CD894605-D29C-48c6-9F63-918E3A773903}";
 
-		//This guid must be unique for each different tool window, but you may use the same guid for the same tool window.
+		// This guid must be unique for each different tool window, but you may use the same guid for the same tool window.
 		// This guid can be used for indexing the windows collection, for example: applicationObject.Windows.Item(guidstr)
 		public static String guidfrmIntellisense = "{CD894605-D29C-48c6-9F63-918E3A773901}";
 		public static String guidfrmSettings = "{CD894605-D29C-48c6-9F63-918E3A773902}";
@@ -152,7 +153,8 @@ namespace Sassner.SmarterSql.Utils {
 			Sql2000,
 			Sql2005,
 			Sql2008,
-			Sql2012
+			Sql2012,
+			Sql2014
 		}
 
 		#endregion
@@ -221,8 +223,6 @@ namespace Sassner.SmarterSql.Utils {
 		#endregion
 
 		#endregion
-
-		//		private static TextWriter charWriter = null;
 
 		public static bool IsTextEditorActiveWindow() {
 			try {
@@ -764,10 +764,10 @@ namespace Sassner.SmarterSql.Utils {
 		public static float GetCharactherWidth(Font editor, Graphics g, char character) {
 			try {
 				StringFormat stringFormat = new StringFormat { FormatFlags = (StringFormatFlags.NoClip | StringFormatFlags.MeasureTrailingSpaces) };
-				CharacterRange[] characterRanges = new[] { new CharacterRange(0, 1) };
+				CharacterRange[] characterRanges = { new CharacterRange(0, 1) };
 				stringFormat.SetMeasurableCharacterRanges(characterRanges);
 				RectangleF displayRectangle = new RectangleF(0, 0, 500, 500);
-				Region[] charRegions = g.MeasureCharacterRanges(character.ToString(), editor, displayRectangle, stringFormat);
+				Region[] charRegions = g.MeasureCharacterRanges(character.ToString(CultureInfo.InvariantCulture), editor, displayRectangle, stringFormat);
 				float width = charRegions[0].GetBounds(g).Size.Width;
 				charRegions[0].Dispose();
 				return width;
