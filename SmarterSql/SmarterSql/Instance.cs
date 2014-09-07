@@ -56,7 +56,8 @@ namespace Sassner.SmarterSql {
 
 		#endregion
 
-		public Instance(DTE2 _applicationObject, AddIn _addInInstance, Thread primaryThread, GetActiveConnection delActiveConnection) {
+		public Instance(DTE2 _applicationObject, AddIn _addInInstance, Thread primaryThread, GetActiveConnection delActiveConnection, Common.enSqlVersion sqlVersion) {
+			MgtmStdSqlVersion = sqlVersion;
 			Instance._applicationObject = _applicationObject;
 			Instance._addInInstance = _addInInstance;
 			Instance.primaryThread = primaryThread;
@@ -97,6 +98,8 @@ namespace Sassner.SmarterSql {
 		}
 
 		#region Public properties
+
+		public static Common.enSqlVersion MgtmStdSqlVersion { get; private set; }
 
 		public static Menus Menus {
 			[DebuggerStepThrough]
@@ -202,7 +205,7 @@ namespace Sassner.SmarterSql {
 		}
 
 		protected static void OnUnhandledException(Exception e) {
-			if (null != e.StackTrace && e.StackTrace.IndexOf("SmarterSql") >= 0) {
+			if (null != e.StackTrace && e.StackTrace.IndexOf("SmarterSql", StringComparison.Ordinal) >= 0) {
 				Common.LogEntry(ClassName, "OnUnhandledException", e, Common.enErrorLvl.Error);
 			}
 		}

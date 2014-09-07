@@ -241,7 +241,7 @@ namespace Sassner.SmarterSql.Utils {
 
 				if (null != activeView) {
 					IntPtr hwndVsTextEditPane = activeView.GetWindowHandle();
-					Common.LogEntry(ClassName, "OnBeforeDocumentWindowShow", "fFirstShow=" + fFirstShow + ", pFrame=" + pFrame.GetHashCode() + ", activeView=" + activeView.GetHashCode(), Common.enErrorLvl.Information);
+					Common.LogEntry(ClassName, "OnBeforeDocumentWindowShow", string.Format("fFirstShow={0}, pFrame={1}, activeView={2}", fFirstShow, pFrame.GetHashCode(), activeView.GetHashCode()), Common.enErrorLvl.Information);
 					if (1 == fFirstShow) {
 						// First time
 						VsSplitterRoot splitterRoot = new VsSplitterRoot(codeWindow, hwndVsTextEditPane);
