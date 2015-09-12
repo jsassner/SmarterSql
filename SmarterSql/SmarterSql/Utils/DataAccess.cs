@@ -141,6 +141,9 @@ namespace Sassner.SmarterSql.Utils {
 		private const string StatementGetDataBases = "" +
 		                                             "SELECT	strDataBaseName = d.name " +
 		                                             "FROM	master..sysdatabases d";
+		private const string StatementGetDataBasesSys = "" +
+		                                             "SELECT	strDataBaseName = d.name " +
+		                                             "FROM	sys.sysdatabases d";
 
 		private const string StatementGetServers = "" +
 													 "SELECT	strServerName = d.name " +
@@ -521,7 +524,7 @@ namespace Sassner.SmarterSql.Utils {
 				OleDbConnection conGetDataBases = GetOleDbConnection(connection);
 				using (OleDbCommand comConnection = conGetDataBases.CreateCommand()) {
 					comConnection.CommandType = CommandType.Text;
-					comConnection.CommandText = StatementGetDataBases;
+					comConnection.CommandText = (connection.SqlVersion >= Common.enSqlVersion.Sql2012 ? StatementGetDataBasesSys : StatementGetDataBases);
 					comConnection.CommandTimeout = 60;
 					OleDbDataReader reader = comConnection.ExecuteReader();
 					while (reader.Read()) {
@@ -536,6 +539,10 @@ namespace Sassner.SmarterSql.Utils {
 
 		public List<SysServer> GetSysServers(Connection connection) {
 			List<SysServer> sysServers = new List<SysServer>(50);
+
+			if (connection.SqlVersion <= Common.enSqlVersion.Unknown) {
+				connection.GetSqlVersion();
+			}
 
 			try {
 				OleDbConnection conGetDataBases = GetOleDbConnection(connection);

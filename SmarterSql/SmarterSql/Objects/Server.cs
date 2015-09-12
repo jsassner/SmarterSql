@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using EnvDTE;
 using EnvDTE80;
 using Sassner.SmarterSql.Utils;
@@ -15,7 +16,7 @@ namespace Sassner.SmarterSql.Objects {
 		private const string ClassName = "Server";
 
 		private readonly List<Connection> lstConnections = new List<Connection>();
-		private readonly Object objLock = new object();
+		private readonly object objLock = new object();
 		private readonly string strSqlServer;
 		private bool blnHasBeenPurged;
 		private List<Database> lstDataBases;
@@ -56,6 +57,7 @@ namespace Sassner.SmarterSql.Objects {
 			return "dbo";
 		}
 
+		// ReSharper disable once UnusedMethodReturnValue.Global
 		public bool PurgeCache() {
 			lock (objLock) {
 				if (null != lstDataBases) {
@@ -66,7 +68,7 @@ namespace Sassner.SmarterSql.Objects {
 					lstSysServers.Clear();
 					lstSysServers = null;
 				}
-				foreach (Connection connection in lstConnections) {
+				foreach (var connection in lstConnections) {
 					connection.PurgeCache();
 				}
 				blnHasBeenPurged = true;
@@ -78,15 +80,14 @@ namespace Sassner.SmarterSql.Objects {
 			connection = null;
 
 			try {
-				List<Database> databases = server.GetDataBases();
-				foreach (Database database in databases) {
-					if (database.MainText.Equals(databaseName, StringComparison.OrdinalIgnoreCase)) {
-						connection = new Connection(new ActiveConnection(server.SqlServer, databaseName, false, string.Empty, string.Empty, 0, 0, 0));
-						server.AddConnection(connection);
-						return true;
-					}
+				var databases = server.GetDataBases();
+				if (databases.Any(database => database.MainText.Equals(databaseName, StringComparison.OrdinalIgnoreCase))) {
+					connection = new Connection(new ActiveConnection(server.SqlServer, databaseName, false, string.Empty, string.Empty, 0, 0, 0));
+					server.AddConnection(connection);
+					return true;
 				}
 				return false;
+
 			} catch (Exception e) {
 				Common.LogEntry(ClassName, "AddNewConnection", e, Common.enErrorLvl.Error);
 				return false;
@@ -98,12 +99,12 @@ namespace Sassner.SmarterSql.Objects {
 			objConnection = null;
 			try {
 				if (_applicationObject.ActiveWindow.Type == vsWindowType.vsWindowTypeDocument) {
-					ActiveConnection activeConnection = Instance.FuncActiveConnection();
+					var activeConnection = Instance.FuncActiveConnection();
 					if (null == activeConnection) {
 						return false;
 					}
 
-					foreach (Server server in servers) {
+					foreach (var server in servers) {
 						if (server.GetConnection(activeConnection, out objConnection)) {
 							objServer = server;
 							break;
@@ -131,15 +132,12 @@ namespace Sassner.SmarterSql.Objects {
 			lock (objLock) {
 				if (null == lstDataBases) {
 					if (null != strSqlServer) {
-						Connection connection = lstConnections[0];
+						var connection = lstConnections[0];
 						lstDataBases = Instance.DataAccess.GetDataBases(connection);
 						blnHasBeenPurged = false;
 					}
 				}
-				if (null == lstDataBases) {
-					lstDataBases = new List<Database>();
-				}
-				return lstDataBases;
+				return lstDataBases ?? (lstDataBases = new List<Database>());
 			}
 		}
 
@@ -147,15 +145,12 @@ namespace Sassner.SmarterSql.Objects {
 			lock (objLock) {
 				if (null == lstSysServers) {
 					if (null != strSqlServer) {
-						Connection connection = lstConnections[0];
+						var connection = lstConnections[0];
 						lstSysServers = Instance.DataAccess.GetSysServers(connection);
 						blnHasBeenPurged = false;
 					}
 				}
-				if (null == lstSysServers) {
-					lstSysServers = new List<SysServer>();
-				}
-				return lstSysServers;
+				return lstSysServers ?? (lstSysServers = new List<SysServer>());
 			}
 		}
 
@@ -173,7 +168,7 @@ namespace Sassner.SmarterSql.Objects {
 			if (connection.ActiveConnection.ServerName.Equals(strSqlServer, StringComparison.OrdinalIgnoreCase)) {
 				lstConnections.Add(connection);
 			} else {
-				throw new ArgumentOutOfRangeException("connection", connection.ActiveConnection.ServerName, "Illegal sqlserver for this server object.");
+				throw new ArgumentOutOfRangeException(nameof(connection), connection.ActiveConnection.ServerName, "Illegal sqlserver for this server object.");
 			}
 		}
 
@@ -189,7 +184,7 @@ namespace Sassner.SmarterSql.Objects {
 				return false;
 			}
 
-			foreach (Connection con in lstConnections) {
+			foreach (var con in lstConnections) {
 				if (con.IsSame(activeConnection)) {
 					connection = con;
 					return true;
